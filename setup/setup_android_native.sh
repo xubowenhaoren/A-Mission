@@ -14,8 +14,8 @@ echo "Found java in the path with version $JAVA_VERSION"
 
 echo "Setting up SDK environment"
 ANDROID_BUILD_TOOLS_VERSION=27.0.3
-MIN_SDK_VERSION=21
-TARGET_SDK_VERSION=28
+MIN_SDK_VERSION=24
+TARGET_SDK_VERSION=29
 
 # Setup the development environment
 source setup/setup_shared.sh
@@ -29,18 +29,18 @@ else
 fi
 
 echo "Setting up sdkman"
-curl -s "https://get.sdkman.io" | bash
-source ~/.sdkman/bin/sdkman-init.sh
+#curl -s "https://get.sdkman.io" | bash
+#source ~/.sdkman/bin/sdkman-init.sh
 
-CURR_GRADLE_VER=`sdk current gradle | cut -d " " -f 4 | xargs`
-
-echo "CURR_GRADLE_VER = '$CURR_GRADLE_VER', expected $GRADLE_VERSION"
-
-if [[ $CURR_GRADLE_VER == $GRADLE_VERSION ]]; then
-    echo "Already have gradle version $GRADLE_VERSION"
-else
-    echo "Setting up gradle using SDKMan"
-    sdk install gradle $GRADLE_VERSION
-fi
+#CURR_GRADLE_VER=`sdk current gradle | cut -d " " -f 4 | xargs`
+#
+#echo "CURR_GRADLE_VER = '$CURR_GRADLE_VER', expected $GRADLE_VERSION"
+#
+#if [[ $CURR_GRADLE_VER == $GRADLE_VERSION ]]; then
+#    echo "Already have gradle version $GRADLE_VERSION"
+#else
+#    echo "Setting up gradle using SDKMan"
+#    sdk install gradle $GRADLE_VERSION
+#fi
 
 source setup/setup_shared_native.sh

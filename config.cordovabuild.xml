@@ -13,7 +13,7 @@
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-minSdkVersion" value="22" />
+    <preference name="android-minSdkVersion" value="24" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="emSensorDataCollectionProtocolApprovalDate" value="2016-07-14" />
     <preference name="GradlePluginGoogleServicesEnabled" value="true" />
@@ -45,7 +45,7 @@
     </platform>
     <platform name="android">
         <hook src="hooks/before_build/android/android_copy_locales.js" type="before_build" />
-        <preference name="android-minSdkVersion" value="22" />
+        <preference name="android-minSdkVersion" value="24" />
         <preference name="android-targetSdkVersion" value="29" />
         <preference name="AndroidXEnabled" value="true" />
         <resource-file src="google-services.json" target="app/google-services.json" />
