@@ -1,0 +1,17 @@
+{
+    "connectUrl": "http://emission1.westus.cloudapp.azure.com:2015",
+    "android": {
+        "auth": {
+            "method": "prompted-auth",
+            "prompt": "Enter a unique passphrase",
+            "clientID": "ignored"
+        }
+    },
+    "ios": {
+        "auth": {
+            "method": "prompted-auth",
+            "prompt": "Enter a unique passphrase",
+            "clientID": "ignored"
+        }
+    }
+}
