@@ -144,6 +144,48 @@ angular.module('emission.main.common.services', ['emission.plugin.logger'])
         var maxEntry = getKeyWithMaxVal(retMap);
         return maxEntry[0];
     };
+
+    commonGraph.getSectionDisplayName = async function(lat, long) {
+      var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat
+        + "&lon=" + long;
+
+      var responseListener = function(data) {
+        var address = data["address"];
+        var name = "";
+        if (angular.isDefined(address)) {
+            if (address["road"]) {
+              name = address["road"];
+            //sometimes it occurs that we cannot display street name because they are pedestrian or suburb places so we added them.
+            } else if (address["pedestrian"]) {
+            name = address["pedestrian"]
+            } else if (address["suburb"]) {
+            name = address["suburb"]
+            } else if (address["neighbourhood"]) {
+              name = address["neighbourhood"];
+            }
+            if (address["city"]) {
+              name = name + ", " + address["city"];
+            } else if (address["town"]) {
+              name = name + ", " + address["town"];
+            } else if (address["county"]) {
+              name = name + ", " + address["county"];
+            }
+        }
+        console.log("got section name response, setting section name to "+name);
+        return name;
+      };
+
+      try {
+        let response = await $http.get(url);
+        console.log("while reading data from nominatim, status = "+response.status
+          +" data = "+JSON.stringify(response.data));
+        return responseListener(response.data);
+      } catch (error) {
+        console.log("while reading data from nominatim, error = "+error);
+        return null;
+      }
+      
+    }
     commonGraph.getDisplayName = function(mode, obj) {
       var responseListener = function(data) {
         var address = data["address"];

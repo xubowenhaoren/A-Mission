@@ -174,6 +174,10 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
     return moment(mdt).format("LT");
   };
 
+  dh.getSectionDisplayName = function(lat, long) {
+    return CommonGraph.getSectionDisplayName(lat, long);
+  }
+
   dh.getFormattedTime = function(ts_in_secs) {
     if (angular.isDefined(ts_in_secs)) {
       return moment(ts_in_secs * 1000).format('LT');
@@ -760,7 +764,13 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
             start_local_dt: moment2localdate(startMoment),
             start_ts: startPoint.data.ts,
             times: times,
-            trip_id: {$oid: tripAndSectionId}
+            trip_id: {$oid: tripAndSectionId},
+            start_point_lat: startPoint.data.latitude, 
+            start_point_long: startPoint.data.longitude,
+            end_point_lat: endPoint.data.latitude,
+            end_point_long: endPoint.data.longitude,
+            start_point_name: CommonGraph.getSectionDisplayName(startPoint.data.latitude, startPoint.data.longitude),
+            end_point_name: CommonGraph.getSectionDisplayName(endPoint.data.latitude, endPoint.data.longitude)
         }
       }
       return {

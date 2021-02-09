@@ -62,11 +62,16 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
   $scope.getLocalTimeString = DiaryHelper.getLocalTimeString;
   $scope.getFormattedTimeRange = DiaryHelper.getFormattedTimeRange;
   $scope.getFormattedDuration = DiaryHelper.getFormattedDuration;
-  $scope.getTripDetails = DiaryHelper.getTripDetails
+  $scope.getTripDetails = DiaryHelper.getTripDetails;
   $scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
 
   $scope.formattedSectionProperties = $scope.tripgj.sections.map(function(s) {
     return {"fmt_time": DiaryHelper.getLocalTimeString(s.properties.start_local_dt),
+            "fmt_end_time": DiaryHelper.getLocalTimeString(s.properties.end_local_dt),
+            // "fmt_start_place": DiaryHelper.getSectionDisplayName(s.properties.start_point_lat, s.properties.start_point_long),
+            // "fmt_end_place": DiaryHelper.getSectionDisplayName(s.properties.end_point_lat, s.properties.end_point_long),
+            "fmt_start_place": s.properties.start_point_name,
+            "fmt_end_place": s.properties.end_point_name,
             "fmt_time_range": DiaryHelper.getFormattedTimeRange(s.properties.end_ts, s.properties.start_ts),
             "fmt_distance": DiaryHelper.getFormattedDistance(s.properties.distance),
             "icon": DiaryHelper.getIcon(s.properties.sensed_mode),

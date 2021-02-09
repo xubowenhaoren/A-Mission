@@ -43,15 +43,23 @@
           </div>
         </div>
         <div style="height: 20px;"></div>
+        <!-- This is the section for the list of trip segments. -->
          <div id="sectionList" class="col button-small">
 
               <div class="row" ng-repeat="sectionFmt in formattedSectionProperties" style="padding: 2px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #eeeeee; margin-top: 15px;">
-                  <div class="col" style="font-size: 15px;line-height: 15px; margin-left:20px;"><p style="margin-bottom: 0; font-weight: 500;">{{sectionFmt.fmt_time}}</p><p>{{sectionFmt.fmt_time_range}}</p>
+                  <div class="col" style="font-size: 15px;line-height: 15px; margin-left:20px;">
+                    <p style="margin-bottom: 0; font-weight: 500;">{{sectionFmt.fmt_time}}</p>
+                    <p>{{sectionFmt.fmt_end_time}}</p>
+                    <p>{{sectionFmt.fmt_time_range}}</p>
 
                   </div>
 
+                  <div class="col" style="font-size: 2px;line-height: 15px; margin-left:20px;">
+                    <p style="margin-bottom: 0; font-weight: 500;">{{sectionFmt.fmt_distance}} km</p>
+                    <p>{{sectionFmt.fmt_start_place}}</p>
+                    <p>{{sectionFmt.fmt_end_place}}</p>
 
-                  <div class="col" style="font-size: 22px;">{{sectionFmt.fmt_distance}} km</div>
+                  </div>
                   <div class="col" style="text-align: center"><i class="{{sectionFmt.icon}}", style="font-size: 25px;" ng-style="{{sectionFmt.colorStyle}}"></i></div>
 
               </div>
