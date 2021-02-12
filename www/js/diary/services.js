@@ -174,10 +174,6 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
     return moment(mdt).format("LT");
   };
 
-  dh.getSectionDisplayName = function(lat, long) {
-    return CommonGraph.getSectionDisplayName(lat, long);
-  }
-
   dh.getFormattedTime = function(ts_in_secs) {
     if (angular.isDefined(ts_in_secs)) {
       return moment(ts_in_secs * 1000).format('LT');
@@ -543,8 +539,7 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
       });
       return $http.get("test_data/"+getKeyForDate(day)).then(function(response) {
        console.log("while reading data for "+day+" from file, status = "+response.status);
-       tripList = response.data;
-       return tripList;
+       return response.data;
      });
     };
 
@@ -568,12 +563,12 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
      * (e.g. `T_DATA_PUSHED`), while the remote transitions have an integer
      * (e.g. `2`).
      * See https://github.com/e-mission/e-mission-phone/issues/214#issuecomment-286338606
-     * 
+     *
      * Also, at least on iOS, it is possible for trip end to be detected way
      * after the end of the trip, so the trip end transition of a processed
      * trip may actually show up as an unprocessed transition.
      * See https://github.com/e-mission/e-mission-phone/issues/214#issuecomment-286279163
-     * 
+     *
      * Let's abstract this out into our own minor state machine.
      */
     var transition2Trip = function(transitionList) {
@@ -582,8 +577,8 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
         var currStartTransitionIndex = -1;
         var currEndTransitionIndex = -1;
         var processedUntil = 0;
-       
-        while(processedUntil < transitionList.length) { 
+
+        while(processedUntil < transitionList.length) {
           // Logger.log("searching within list = "+JSON.stringify(transitionList.slice(processedUntil)));
           if(inTrip == false) {
               var foundStartTransitionIndex = transitionList.slice(processedUntil).findIndex(isStartingTransition);
@@ -608,7 +603,7 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
                   Logger.log("currEndTransitionIndex = "+currEndTransitionIndex);
                   Logger.log("Unprocessed trip starting at "+JSON.stringify(transitionList[currStartTransitionIndex])+" ends at "+JSON.stringify(transitionList[currEndTransitionIndex]));
                   tripList.push([transitionList[currStartTransitionIndex],
-                                 transitionList[currEndTransitionIndex]])  
+                                 transitionList[currEndTransitionIndex]])
                   inTrip = false;
               }
           }
@@ -631,7 +626,7 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
     var isEndingTransition = function(transWrapper) {
         // Logger.log("isEndingTransition: transWrapper.data.transition = "+transWrapper.data.transition);
         if(transWrapper.data.transition == 'T_TRIP_ENDED' ||
-            transWrapper.data.transition == 'local.transition.stopped_moving' || 
+            transWrapper.data.transition == 'local.transition.stopped_moving' ||
             transWrapper.data.transition == 2) {
             // Logger.log("Returning true");
             return true;
@@ -739,38 +734,43 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
         speeds.push(distances[i] / timeDeltas[i]);
       }
 
+      var start_place_name_res = {name: ""};
+      var end_place_name_res = {name: ""};
+      CommonGraph.getSectionDisplayName(startPoint.data.latitude, startPoint.data.longitude, start_place_name_res);
+      CommonGraph.getSectionDisplayName(startPoint.data.latitude, endPoint.data.longitude, end_place_name_res);
+
       var section_gj = {
         "id": tripAndSectionId,
         "type": "Feature",
         "geometry": {
-            "type": "LineString",
-            "coordinates": sectionCoordinates
+          "type": "LineString",
+          "coordinates": sectionCoordinates
         },
         // missing properties are:
         "properties": {
-            distances: distances,
-            distance: distances.reduce(function(acc, val) {
-              return acc + val;
-            }, 0),
-            duration: endPoint.data.ts - startPoint.data.ts,
-            end_fmt_time: endMoment.format(),
-            end_local_dt: moment2localdate(endMoment),
-            end_ts: endPoint.data.ts,
-            feature_type: "section",
-            sensed_mode: "MotionTypes.UNPROCESSED",
-            source: "unprocessed",
-            speeds: speeds,
-            start_fmt_time: startMoment.format(),
-            start_local_dt: moment2localdate(startMoment),
-            start_ts: startPoint.data.ts,
-            times: times,
-            trip_id: {$oid: tripAndSectionId},
-            start_point_lat: startPoint.data.latitude, 
-            start_point_long: startPoint.data.longitude,
-            end_point_lat: endPoint.data.latitude,
-            end_point_long: endPoint.data.longitude,
-            start_point_name: CommonGraph.getSectionDisplayName(startPoint.data.latitude, startPoint.data.longitude),
-            end_point_name: CommonGraph.getSectionDisplayName(endPoint.data.latitude, endPoint.data.longitude)
+          distances: distances,
+          distance: distances.reduce(function (acc, val) {
+            return acc + val;
+          }, 0),
+          duration: endPoint.data.ts - startPoint.data.ts,
+          end_fmt_time: endMoment.format(),
+          end_local_dt: moment2localdate(endMoment),
+          end_ts: endPoint.data.ts,
+          feature_type: "section",
+          sensed_mode: "MotionTypes.UNPROCESSED",
+          source: "unprocessed",
+          speeds: speeds,
+          start_fmt_time: startMoment.format(),
+          start_local_dt: moment2localdate(startMoment),
+          start_ts: startPoint.data.ts,
+          times: times,
+          trip_id: {$oid: tripAndSectionId},
+          start_point_lat: startPoint.data.latitude,
+          start_point_long: startPoint.data.longitude,
+          end_point_lat: endPoint.data.latitude,
+          end_point_long: endPoint.data.longitude,
+          start_point_name: start_place_name_res,
+          end_point_name: end_place_name_res
         }
       }
       return {
@@ -792,7 +792,7 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
          endTs: tripEndTransition.data.ts
       }
       Logger.log("About to pull location data for range "
-        + moment.unix(tripStartTransition.data.ts).toString() + " -> " 
+        + moment.unix(tripStartTransition.data.ts).toString() + " -> "
         + moment.unix(tripEndTransition.data.ts).toString());
       return UnifiedDataLoader.getUnifiedSensorDataForInterval("background/filtered_location", tq).then(function(locationList) {
           if (locationList.length == 0) {
@@ -800,7 +800,7 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
           }
           var sortedLocationList = locationList.sort(tsEntrySort);
           var retainInRange = function(loc) {
-            return (tripStartTransition.data.ts <= loc.data.ts) && 
+            return (tripStartTransition.data.ts <= loc.data.ts) &&
                     (loc.data.ts <= tripEndTransition.data.ts)
           }
 
@@ -816,7 +816,7 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
           Logger.log("tripStartPoint = "+JSON.stringify(tripStartPoint)+"tripEndPoint = "+JSON.stringify(tripEndPoint));
           // if we get a list but our start and end are undefined
           // let's print out the complete original list to get a clue
-          // this should help with debugging 
+          // this should help with debugging
           // https://github.com/e-mission/e-mission-docs/issues/417
           // if it ever occurs again
           if (angular.isUndefined(tripStartPoint) || angular.isUndefined(tripEndPoint)) {
@@ -878,15 +878,15 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
        * from the last processed trip until the end of the day. But now we
        * need to figure out which timezone we need to use for the end of the
        * day.
-       * 
+       *
        * I think that it should be fine to use the current timezone.
-       * 
+       *
        * Details: https://github.com/e-mission/e-mission-phone/issues/214#issuecomment-284284382
        * One problem with simply querying for transactions after this is
        * that sometimes we skip trips in the cleaning phase because they are
        * spurious. So if we have already processed this day but had a
        * spurious trip after the last real trip, it would show up again.
-       * 
+       *
        * We deal with this by ensuring that this is called iff we are beyond
        * the end of the processed data.
        *
@@ -934,7 +934,7 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
                 // to one another is fairly simple, but we need to link the
                 // first unprocessed trip to the last processed trip.
                 // This might be challenging if we don't have any processed
-                // trips for the day. I don't want to go back forever until 
+                // trips for the day. I don't want to go back forever until
                 // I find a trip. So if this is the first trip, we will start a
                 // new chain for now, since this is with unprocessed data
                 // anyway.

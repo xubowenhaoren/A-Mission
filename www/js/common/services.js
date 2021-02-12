@@ -47,7 +47,7 @@ angular.module('emission.main.common.services', ['emission.plugin.logger'])
      * Returns the common trip corresponding to the specified tripId
      */
     commonGraph.trip2Common = function(tripId) {
-        if (angular.isDefined(commonGraph.data) && 
+        if (angular.isDefined(commonGraph.data) &&
             angular.isDefined(commonGraph.data.trip2CommonMap)) {
           return commonGraph.data.trip2CommonMap[tripId];
         } else {
@@ -145,11 +145,19 @@ angular.module('emission.main.common.services', ['emission.plugin.logger'])
         return maxEntry[0];
     };
 
-    commonGraph.getSectionDisplayName = async function(lat, long) {
+    commonGraph.getSectionDisplayName = function(lat, long, obj) {
       var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat
         + "&lon=" + long;
+      $http.get(url).then(function(response) {
+        console.log("while reading data from nominatim, status = "+response.status
+          +" data = "+JSON.stringify(response.data));
+        console.log("about to return data" + response.data);
+        responseListener(response.data, obj);
+      }, function(error) {
+        console.log("while reading data from nominatim, error = "+error);
+      });
 
-      var responseListener = function(data) {
+      var responseListener = function(data, obj) {
         var address = data["address"];
         var name = "";
         if (angular.isDefined(address)) {
@@ -172,19 +180,9 @@ angular.module('emission.main.common.services', ['emission.plugin.logger'])
             }
         }
         console.log("got section name response, setting section name to "+name);
-        return name;
+        obj.name = name;
       };
 
-      try {
-        let response = await $http.get(url);
-        console.log("while reading data from nominatim, status = "+response.status
-          +" data = "+JSON.stringify(response.data));
-        return responseListener(response.data);
-      } catch (error) {
-        console.log("while reading data from nominatim, error = "+error);
-        return null;
-      }
-      
     }
     commonGraph.getDisplayName = function(mode, obj) {
       var responseListener = function(data) {

@@ -68,8 +68,6 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
   $scope.formattedSectionProperties = $scope.tripgj.sections.map(function(s) {
     return {"fmt_time": DiaryHelper.getLocalTimeString(s.properties.start_local_dt),
             "fmt_end_time": DiaryHelper.getLocalTimeString(s.properties.end_local_dt),
-            // "fmt_start_place": DiaryHelper.getSectionDisplayName(s.properties.start_point_lat, s.properties.start_point_long),
-            // "fmt_end_place": DiaryHelper.getSectionDisplayName(s.properties.end_point_lat, s.properties.end_point_long),
             "fmt_start_place": s.properties.start_point_name,
             "fmt_end_place": s.properties.end_point_name,
             "fmt_time_range": DiaryHelper.getFormattedTimeRange(s.properties.end_ts, s.properties.start_ts),
@@ -167,7 +165,7 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
   }
 
   $scope.$on('$ionicView.afterEnter', function(ev) {
-    // Workaround from 
+    // Workaround from
     // https://github.com/driftyco/ionic/issues/3433#issuecomment-195775629
     if(ev.targetScope !== $scope)
       return;
