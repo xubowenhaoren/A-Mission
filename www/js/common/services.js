@@ -151,8 +151,7 @@ angular.module('emission.main.common.services', ['emission.plugin.logger'])
       $http.get(url).then(function(response) {
         console.log("while reading data from nominatim, status = "+response.status
           +" data = "+JSON.stringify(response.data));
-        console.log("about to return data" + response.data);
-        responseListener(response.data, obj);
+        return responseListener(response.data, obj);
       }, function(error) {
         console.log("while reading data from nominatim, error = "+error);
       });
@@ -179,8 +178,8 @@ angular.module('emission.main.common.services', ['emission.plugin.logger'])
               name = name + ", " + address["county"];
             }
         }
-        console.log("got section name response, setting section name to "+name);
         obj.name = name;
+        return name;
       };
 
     }

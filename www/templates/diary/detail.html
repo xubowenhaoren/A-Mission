@@ -27,7 +27,7 @@
             </div>
         </div>
         <div style="height: 10px;"></div>
-        <leaflet geojson="tripgj" id="detail" defaults="mapCtrl.defaults" 
+        <leaflet geojson="tripgj" id="detail" defaults="mapCtrl.defaults"
             height="50%" width="100%" data-tap-disabled="true">
         </leaflet>
         <div style="height: 15px;"></div>
@@ -54,10 +54,10 @@
 
                   </div>
 
-                  <div class="col" style="font-size: 2px;line-height: 15px; margin-left:20px;">
+                  <div class="col" style="font-size: 15px;line-height: 15px; margin-left:20px;">
                     <p style="margin-bottom: 0; font-weight: 500;">{{sectionFmt.fmt_distance}} km</p>
-                    <p>{{sectionFmt.fmt_start_place}}</p>
-                    <p>{{sectionFmt.fmt_end_place}}</p>
+                    <p>From: {{sectionFmt.fmt_start_place}}</p>
+                    <p>To: {{sectionFmt.fmt_end_place}}</p>
 
                   </div>
                   <div class="col" style="text-align: center"><i class="{{sectionFmt.icon}}", style="font-size: 25px;" ng-style="{{sectionFmt.colorStyle}}"></i></div>

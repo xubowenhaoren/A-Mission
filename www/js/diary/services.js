@@ -734,10 +734,10 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
         speeds.push(distances[i] / timeDeltas[i]);
       }
 
-      var start_place_name_res = {name: ""};
-      var end_place_name_res = {name: ""};
+      var start_place_name_res = {name: "dummy start place"};
+      var end_place_name_res = {name: "dummy end place"};
       CommonGraph.getSectionDisplayName(startPoint.data.latitude, startPoint.data.longitude, start_place_name_res);
-      CommonGraph.getSectionDisplayName(startPoint.data.latitude, endPoint.data.longitude, end_place_name_res);
+      CommonGraph.getSectionDisplayName(endPoint.data.latitude, endPoint.data.longitude, end_place_name_res);
 
       var section_gj = {
         "id": tripAndSectionId,
