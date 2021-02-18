@@ -1,7 +1,8 @@
 angular.module('emission.main.diary',['emission.main.diary.list',
                                       'emission.main.diary.detail',
                                       'emission.main.diary.services',
-                                      'emission.main.diary.current',])
+                                      'emission.main.diary.current',
+                                      'emission.main.diary.change-mode'])
 
 .config(function($stateProvider) {
   $stateProvider
@@ -33,6 +34,17 @@ angular.module('emission.main.diary',['emission.main.diary.list',
           controller: 'CurrMapCtrl'
         },
       }
-      
+
+  })
+
+  .state('root.main.change-mode', {
+      url: '/diary/:tripId/change-mode',
+      views: {
+        'main-diary': {
+          templateUrl: "templates/diary/change-mode.html",
+          controller: 'ChangeModeCtrl'
+        },
+      }
+
   });
 });

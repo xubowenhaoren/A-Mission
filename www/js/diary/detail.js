@@ -4,7 +4,7 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
                                       'emission.services', 'emission.plugin.logger',
                                       'emission.incident.posttrip.manual'])
 
-.controller("DiaryDetailCtrl", function($scope, $rootScope, $window, $stateParams, $ionicActionSheet,
+.controller("DiaryDetailCtrl", function($state, $scope, $rootScope, $window, $stateParams, $ionicActionSheet,
                                         leafletData, leafletMapEvents, nzTour, KVStore,
                                         Logger, Timeline, DiaryHelper, Config,
                                         CommHelper, PostTripManualMarker, $translate) {
@@ -163,6 +163,13 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
   $scope.startWalkthrough = function () {
     startWalkthrough();
   }
+
+  $scope.toChangeMode = function (param) {
+    $state.go('root.main.change-mode', {
+      tripId: param
+      //segmentId: param
+    });
+  };
 
   $scope.$on('$ionicView.afterEnter', function(ev) {
     // Workaround from
