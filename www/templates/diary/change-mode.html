@@ -7,6 +7,28 @@
             ng-click="startWalkthrough()"></button>
   </ion-nav-buttons> -->
   <ion-content>
-Hello, world!
+      <div style="padding: 5px; border-top-width: 1px; border-top-style: solid;">
+        <b style="font-size: 1.4em;">
+          How did you travel between the start and end point?
+        </b>
+        <form style="margin: 10px; font-size: 1.1em">
+          <input type="radio" id="walk" name="mode" value="walk">
+          <label for="walk">Walk</label></br>
+          <input type="radio" id="bus" name="mode" value="bus">
+          <label for="walk">Bus</label></br>
+          <input type="radio" id="other" name="mode" value="other">
+          <label for="walk">Other (still need to add the actual modes)</label></br>
+        </form>
+      </div>
+      <div class="row" style="margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto">
+          <button ng-click="toDetail(tripgj.data.id)"
+            style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 10px;">
+            BACK TO TRIP REVIEW
+          </button>
+        <button style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 10px;">
+            BACK TO TRIP DIARY
+        </button>
+      </div>
+
   </ion-content>
 </ion-view>

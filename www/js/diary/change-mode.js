@@ -8,7 +8,7 @@ angular.module('emission.main.diary.change-mode', ['ui-leaflet',
   'emission.plugin.kvstore',
   'emission.plugin.logger']).
 controller('ChangeModeCtrl',
-  function ($scope, $state, $ionicPopup, nzTour, $ionicPopover, storage,
+  function ($scope, $state, $stateParams, $ionicPopup, nzTour, $ionicPopover, storage,
             CommHelper, $sce) {
     /*
       * Checks if it is the first time the user has loaded the diary tab. If it is then
@@ -33,6 +33,8 @@ controller('ChangeModeCtrl',
     //   return uuidParts.join('-');
     // };
 
+    //$scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
+
     $scope.$on('$ionicView.enter', function(ev) {
       // Workaround from
       // https://github.com/driftyco/ionic/issues/3433#issuecomment-195775629
@@ -40,4 +42,10 @@ controller('ChangeModeCtrl',
       //   return;
       // }
     });
+
+    $scope.toDetail = function (param) {
+      $state.go('root.main.diary-detail', {
+        tripId: param
+      });
+    };
   });

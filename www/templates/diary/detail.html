@@ -1,86 +1,86 @@
 <ion-view ng-class="tripgj.background" translate-namespace="diary">
     <ion-nav-title>
       <div class="col" text-align="center">
-        <p>Your trip on</p>
-        <b>[date]</b>
+        Your trip on [date]
       </div>
     </ion-nav-title>
     <ion-nav-buttons side="right">
          <button class="button button-icon ion-help" ng-click="startWalkthrough()"></button>
     </ion-nav-buttons>
     <ion-content class="has-header" ng-class="tripgj.background" overflow-scroll="true" padding="true">
-        <div class="row" style="">
+      <h1 id="tripDetailsHeader"
+          style="font-size: 1.5em; color: #000000; font-weight: bold; padding: 5px; background-color: #E8E8E8">
+        Trip Details
+      </h1>
+        <div class="col" style="background-color: #FFFFFF; padding: 5px; font-size: 1.1em">
 
-            <div class="col-30">
-                <div style="font-size: 1em; padding-top: 5px; padding-bottom: 5px;">{{tripgj.display_start_time}}</div>
-                <div style="font-size: 15px;white-space: nowrap; width: 0px; color: #999; display: {{ tripgj.common.earlierOrLater == ''? 'none':'block';  }}"><img src="{{ tripgj.common.earlierOrLater[0] == '-'? 'img/minus.gif':'img/plus.gif';  }}" style="width: 15px; margin-right: 8px;">{{tripgj.common.displayEarlierLater}}</div>
-                <div style="font-size: 1em; padding-top: 5px; padding-bottom: 5px;">{{tripgj.display_end_time}}
-                </div>
-            </div>
-
-            <div class="col-70">
-
-                <div class="item item-icon-left" id="no-border" href="#" style="font-size: 1em; padding-top: 5px; padding-bottom: 5px;padding-left: 25px; margin-top: 0; margin-bottom: {{getEarlierOrLater(tripgj.data.properties.start_ts, tripgj.data.id) == ''? '0':'20px'}};">
-                <i class="icon ion-ios-location" style="font-size: 16px; left: 0; color: #33e0bb;"></i>
+          <div class="row" id="trip-start-info" style="margin-bottom: 5px">
+            <i class="icon ion-ios-location" style="padding: 10px; font-size: 16px; color: #33e0bb;" aria-hidden="true"></i>
+            <b style="margin-right: 2px">Trip Start:</b>
             {{tripgj.start_place.properties.display_name.split(',')[0]}}
-
-                </div>
-                <div class="item item-icon-left" id="no-border" href="#" style="font-size: 1em; padding-top: 5px; padding-bottom: 5px;padding-left: 25px; margin-top: 0; margin-bottom: 0;">
-                <i class="icon ion-ios-location" style="font-size: 16px; left: 0; color: #ff5251;"></i>
-            {{tripgj.end_place.properties.display_name.split(',')[0]}}
-                </div>
-            </div>
-        </div>
-        <div style="height: 10px;"></div>
-        <div class="row" style="padding-top: 10px !important; padding-bottom: 10px !important; padding-left: 20px !important; padding-right: 20px !important;">
-          <div class="col" style="width: 30%; margin-top: 0; font-size: 1.1em; font-weight: thin;">
-          <p style="font-size: 1.1em; color: #cccccc; margin-bottom: 0; font-weight: bolder;" translate>{{'.distance'}}</p>{{tripgj.display_distance}} km</div>
-          <div class="col" style="width: 30%; margin-top: 0; font-size: 1.1em; font-weight: thin;"><p style="font-size: 1.1em; color: #cccccc; margin-bottom: 0; font-weight: bolder;" translate>{{'.time'}}</p>{{tripgj.display_time}}</div>
-          <div id="sectionPct" class="col">
-            <i class="{{sectionPct.icon}}" ng-repeat="sectionPct in tripgj.percentages" style="margin-left: 10px; margin-right: 10px; font-size: 15px;" ng-style="{{sectionPct.color}}"></i>
-            <br>
-            <a ng-repeat="sectionPct in tripgj.percentages" style="font-size: 10px; margin-left: 10px; margin-right: 10px;">{{sectionPct.pct}}%</a>
-
+            <b style="margin: 0 2px;">at</b>
+            {{tripgj.display_start_time}}
           </div>
+
+          <div class="row" id="trip-end-info">
+            <i class="icon ion-ios-location" style="padding: 10px; font-size: 16px; color: #ff5251; margin-bottom: 10px;" aria-hidden="true"></i>
+            <b style="margin-right: 2px">Trip End:</b>
+            {{tripgj.end_place.properties.display_name.split(',')[0]}}
+            <b style="margin: 0 2px;">at</b>
+            {{tripgj.display_end_time}}
+          </div>
+
+          <div class="row" style="">
+            <div class="col" style="width: 30%; margin-top: 0; font-size: 1.1em; font-weight: thin;">
+              <p style="font-size: 1.1em; margin-bottom: 0; font-weight: bold;">Total Distance</p>
+              {{tripgj.display_distance}} km
+            </div>
+            <div class="col" style="width: 30%; margin-top: 0; font-size: 1.1em; font-weight: thin;">
+              <p style="font-size: 1.1em; margin-bottom: 0; font-weight: bold;">Total Time</p>
+              {{tripgj.display_time}}
+            </div>
+            <div id="sectionPct" class="col" aria-hidden="true">
+              <i class="{{sectionPct.icon}}" ng-repeat="sectionPct in tripgj.percentages" style="margin-left: 10px; margin-right: 10px; font-size: 15px;" ng-style="{{sectionPct.color}}"></i>
+              <br>
+              <a ng-repeat="sectionPct in tripgj.percentages" style="font-size: 10px; margin-left: 10px; margin-right: 10px;">{{sectionPct.pct}}%</a>
+            </div>
+          </div>
+
         </div>
+
+        <div style="height: 10px;"></div>
+
+
         <leaflet geojson="tripgj" id="detail" defaults="mapCtrl.defaults"
                  height="50%" width="100%" data-tap-disabled="true" aria-hidden="true">
         </leaflet>
         <div style="height: 20px;"></div>
         <!-- This is the section for the list of trip segments. -->
-         <div id="sectionList" class="col button-small" aria-labelledby="tripSegmentHeader">
-           <h2 id="tripSegmentHeader" style="font-size: 1.5em; color: #000000; font-weight: bold; margin-bottom: 10px;">
-             Trip Segments:
-           </h2>
+        <h2 id="tripSegmentHeader"
+            style="font-size: 1.5em; color: #000000; font-weight: bold; padding: 5px; background-color: #E8E8E8">
+          Trip Segments
+        </h2>
+         <div id="sectionList" class="col button-small" aria-labelledby="tripSegmentHeader" style="left: 0;">
 
-              <!--<div class="row" ng-repeat="sectionFmt in formattedSectionProperties" style="padding: 2px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #eeeeee; margin-top: 15px;">
-                  <div class="col" style="font-size: 15px;line-height: 15px; margin-left:20px;">
-                    <p style="margin-bottom: 0; font-weight: 500;">{{sectionFmt.fmt_time}}</p>
-                    <p>{{sectionFmt.fmt_end_time}}</p>
-                    <p>{{sectionFmt.fmt_time_range}}</p>
-
-                  </div>
-
-                  <div class="col" style="font-size: 15px;line-height: 15px; margin-left:20px;">
-                    <p style="margin-bottom: 0; font-weight: 500;">{{sectionFmt.fmt_distance}} km</p>
-                    <p>From: {{sectionFmt.fmt_start_place}}</p>
-                    <p>To: {{sectionFmt.fmt_end_place}}</p>
-
-                  </div>
-                  <div class="col" style="text-align: center"><i class="{{sectionFmt.icon}}", style="font-size: 25px;" ng-style="{{sectionFmt.colorStyle}}"></i></div>
-
-              </div>-->
 
            <div class="col" ng-repeat="sectionFmt in formattedSectionProperties"
                 style="padding: 5px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;
                 background-color: #eeeeee;">
              <div class="row" style="font-size: 15px; margin-left:10px; margin-bottom: 10px;">
-               <p><b style="margin-right: 10px;">Departed from: </b>{{sectionFmt.fmt_start_place}}<b
-                 style="margin-left: 5px; margin-right: 5px;"> at </b> {{sectionFmt.fmt_time}}</p>
+               <p>
+                 <b style="margin-right: 5px;">Departed from: </b>
+                 {{sectionFmt.fmt_start_place}}
+                 <b style="margin-left: 2px; margin-right: 2px;"> at </b>
+                 {{sectionFmt.fmt_time}}
+               </p>
              </div>
              <div class="row" style="font-size: 15px; margin-left:10px; margin-bottom: 10px;">
-               <p><b style="margin-right: 10px;">Arrived at: </b>{{sectionFmt.fmt_end_place}}<b
-                 style="margin-left: 5px; margin-right: 5px;"> at </b> {{sectionFmt.fmt_end_time}}</p>
+               <p>
+                 <b style="margin-right: 10px;">Arrived at: </b>
+                 {{sectionFmt.fmt_end_place}}
+                 <b style="margin-left: 5px; margin-right: 5px;"> at </b>
+                 {{sectionFmt.fmt_end_time}}
+               </p>
              </div>
 
              <div class="row" style="font-size: 15px; margin-left:10px; margin-bottom: 10px;">
@@ -111,7 +111,9 @@
         Change mode
       </button>-->
 
-        <div id="chart"><svg></svg></div>
+        <div id="chart" aria-hidden="true">
+          <svg></svg>
+        </div>
         <div style="" class="button-bar">
             <button class="button button-stable button-block icon ion-refresh"
                 ng-click="refreshMap()" translate>{{'map-refresh'}}</button>
