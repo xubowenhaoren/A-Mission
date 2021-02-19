@@ -12,22 +12,26 @@
           style="font-size: 1.5em; color: #000000; font-weight: bold; padding: 5px; background-color: #E8E8E8">
         Trip Details
       </h1>
-        <div class="col" style="background-color: #FFFFFF; padding: 5px; font-size: 1.1em">
+        <div class="col" style="background-color: #ffffff; padding: 5px !important; font-size: 1.1em">
 
-          <div class="row" id="trip-start-info" style="margin-bottom: 5px">
-            <i class="icon ion-ios-location" style="padding: 10px; font-size: 16px; color: #33e0bb;" aria-hidden="true"></i>
-            <b style="margin-right: 2px">Trip Start:</b>
-            {{tripgj.start_place.properties.display_name.split(',')[0]}}
-            <b style="margin: 0 2px;">at</b>
-            {{tripgj.display_start_time}}
+          <div class="row" id="trip-start-info" style="margin-bottom: 10px;">
+            <i class="icon ion-ios-location" style="padding: 10px; font-size: 20px; color: #33e0bb;" aria-hidden="true"></i>
+            <p style="padding-right: 5px;">
+              <b style="margin-right: 2px">Trip Start:</b>
+              {{tripgj.start_place.properties.display_name.split(',')[0]}}
+              <b style="margin: 0 2px;">at</b>
+              {{tripgj.display_start_time}}
+            </p>
           </div>
 
           <div class="row" id="trip-end-info">
-            <i class="icon ion-ios-location" style="padding: 10px; font-size: 16px; color: #ff5251; margin-bottom: 10px;" aria-hidden="true"></i>
-            <b style="margin-right: 2px">Trip End:</b>
-            {{tripgj.end_place.properties.display_name.split(',')[0]}}
-            <b style="margin: 0 2px;">at</b>
-            {{tripgj.display_end_time}}
+            <i class="icon ion-ios-location" style="padding: 10px; font-size: 20px; color: #ff5251; margin-bottom: 10px;" aria-hidden="true"></i>
+            <p style="padding-right: 5px;">
+              <b style="margin-right: 2px">Trip End:</b>
+              {{tripgj.end_place.properties.display_name.split(',')[0]}}
+              <b style="margin: 0 2px;">at</b>
+              {{tripgj.display_end_time}}
+            </p>
           </div>
 
           <div class="row" style="">
@@ -60,14 +64,14 @@
             style="font-size: 1.5em; color: #000000; font-weight: bold; padding: 5px; background-color: #E8E8E8">
           Trip Segments
         </h2>
-         <div id="sectionList" class="col button-small" aria-labelledby="tripSegmentHeader" style="left: 0;">
+         <div id="sectionList" class="col" aria-labelledby="tripSegmentHeader">
 
 
            <div class="col" ng-repeat="sectionFmt in formattedSectionProperties"
                 style="padding: 5px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;
                 background-color: #eeeeee;">
              <div class="row" style="font-size: 15px; margin-left:10px; margin-bottom: 10px;">
-               <p>
+               <p style="padding-right: 5px;">
                  <b style="margin-right: 5px;">Departed from: </b>
                  {{sectionFmt.fmt_start_place}}
                  <b style="margin-left: 2px; margin-right: 2px;"> at </b>
@@ -75,10 +79,10 @@
                </p>
              </div>
              <div class="row" style="font-size: 15px; margin-left:10px; margin-bottom: 10px;">
-               <p>
-                 <b style="margin-right: 10px;">Arrived at: </b>
+               <p style="padding-right: 5px;">
+                 <b style="margin-right: 5px;">Arrived at: </b>
                  {{sectionFmt.fmt_end_place}}
-                 <b style="margin-left: 5px; margin-right: 5px;"> at </b>
+                 <b style="margin-left: 2px; margin-right: 2px;"> at </b>
                  {{sectionFmt.fmt_end_time}}
                </p>
              </div>
