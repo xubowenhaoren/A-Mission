@@ -19,6 +19,8 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
 
   angular.extend($scope.mapCtrl.defaults, Config.getMapTiles())
 
+  $scope.formattedTripDate = moment(Timeline.data.currDay).format('LL');
+
   var mapEvents = leafletMapEvents.getAvailableMapEvents();
   for (var k in mapEvents) {
     var eventName = 'leafletDirectiveMap.detail.' + mapEvents[k];
@@ -177,6 +179,8 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
     if(ev.targetScope !== $scope)
       return;
     checkDetailTutorialDone();
+
   });
+
   /* END: ng-walkthrough code */
 })
