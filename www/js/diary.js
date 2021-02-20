@@ -39,6 +39,9 @@ angular.module('emission.main.diary',['emission.main.diary.list',
 
   .state('root.main.change-mode', {
       url: '/diary/:tripId/change-mode',
+      params: {
+        sectionInfo: null
+      },
       views: {
         'main-diary': {
           templateUrl: "templates/diary/change-mode.html",

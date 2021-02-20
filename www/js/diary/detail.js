@@ -74,6 +74,7 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
             "fmt_end_place": s.properties.end_point_name.name,
             "fmt_time_range": DiaryHelper.getFormattedTimeRange(s.properties.end_ts, s.properties.start_ts),
             "fmt_distance": DiaryHelper.getFormattedDistance(s.properties.distance),
+            "sensed_mode": s.properties.sensed_mode,
             "icon": DiaryHelper.getIcon(s.properties.sensed_mode),
             "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)}
             };
@@ -168,9 +169,10 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
 
   $scope.toChangeMode = function (param) {
     $state.go('root.main.change-mode', {
-      tripId: param
-      //segmentId: param
+      tripId: $stateParams.tripId,
+      sectionInfo: param
     });
+
   };
 
   $scope.$on('$ionicView.afterEnter', function(ev) {

@@ -10,6 +10,9 @@ angular.module('emission.main.diary.change-mode', ['ui-leaflet',
 controller('ChangeModeCtrl',
   function ($scope, $state, $stateParams, $ionicPopup, nzTour, $ionicPopover, storage,
             CommHelper, $sce, DiaryHelper, Timeline) {
+
+  console.log("controller ChangeModeCtrl called with params = "+
+      JSON.stringify($stateParams));
     /*
       * Checks if it is the first time the user has loaded the diary tab. If it is then
       * show a walkthrough and store the info that the user has seen the tutorial.
@@ -45,11 +48,13 @@ controller('ChangeModeCtrl',
       // raw unformatted current date from timeline:
       // Timeline.data.currDay
       $scope.formattedCurrDate = moment(Timeline.data.currDay).format('LL');
+      $scope.startPlace = $stateParams.sectionInfo.fmt_start_place;
+      $scope.endPlace = $stateParams.sectionInfo.fmt_end_place;
     });
 
-    $scope.toDetail = function (param) {
-      $state.go('root.main.diary-detail', {
-        tripId: param
-      });
-    };
+    // $scope.toDetail = function (param) {
+    //   $state.go('root.main.diary-detail', {
+    //     tripId: param
+    //   });
+    // };
   });

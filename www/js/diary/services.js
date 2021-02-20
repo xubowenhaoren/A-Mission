@@ -757,7 +757,7 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
           end_local_dt: moment2localdate(endMoment),
           end_ts: endPoint.data.ts,
           feature_type: "section",
-          sensed_mode: "MotionTypes.UNPROCESSED",
+          sensed_mode: "MotionTypes.UNPROCESSED", // TODO: pass this information to change-mode.js
           source: "unprocessed",
           speeds: speeds,
           start_fmt_time: startMoment.format(),
