@@ -24,7 +24,6 @@ controller('ChangeModeCtrl',
       $scope.startPlace = $stateParams.sectionInfo.fmt_start_place;
       $scope.endPlace = $stateParams.sectionInfo.fmt_end_place;
       $scope.sensed_mode = $stateParams.sectionInfo.sensed_mode;
-      // TODO get this directly from detail.js
       $scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
       $scope.segment_index = $stateParams.sectionInfo.segment_index;
 
@@ -68,36 +67,33 @@ controller('ChangeModeCtrl',
      * Embed 'inputType' to the segment
      */
     $scope.populateSegmentInputFromTimeline = function (inputType) {
-      // TODO try to move this directly to detail.js, or just load one segment at a time
       console.log("populateSegmentInputFromTimeline called");
-      for (let s_index in $scope.tripgj.sections) {
-        let segment = $scope.tripgj.sections[s_index];
-        console.log("populateSegmentInputFromTimeline: currently checking section " + JSON.stringify(segment.id));
-        DiaryHelper.getUserInputForSegment(segment, function (tempRes) {
-          console.log("populateSegmentInputFromTimeline: get back", JSON.stringify(tempRes));
-          if (angular.isDefined(tempRes) && tempRes.length > 0) {
-            let userInput = tempRes[0];
-            // userInput is an object with data + metadata
-            // the label is the "value" from the options
-            var userInputEntry = $scope.inputParamsSegment[inputType].value2entry[userInput.data.label];
-            if (!angular.isDefined(userInputEntry)) {
-              userInputEntry = ConfirmHelper.getFakeEntry(userInput.data.label);
-              $scope.inputParamsSegment[inputType].options.push(userInputEntry);
-              $scope.inputParamsSegment[inputType].value2entry[userInput.data.label] = userInputEntry;
-            }
-            console.log("Mapped label " + userInput.data.label + " to entry " + JSON.stringify(userInputEntry));
-            segment.properties.userInput[inputType] = userInputEntry;
-            Logger.log("populateSegmentInputFromTimeline: Set "
-              + inputType + " " + JSON.stringify(userInputEntry) + " for trip id " + JSON.stringify($scope.tripgj.data.id)
-              + ", for segment " + JSON.stringify(segment.id));
-          } else {
-            Logger.log("populateSegmentInputFromTimeline: Skipped for trip id " + JSON.stringify($scope.tripgj.data.id)
-              + ", for segment " + JSON.stringify(segment.id));
+      let segment = $scope.tripgj.sections[$scope.segment_index];
+      console.log("populateSegmentInputFromTimeline: currently checking section " + JSON.stringify(segment.id));
+      DiaryHelper.getUserInputForSegment(segment, function (tempRes) {
+        console.log("populateSegmentInputFromTimeline: get back", JSON.stringify(tempRes));
+        if (angular.isDefined(tempRes) && tempRes.length > 0) {
+          let userInput = tempRes[0];
+          // userInput is an object with data + metadata
+          // the label is the "value" from the options
+          var userInputEntry = $scope.inputParamsSegment[inputType].value2entry[userInput.data.label];
+          if (!angular.isDefined(userInputEntry)) {
+            userInputEntry = ConfirmHelper.getFakeEntry(userInput.data.label);
+            $scope.inputParamsSegment[inputType].options.push(userInputEntry);
+            $scope.inputParamsSegment[inputType].value2entry[userInput.data.label] = userInputEntry;
           }
-        });
-      }
-      $scope.editingSegment = angular.undefined;
+          console.log("Mapped label " + userInput.data.label + " to entry " + JSON.stringify(userInputEntry));
+          segment.properties.userInput[inputType] = userInputEntry;
+          Logger.log("populateSegmentInputFromTimeline: Set "
+            + inputType + " " + JSON.stringify(userInputEntry) + " for trip id " + JSON.stringify($scope.tripgj.data.id)
+            + ", for segment " + JSON.stringify(segment.id));
+        } else {
+          Logger.log("populateSegmentInputFromTimeline: Skipped for trip id " + JSON.stringify($scope.tripgj.data.id)
+            + ", for segment " + JSON.stringify(segment.id));
+        }
+      });
     }
+    $scope.editingSegment = angular.undefined;
 
     var closePopover = function (inputType) {
       $scope.selectedSegment[inputType] = {
