@@ -169,10 +169,11 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
     startWalkthrough();
   }
 
-  $scope.toChangeMode = function (param) {
+  $scope.toChangeMode = function (sectionFmt, trip_gj) {
     $state.go('root.main.change-mode', {
       tripId: $stateParams.tripId,
-      sectionInfo: param
+      sectionInfo: sectionFmt,
+      tripgj: trip_gj
     });
 
   };
@@ -267,32 +268,10 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
   });
   $scope.selectedSegment.other = {text: '', value: ''};
 
-  /*
-   * This is a curried function that curries the `$scope` variable
-   * while returing a function that takes `e` as the input
-   */
-  var checkOtherOptionOnTap = function ($scope, inputType) {
-    return function (e) {
-      if (!$scope.selected.other.text) {
-        e.preventDefault();
-      } else {
-        Logger.log("in choose other, other = " + JSON.stringify($scope.selected));
-        $scope.store(inputType, $scope.selected.other, true /* isOther */);
-        $scope.selected.other = '';
-        return $scope.selected.other;
-      }
-    }
-  };
-
   $scope.chooseSegment = function (inputType) {
-    var isOther = false
+    var isOther = false;
     console.log("In chooseSegment, the value is ", $scope.selectedSegment[inputType].value);
-    if ($scope.selectedSegment[inputType].value != "other") {
-      $scope.storeSegment(inputType, $scope.selectedSegment[inputType], isOther);
-    } else {
-      isOther = true
-      ConfirmHelper.checkOtherOption(inputType, checkOtherOptionOnTap, $scope);
-    }
+    $scope.storeSegment(inputType, $scope.selectedSegment[inputType], isOther);
     closePopover(inputType);
   };
 
@@ -309,11 +288,6 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
   });
 
   $scope.storeSegment = function (inputType, input, isOther) {
-    if(isOther) {
-      // Let's make the value for user entered inputs look consistent with our
-      // other values
-      input.value = ConfirmHelper.otherTextToValue(input.text);
-    }
     $scope.draftInputSegment.label = input.value;
     Logger.log("in storeInput, after setting input.value = " + input.value + ", draftInputSegment = " + JSON.stringify($scope.draftInputSegment));
     var tripToUpdate = $scope.editingSegment.properties;
@@ -324,17 +298,9 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
     console.log("in storeInput, about to store with key " + ConfirmHelper.inputDetails[inputType].key);
     $window.cordova.plugins.BEMUserCache.putMessage(ConfirmHelper.inputDetails[inputType].key, $scope.draftInputSegment).then(function () {
       $scope.$apply(function() {
-        if (isOther) {
-          tripToUpdate.userInput[inputType] = ConfirmHelper.getFakeEntry(input.value);
-          $scope.inputParamsSegment[inputType].options.push(tripToUpdate.userInput[inputType]);
-          $scope.inputParamsSegment[inputType].value2entry[input.value] = tripToUpdate.userInput[inputType];
-        } else {
-          tripToUpdate.userInput[inputType] = $scope.inputParamsSegment[inputType].value2entry[input.value];
-        }
+        tripToUpdate.userInput[inputType] = $scope.inputParamsSegment[inputType].value2entry[input.value];
       });
     });
-    if (isOther == true)
-      $scope.draftInputSegment = angular.undefined;
   }
 
   /* END: ng-walkthrough code */
