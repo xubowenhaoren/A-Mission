@@ -11,7 +11,7 @@
   <ion-content [fullscreen]="true">
     <ion-item>Departed from: {{startPlace}}</ion-item>
     <ion-item>Arrived at: {{endPlace}}</ion-item>
-    <ion-item>Detected Mode of Transportation: {{sensed_mode}}</ion-item>
+    <ion-item>Detected Mode: {{sensed_mode}}</ion-item>
     <ion-item-divider></ion-item-divider>
     <ion-list>
       <ion-radio-group [(ngModel)]="mode">
@@ -20,6 +20,16 @@
 <!--        <ion-radio slot="start" value="bus">Bus</ion-radio>-->
 <!--        <ion-radio slot="start" value="other">Other</ion-radio>-->
       </ion-radio-group>
+      <div ng-if="tripgj.sections[segment_index].properties.userInput.MODE" class="mode-confirm-container">
+        <button ng-click ="openPopoverSegment($event, segment_index, 'MODE')" class="button btn-mode-confirm btn-mode-confirm-green">
+          {{tripgj.sections[segment_index].properties.userInput.MODE.text}}
+        </button>
+      </div>
+      <div  ng-if="!tripgj.sections[segment_index].properties.userInput.MODE" class="mode-confirm-container">
+        <button ng-click ="openPopoverSegment($event, segment_index, 'MODE')" class="button btn-mode-confirm btn-mode-confirm-white" translate>
+          {{'.choose-mode'}}
+        </button>
+      </div>
     </ion-list>
     <!--      <div class="row" style="margin-bottom: 15px; display: flex; justify-content: center;">-->
     <!--          <button ng-click="toDetail(tripgj.data.id)"-->
