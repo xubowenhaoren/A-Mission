@@ -43,11 +43,11 @@
               <p style="font-size: 1.1em; margin-bottom: 0; font-weight: bold;">Total Time</p>
               {{tripgj.display_time}}
             </div>
-            <div id="sectionPct" class="col" aria-hidden="true">
-              <i class="{{sectionPct.icon}}" ng-repeat="sectionPct in tripgj.percentages" style="margin-left: 10px; margin-right: 10px; font-size: 15px;" ng-style="{{sectionPct.color}}"></i>
-              <br>
-              <a ng-repeat="sectionPct in tripgj.percentages" style="font-size: 10px; margin-left: 10px; margin-right: 10px;">{{sectionPct.pct}}%</a>
-            </div>
+<!--            <div id="sectionPct" class="col" aria-hidden="true">-->
+<!--              <i class="{{sectionPct.icon}}" ng-repeat="sectionPct in tripgj.percentages" style="margin-left: 10px; margin-right: 10px; font-size: 15px;" ng-style="{{sectionPct.color}}"></i>-->
+<!--              <br>-->
+<!--              <a ng-repeat="sectionPct in tripgj.percentages" style="font-size: 10px; margin-left: 10px; margin-right: 10px;">{{sectionPct.pct}}%</a>-->
+<!--            </div>-->
           </div>
 
         </div>
@@ -93,15 +93,15 @@
              </div>
              <div class="row" style="font-size: 15px; margin-left:10px; margin-bottom: 10px;">
                <b style="margin-right: 10px;">Mode of transportation: </b>
-               Walk
-               <i class="{{sectionFmt.icon}}" , style="font-size: 25px; margin-left: 10px;"
-                  ng-style="{{sectionFmt.colorStyle}}" aria-hidden="true"></i>
+               {{sectionFmt.sensed_mode}}
+<!--               <i class="{{sectionFmt.icon}}" , style="font-size: 25px; margin-left: 10px;"-->
+<!--                  ng-style="{{sectionFmt.colorStyle}}" aria-hidden="true"></i>-->
 
              </div>
              <button
                style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 25px;
                margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto;"
-               ng-click="toChangeMode(tripgj.data.id)">
+               ng-click="toChangeMode(sectionFmt)">
                MODIFY MODE OF TRANSPORTATION
              </button>
            </div>

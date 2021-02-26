@@ -2,12 +2,13 @@
 angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
                                       'nvd3', 'emission.plugin.kvstore',
                                       'emission.services', 'emission.plugin.logger',
-                                      'emission.incident.posttrip.manual'])
+                                      'emission.incident.posttrip.manual',
+                                      'emission.main.common.services'])
 
 .controller("DiaryDetailCtrl", function($state, $scope, $rootScope, $window, $stateParams, $ionicActionSheet,
                                         leafletData, leafletMapEvents, nzTour, KVStore,
-                                        Logger, Timeline, DiaryHelper, Config,
-                                        CommHelper, PostTripManualMarker, $translate) {
+                                        Logger, Timeline, DiaryHelper, Config, ConfirmHelper,
+                                        CommHelper, PostTripManualMarker, $translate, $ionicPopover) {
   console.log("controller DiaryDetailCtrl called with params = "+
     JSON.stringify($stateParams));
 
@@ -67,16 +68,18 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
   $scope.getTripDetails = DiaryHelper.getTripDetails;
   $scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
 
-  $scope.formattedSectionProperties = $scope.tripgj.sections.map(function(s) {
+  $scope.formattedSectionProperties = $scope.tripgj.sections.map(function(s, index) {
     return {"fmt_time": DiaryHelper.getLocalTimeString(s.properties.start_local_dt),
             "fmt_end_time": DiaryHelper.getLocalTimeString(s.properties.end_local_dt),
             "fmt_start_place": s.properties.start_point_name.name,
             "fmt_end_place": s.properties.end_point_name.name,
             "fmt_time_range": DiaryHelper.getFormattedTimeRange(s.properties.end_ts, s.properties.start_ts),
             "fmt_distance": DiaryHelper.getFormattedDistance(s.properties.distance),
+            "sensed_mode": s.properties.sensed_mode,
             "icon": DiaryHelper.getIcon(s.properties.sensed_mode),
-            "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)}
-            };
+            "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)},
+            "segment_index": index
+          };
   });
 
   console.log("trip.start_place = " + JSON.stringify($scope.trip.start_place));
@@ -166,11 +169,12 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
     startWalkthrough();
   }
 
-  $scope.toChangeMode = function (param) {
+  $scope.toChangeMode = function (sectionFmt) {
     $state.go('root.main.change-mode', {
-      tripId: param
-      //segmentId: param
+      tripId: $stateParams.tripId,
+      sectionInfo: sectionFmt,
     });
+
   };
 
   $scope.$on('$ionicView.afterEnter', function(ev) {
@@ -181,6 +185,9 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
     checkDetailTutorialDone();
 
   });
+
+
+
 
   /* END: ng-walkthrough code */
 })
