@@ -1596,8 +1596,8 @@
   },
   {
     "href": "templates/diary/detail.html",
-    "size": 7178,
-    "integrity": "sha256-TQwoUPdX1cESLp3w4VKRWTJm+jQZ0SCqQhVCh9jnwKw= sha384-WEh1OiodiRzOWH9BbRIymH6I+7AdvBx01PvWvD6+uuf5bqMdNjHLmy7n0Rz9oSKf sha512-IlmopeoGDs3Lx8Myv8fnOf0FuMKW/RYxMEi66dIgw9r6GPShI0eYODnhRTqLKvdId1HuOv0IO3ei/9MYJAIPcw=="
+    "size": 7213,
+    "integrity": "sha256-6tfObq1mWSmK+zOQ5chAzD7bTBqXrMGvCwAKjeXAdSQ= sha384-TJztf7BiHLKJE08R3BfSOqdOrMKVNIyY+znVXOUkxQPbddH8fpJ+2S1UaqtR6GOZ sha512-X+UfQqHdhkHYGeyrzOKk9iZq7vnZe6vlQAwQ5ujDhlDQM7WzrdzjJhdoYYj4YGyvJ7T49luy+sGclJbON3roLQ=="
   },
   {
     "href": "templates/diary/list.html",
