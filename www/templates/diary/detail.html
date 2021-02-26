@@ -105,16 +105,6 @@
                ng-click="toChangeMode(sectionFmt)">
                MODIFY MODE OF TRANSPORTATION
              </button>
-             <div ng-if="tripgj.sections[sectionFmt.segment_index].properties.userInput.MODE" class="mode-confirm-container">
-               <button ng-click ="openPopoverSegment($event, sectionFmt.segment_index, 'MODE')" class="button btn-mode-confirm btn-mode-confirm-green">
-                 {{tripgj.sections[sectionFmt.segment_index].properties.userInput.MODE.text}}
-               </button>
-             </div>
-             <div  ng-if="!tripgj.sections[sectionFmt.segment_index].properties.userInput.MODE" class="mode-confirm-container">
-               <button ng-click ="openPopoverSegment($event, sectionFmt.segment_index, 'MODE')" class="button btn-mode-confirm btn-mode-confirm-white" translate>
-                 {{'.choose-mode'}}
-               </button>
-             </div>
            </div>
 
           </div>
