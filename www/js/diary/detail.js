@@ -7,7 +7,7 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
 .controller("DiaryDetailCtrl", function($state, $scope, $rootScope, $window, $stateParams, $ionicActionSheet,
                                         leafletData, leafletMapEvents, nzTour, KVStore,
                                         Logger, Timeline, DiaryHelper, Config,
-                                        CommHelper, PostTripManualMarker, $translate) {
+                                        CommHelper, PostTripManualMarker, $translate, CommonGraph) {
   console.log("controller DiaryDetailCtrl called with params = "+
     JSON.stringify($stateParams));
 
@@ -67,18 +67,40 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
   $scope.getTripDetails = DiaryHelper.getTripDetails;
   $scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
 
-  $scope.formattedSectionProperties = $scope.tripgj.sections.map(function(s) {
-    return {"fmt_time": DiaryHelper.getLocalTimeString(s.properties.start_local_dt),
-            "fmt_end_time": DiaryHelper.getLocalTimeString(s.properties.end_local_dt),
-            "fmt_start_place": s.properties.start_point_name.name,
-            "fmt_end_place": s.properties.end_point_name.name,
-            "fmt_time_range": DiaryHelper.getFormattedTimeRange(s.properties.end_ts, s.properties.start_ts),
-            "fmt_distance": DiaryHelper.getFormattedDistance(s.properties.distance),
-            "sensed_mode": s.properties.sensed_mode,
-            "icon": DiaryHelper.getIcon(s.properties.sensed_mode),
-            "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)}
-            };
-  });
+  if ($scope.tripgj.sections[0].properties.sensed_mode === "MotionTypes.UNPROCESSED") {
+    $scope.formattedSectionProperties = $scope.tripgj.sections.map(function(s) {
+      return {"fmt_time": DiaryHelper.getLocalTimeString(s.properties.start_local_dt),
+        "fmt_end_time": DiaryHelper.getLocalTimeString(s.properties.end_local_dt),
+        "fmt_start_place": s.properties.start_point_name.name,
+        "fmt_end_place": s.properties.end_point_name.name,
+        "fmt_time_range": DiaryHelper.getFormattedTimeRange(s.properties.end_ts, s.properties.start_ts),
+        "fmt_distance": DiaryHelper.getFormattedDistance(s.properties.distance),
+        "sensed_mode": s.properties.sensed_mode,
+        "icon": DiaryHelper.getIcon(s.properties.sensed_mode),
+        "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)}
+      };
+    });
+  } else {
+    $scope.formattedSectionProperties = [];
+    $scope.tripgj.sections.map(function(s) {
+      let start_point = {"lat": s.geometry.coordinates[0][1], "long": s.geometry.coordinates[0][0]};
+      let end_point = {"lat": s.geometry.coordinates[s.geometry.coordinates.length - 1][1],
+        "long": s.geometry.coordinates[s.geometry.coordinates.length - 1][0]};
+      CommonGraph.getSectionDisplayNameCallback(start_point, end_point, function(start_res, end_res) {
+        let res = {"fmt_time": DiaryHelper.getLocalTimeString(s.properties.start_local_dt),
+          "fmt_end_time": DiaryHelper.getLocalTimeString(s.properties.end_local_dt),
+          "fmt_start_place": start_res,
+          "fmt_end_place": end_res,
+          "fmt_time_range": DiaryHelper.getFormattedTimeRange(s.properties.end_ts, s.properties.start_ts),
+          "fmt_distance": DiaryHelper.getFormattedDistance(s.properties.distance),
+          "sensed_mode": s.properties.sensed_mode,
+          "icon": DiaryHelper.getIcon(s.properties.sensed_mode),
+          "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)}
+        };
+        $scope.formattedSectionProperties.push(res);
+      });
+    });
+  }
 
   console.log("trip.start_place = " + JSON.stringify($scope.trip.start_place));
 

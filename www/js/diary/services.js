@@ -736,8 +736,10 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
 
       var start_place_name_res = {name: "dummy start place"};
       var end_place_name_res = {name: "dummy end place"};
-      CommonGraph.getSectionDisplayName(startPoint.data.latitude, startPoint.data.longitude, start_place_name_res);
-      CommonGraph.getSectionDisplayName(endPoint.data.latitude, endPoint.data.longitude, end_place_name_res);
+      CommonGraph.getSectionDisplayName(startPoint.data.latitude, startPoint.data.longitude,
+        start_place_name_res, function(){});
+      CommonGraph.getSectionDisplayName(endPoint.data.latitude, endPoint.data.longitude,
+        end_place_name_res, function(){});
 
       var section_gj = {
         "id": tripAndSectionId,
