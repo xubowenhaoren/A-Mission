@@ -2,12 +2,13 @@
 angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
                                       'nvd3', 'emission.plugin.kvstore',
                                       'emission.services', 'emission.plugin.logger',
-                                      'emission.incident.posttrip.manual'])
+                                      'emission.incident.posttrip.manual',
+                                      'emission.main.common.services'])
 
 .controller("DiaryDetailCtrl", function($state, $scope, $rootScope, $window, $stateParams, $ionicActionSheet,
                                         leafletData, leafletMapEvents, nzTour, KVStore,
-                                        Logger, Timeline, DiaryHelper, Config,
-                                        CommHelper, PostTripManualMarker, $translate, CommonGraph) {
+                                        Logger, Timeline, DiaryHelper, Config, ConfirmHelper,
+                                        CommHelper, PostTripManualMarker, $translate, CommonGraph, $ionicPopover) {
   console.log("controller DiaryDetailCtrl called with params = "+
     JSON.stringify($stateParams));
 
@@ -68,7 +69,7 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
   $scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
 
   if ($scope.tripgj.sections[0].properties.sensed_mode === "MotionTypes.UNPROCESSED") {
-    $scope.formattedSectionProperties = $scope.tripgj.sections.map(function(s) {
+    $scope.formattedSectionProperties = $scope.tripgj.sections.map(function(s, index) {
       return {"fmt_time": DiaryHelper.getLocalTimeString(s.properties.start_local_dt),
         "fmt_end_time": DiaryHelper.getLocalTimeString(s.properties.end_local_dt),
         "fmt_start_place": s.properties.start_point_name.name,
@@ -77,12 +78,13 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
         "fmt_distance": DiaryHelper.getFormattedDistance(s.properties.distance),
         "sensed_mode": s.properties.sensed_mode,
         "icon": DiaryHelper.getIcon(s.properties.sensed_mode),
-        "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)}
+        "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)},
+        "segment_index": index
       };
     });
   } else {
     $scope.formattedSectionProperties = [];
-    $scope.tripgj.sections.map(function(s) {
+    $scope.tripgj.sections.map(function(s, index) {
       let start_point = {"lat": s.geometry.coordinates[0][1], "long": s.geometry.coordinates[0][0]};
       let end_point = {"lat": s.geometry.coordinates[s.geometry.coordinates.length - 1][1],
         "long": s.geometry.coordinates[s.geometry.coordinates.length - 1][0]};
@@ -95,7 +97,8 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
           "fmt_distance": DiaryHelper.getFormattedDistance(s.properties.distance),
           "sensed_mode": s.properties.sensed_mode,
           "icon": DiaryHelper.getIcon(s.properties.sensed_mode),
-          "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)}
+          "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)},
+          "segment_index": index
         };
         $scope.formattedSectionProperties.push(res);
       });
@@ -207,4 +210,153 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
   });
 
   /* END: ng-walkthrough code */
+  $scope.popovers = {};
+  ConfirmHelper.INPUTS.forEach(function(item, index) {
+    let popoverPath = 'templates/diary/'+item.toLowerCase()+'-popover.html';
+    return $ionicPopover.fromTemplateUrl(popoverPath, {
+      scope: $scope
+    }).then(function (popover) {
+      $scope.popovers[item] = popover;
+    });
+  });
+
+  $scope.openPopoverSegment = function ($event, segment_index, inputType) {
+    // TODO fix userInput to load the server-side analysis prediction.
+    var userInput = $scope.tripgj.sections[segment_index].properties.userInput[inputType];
+    if (angular.isDefined(userInput)) {
+      $scope.selectedSegment[inputType].value = userInput.value;
+    } else {
+      $scope.selectedSegment[inputType].value = '';
+    }
+    $scope.draftInputSegment = {
+      "start_ts": $scope.tripgj.sections[segment_index].properties.start_ts,
+      "end_ts": $scope.tripgj.sections[segment_index].properties.end_ts,
+      "segment": true
+    };
+    $scope.editingSegment = $scope.tripgj.sections[segment_index];
+    Logger.log("in openPopover, setting draftInputSegment = " + JSON.stringify($scope.draftInputSegment));
+    $scope.popovers[inputType].show($event);
+  };
+
+  /**
+   * Embed 'inputType' to the segment
+   */
+  $scope.populateSegmentInputFromTimeline = function (inputType) {
+    console.log("populateSegmentInputFromTimeline called");
+    for (let s_index in $scope.tripgj.sections) {
+      let segment = $scope.tripgj.sections[s_index];
+      console.log("populateSegmentInputFromTimeline: currently checking section " + JSON.stringify(segment.id));
+      DiaryHelper.getUserInputForSegment(segment, function (tempRes) {
+        console.log("populateSegmentInputFromTimeline: get back", JSON.stringify(tempRes));
+        if (angular.isDefined(tempRes) && tempRes.length > 0) {
+          let userInput = tempRes[0];
+          // userInput is an object with data + metadata
+          // the label is the "value" from the options
+          var userInputEntry = $scope.inputParamsSegment[inputType].value2entry[userInput.data.label];
+          if (!angular.isDefined(userInputEntry)) {
+            userInputEntry = ConfirmHelper.getFakeEntry(userInput.data.label);
+            $scope.inputParamsSegment[inputType].options.push(userInputEntry);
+            $scope.inputParamsSegment[inputType].value2entry[userInput.data.label] = userInputEntry;
+          }
+          console.log("Mapped label " + userInput.data.label + " to entry " + JSON.stringify(userInputEntry));
+          segment.properties.userInput[inputType] = userInputEntry;
+          Logger.log("populateSegmentInputFromTimeline: Set "
+            + inputType + " " + JSON.stringify(userInputEntry) + " for trip id " + JSON.stringify($scope.tripgj.data.id)
+            + ", for segment " + JSON.stringify(segment.id));
+        } else {
+          Logger.log("populateSegmentInputFromTimeline: Skipped for trip id " + JSON.stringify($scope.tripgj.data.id)
+            + ", for segment " + JSON.stringify(segment.id));
+        }
+      });
+    }
+    $scope.editingSegment = angular.undefined;
+  }
+
+  var closePopover = function (inputType) {
+    $scope.selectedSegment[inputType] = {
+      value: ''
+    };
+    $scope.popovers[inputType].hide();
+  };
+
+  /**
+   * Store selected value for options
+   * $scope.selected is for display only
+   * the value is displayed on popover selected option
+   */
+  $scope.selectedSegment = {}
+  ConfirmHelper.INPUTS.forEach(function(item, index) {
+    $scope.selectedSegment[item] = {value: ''};
+  });
+  $scope.selectedSegment.other = {text: '', value: ''};
+
+  /*
+   * This is a curried function that curries the `$scope` variable
+   * while returing a function that takes `e` as the input
+   */
+  var checkOtherOptionOnTap = function ($scope, inputType) {
+    return function (e) {
+      if (!$scope.selected.other.text) {
+        e.preventDefault();
+      } else {
+        Logger.log("in choose other, other = " + JSON.stringify($scope.selected));
+        $scope.store(inputType, $scope.selected.other, true /* isOther */);
+        $scope.selected.other = '';
+        return $scope.selected.other;
+      }
+    }
+  };
+
+  $scope.chooseSegment = function (inputType) {
+    var isOther = false
+    console.log("In chooseSegment, the value is ", $scope.selectedSegment[inputType].value);
+    if ($scope.selectedSegment[inputType].value != "other") {
+      $scope.storeSegment(inputType, $scope.selectedSegment[inputType], isOther);
+    } else {
+      isOther = true
+      ConfirmHelper.checkOtherOption(inputType, checkOtherOptionOnTap, $scope);
+    }
+    closePopover(inputType);
+  };
+
+  $scope.$on('$ionicView.afterEnter', function() {
+    $scope.inputParamsSegment = {}
+    ConfirmHelper.INPUTS.forEach(function(item) {
+      ConfirmHelper.getOptionsAndMaps(item).then(function(omObj) {
+        $scope.inputParamsSegment[item] = omObj;
+        if (item === "MODE") {
+          $scope.populateSegmentInputFromTimeline(item);
+        }
+      });
+    });
+  });
+
+  $scope.storeSegment = function (inputType, input, isOther) {
+    if(isOther) {
+      // Let's make the value for user entered inputs look consistent with our
+      // other values
+      input.value = ConfirmHelper.otherTextToValue(input.text);
+    }
+    $scope.draftInputSegment.label = input.value;
+    Logger.log("in storeInput, after setting input.value = " + input.value + ", draftInputSegment = " + JSON.stringify($scope.draftInputSegment));
+    var tripToUpdate = $scope.editingSegment.properties;
+    let segmentKey = $scope.draftInputSegment.start_ts + "_" + $scope.draftInputSegment.end_ts;
+    console.log("in storeInput, about to store with key " + segmentKey);
+    $window.cordova.plugins.BEMUserCache.putMessage(segmentKey, $scope.draftInputSegment);
+
+    console.log("in storeInput, about to store with key " + ConfirmHelper.inputDetails[inputType].key);
+    $window.cordova.plugins.BEMUserCache.putMessage(ConfirmHelper.inputDetails[inputType].key, $scope.draftInputSegment).then(function () {
+      $scope.$apply(function() {
+        if (isOther) {
+          tripToUpdate.userInput[inputType] = ConfirmHelper.getFakeEntry(input.value);
+          $scope.inputParamsSegment[inputType].options.push(tripToUpdate.userInput[inputType]);
+          $scope.inputParamsSegment[inputType].value2entry[input.value] = tripToUpdate.userInput[inputType];
+        } else {
+          tripToUpdate.userInput[inputType] = $scope.inputParamsSegment[inputType].value2entry[input.value];
+        }
+      });
+    });
+    if (isOther == true)
+      $scope.draftInputSegment = angular.undefined;
+  }
 })

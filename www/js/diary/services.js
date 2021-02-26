@@ -3,7 +3,7 @@
 angular.module('emission.main.diary.services', ['emission.plugin.logger',
     'emission.services', 'emission.main.common.services',
     'emission.incident.posttrip.manual', 'emission.tripconfirm.services'])
-.factory('DiaryHelper', function(CommonGraph, PostTripManualMarker, $translate){
+.factory('DiaryHelper', function(CommonGraph, PostTripManualMarker, $translate, $window){
   var dh = {};
   // dh.expandEarlierOrLater = function(id) {
   //   document.querySelector('#hidden-' + id.toString()).setAttribute('style', 'display: block;');
@@ -399,6 +399,24 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
     return moment(ts_in_secs * 1000).tz(tz).format();
   }
 
+  var printSegmentUserInput = function(segment_properties) {
+    return segment_properties.start_fmt_time + "(" + segment_properties.start_ts+ ") -> "
+      + segment_properties.end_fmt_time + "(" + segment_properties.end_ts+ ")"
+      + "existing user input: " + JSON.stringify(segment_properties.userInput);
+  }
+
+  // a method to return the user input for a segment
+  dh.getUserInputForSegment = function(segment, callback) {
+    console.log("Segment input = " + printSegmentUserInput(segment.properties));
+    // if (!angular.isDefined(segment.properties.userInput.MODE)) {
+    let segmentKey = segment.properties.start_ts + "_" + segment.properties.end_ts;
+    console.log("looking up userCache for segment motion mode user input with key " + segmentKey);
+    $window.cordova.plugins.BEMUserCache.getLastMessages(segmentKey, 1, true).then(function(tempRes) {
+      console.log("looking up result: " + JSON.stringify(tempRes));
+      callback(tempRes);
+    });
+  }
+
   var printUserInput = function(ui) {
     return fmtTs(ui.data.start_ts, ui.metadata.time_zone) + "("+ui.data.start_ts + ") -> "+
            fmtTs(ui.data.end_ts, ui.metadata.time_zone) + "("+ui.data.end_ts + ")"+
@@ -772,7 +790,8 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
           end_point_lat: endPoint.data.latitude,
           end_point_long: endPoint.data.longitude,
           start_point_name: start_place_name_res,
-          end_point_name: end_place_name_res
+          end_point_name: end_place_name_res,
+          userInput: {}
         }
       }
       return {

@@ -93,9 +93,10 @@
              </div>
              <div class="row" style="font-size: 15px; margin-left:10px; margin-bottom: 10px;">
                <b style="margin-right: 10px;">Mode of transportation: </b>
-               Walk
-               <i class="{{sectionFmt.icon}}" , style="font-size: 25px; margin-left: 10px;"
-                  ng-style="{{sectionFmt.colorStyle}}" aria-hidden="true"></i>
+<!--               Walk-->
+<!--               <i class="{{sectionFmt.icon}}" , style="font-size: 25px; margin-left: 10px;"-->
+<!--                  ng-style="{{sectionFmt.colorStyle}}" aria-hidden="true"></i>-->
+               {{sectionFmt.sensed_mode}}
 
              </div>
              <button
@@ -104,6 +105,16 @@
                ng-click="toChangeMode(sectionFmt)">
                MODIFY MODE OF TRANSPORTATION
              </button>
+             <div ng-if="tripgj.sections[sectionFmt.segment_index].properties.userInput.MODE" class="mode-confirm-container">
+               <button ng-click ="openPopoverSegment($event, sectionFmt.segment_index, 'MODE')" class="button btn-mode-confirm btn-mode-confirm-green">
+                 {{tripgj.sections[sectionFmt.segment_index].properties.userInput.MODE.text}}
+               </button>
+             </div>
+             <div  ng-if="!tripgj.sections[sectionFmt.segment_index].properties.userInput.MODE" class="mode-confirm-container">
+               <button ng-click ="openPopoverSegment($event, sectionFmt.segment_index, 'MODE')" class="button btn-mode-confirm btn-mode-confirm-white" translate>
+                 {{'.choose-mode'}}
+               </button>
+             </div>
            </div>
 
           </div>

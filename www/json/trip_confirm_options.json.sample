@@ -1,13 +1,10 @@
 {
   "MODE" : [
        {"text":"Walk", "value":"walk"},
+       {"text":"Wheelchair", "value":"wheelchair"},
+       {"text":"Automobile","value":"automobile"},
        {"text":"Bike","value":"bike"},
-       {"text":"Drove Alone","value":"drove_alone"},
-       {"text":"Shared Ride","value":"shared_ride"},
-       {"text":"Taxi/Uber/Lyft","value":"taxi"},
-       {"text":"Bus","value":"bus"},
        {"text":"Train","value":"train"},
-       {"text":"Free Shuttle","value":"free_shuttle"},
        {"text":"Other","value":"other"}],
     "PURPOSE" : [
        {"text":"Home", "value":"home"},
