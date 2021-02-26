@@ -23,6 +23,8 @@ controller('ChangeModeCtrl',
       $scope.formattedCurrDate = moment(Timeline.data.currDay).format('LL');
       $scope.startPlace = $stateParams.sectionInfo.fmt_start_place;
       $scope.endPlace = $stateParams.sectionInfo.fmt_end_place;
+      $scope.startTime = $stateParams.sectionInfo.fmt_time;
+      $scope.endTime = $stateParams.sectionInfo.fmt_end_time;
       $scope.sensed_mode = $stateParams.sectionInfo.sensed_mode;
       $scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
       $scope.segment_index = $stateParams.sectionInfo.segment_index;
