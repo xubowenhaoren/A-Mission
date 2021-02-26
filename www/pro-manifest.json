@@ -21,8 +21,8 @@
   },
   {
     "href": ".idea/workspace.xml",
-    "size": 4776,
-    "integrity": "sha256-e6vn+DtQiM62ii/nYihEHcFYKGjx/BaHY377IjQKbh8= sha384-x/WLKeteXiH2Z/kl/BtzC8OGxf1g6WL3Em6JPmLMYgO/XpcxCacjcoBPo2jmP7O3 sha512-9HBz9Hx2QnWu2b21Pa+Wj74JsITB4Sn1virBeLjfyMTLTuju8BzxiSVHmD+NxXcLec8KvcIWd0ljsJWnkivQOA=="
+    "size": 4820,
+    "integrity": "sha256-TESY/+ecvaiDVEzyZhp7VyYWbsovHWhW8ggmtkwvY3I= sha384-rbQ8q0/Zr9sfoPwG4xMNv0LtsYcpUB42hJG/nGGyC72ghaI76Vf1M4oJU69gm5vV sha512-aRzYR7QzmK3ji8fPe9yC/Wh1QVB+lJ5ECcq0W+4gtZKBo6R5jvJAPlK0OrtxAsO938Aj0H0WDGqkQ8y4ht39PA=="
   },
   {
     "href": ".idea/www.iml",
@@ -56,8 +56,8 @@
   },
   {
     "href": "css/style.css",
-    "size": 41217,
-    "integrity": "sha256-c8LNNwZJnuyC/zDJLyQaurQ2Um6U7o0D+0xyIEiJ3Cg= sha384-TvehiJDrwtItaIZKOA2/i6TPKdDvw3FsSY7cAVsqF6t+OOuGVRTKP0FZ/axOaNC9 sha512-IMSo7NMfJjWEhMNTPHcU6wcy4kyYpvyKLc4x/QbI89lZC+LPXORUQu+By4hVkhyIz5avvEc7KGa5/Hf+LIl43A=="
+    "size": 41329,
+    "integrity": "sha256-FoY5BVaLDOfVcvBxcIxge38vO1qNyxMrtotdpdsGxm0= sha384-mcb8ZUdW9nIfb72U8wq+ZJ83tc7Kj2ntUvfyhFzYGcAQhNhMV4CHp5erXh/U8jzq sha512-TvLpZO+2MJZNG6qu1MVcldVJiOBtO3YK+MCs+XDHur5qcvc6Jp8Tz5p2ekXZCWsuN3577De0CJhF4dwaA4948g=="
   },
   {
     "href": "i18n/en.json",
@@ -441,8 +441,8 @@
   },
   {
     "href": "js/diary/change-mode.js",
-    "size": 1713,
-    "integrity": "sha256-8VaqCk3k8M9xHsUXYMJX3pwnvf58CxAvhWO6Kolwr3U= sha384-w/QUe7aI/3kvj1lqpXByVGd93+82qylfw96mgm5ANTs7tx40CbnNAFsFggfu9sr2 sha512-VNlTlUY4K8ynx6LCcsjk9d6rb1eo8gUzyHzfZaU+uIPudF8JcKTUzrkxfB9TJGYA3cRnUPoDTXM0u9R8zF8hfA=="
+    "size": 1898,
+    "integrity": "sha256-z155P6R2khJ8JEn83ZjVpVmToOB0zLq7oCmfpA9vLWE= sha384-bqEDUqFFmf7X4JfNQZESNjUFlA3XRd/cy1nnffvEIe2nqr2QoMF+FJpHJgqeQqmr sha512-DE/pmDnDiPR/y2nqUUn8z+bYqVrGpvUJ4qFwqlRlPT2+ObFOijieNr4TSvAN48d4pfHoWSygEnxpNYx7H9TsQw=="
   },
   {
     "href": "js/diary/current.js",
@@ -451,8 +451,8 @@
   },
   {
     "href": "js/diary/detail.js",
-    "size": 7028,
-    "integrity": "sha256-8wmeHiylGWlcKWVsrqmcR3enZUFXktPvxc5FZ3Sii2A= sha384-XlFSI5bprtEVLaiik4H09ycj9jjmvsLSHkBwkvnLKg2wDMOET22GGXHjDcIj8MnT sha512-DkqtWk7TtqOl/ArxjshgPTogd3/K4L0EWXBcntsZlMvLw6YEeQm5IO/8jXgqn0lZYs8PvhQ8H8GUDi1iCaAd3g=="
+    "size": 7104,
+    "integrity": "sha256-y9tVsrL1hI0vybl2XYGpm5vc3DrU3O/mIeF+c7MCHpw= sha384-vrposrIiyHkqXLYimdbWepb9lqcwkBqEVAaD9bo9dVdvrCrHysT+gk4RIXid5Cjk sha512-o2MGoE9Rm04tvK/P92j8OELGnGWSqx1eS/8FpUhABp+WNeSl/O8fAhRQWOSxUlvflx0faoKfySHB4WNxGJNo2w=="
   },
   {
     "href": "js/diary/list.js",
@@ -1611,8 +1611,8 @@
   },
   {
     "href": "templates/diary/change-mode.html",
-    "size": 1562,
-    "integrity": "sha256-yROZyOgJPfbyADtAAW1HQvH34XWZkhcxbFKIp/SrKCg= sha384-TAFzg0V39Wqs8AIP0qqmYLHE6oAk+cEw6AIksdXrWTc1T6lmafmqXxA4qYRCYZ3j sha512-Ng34pbmA9edj0cpfVglm7m0cRIk9Emt0KyXVXZdV2GvxhZvwYp15/cmJdFtbBronK3bsD7lyGzQFHBav3yaKFQ=="
+    "size": 1600,
+    "integrity": "sha256-Xh2Dsb0Gm177SqjZNTGup5q5bTNL6LySiSGY4dJNCRs= sha384-VrW47NnUnLIjKZAGYI5NcbBlfCTnsPAFz+iYvWh1MQ2w/q3ZP+GLd7sT8A8k2syu sha512-SbXcwS7E78xGPMehx88IuKStEaMAqqSJJdVpnbkfRyAZLmi5hXUAokFR8ZHclSoceLruEZFGNQ8zbfUzHax9Dg=="
   },
   {
     "href": "templates/diary/current.html",
@@ -1621,13 +1621,13 @@
   },
   {
     "href": "templates/diary/detail.html",
-    "size": 6316,
-    "integrity": "sha256-+FVaLAyKWGioBRDxHnIZIBvhg/sWx3Iie/rB+b3aYa8= sha384-Iec4Gdzmh32i6LcRMfny/l8b4q1zGQq+ZUGENIZ/Opx+cxPXX98+/Np9FmRZ3elk sha512-hgzN+RJ8uPEdsctm/mR2HvjsCoTTJLKG5jSoMxHrv8pNqVRNjcaH3UnIzBUuCq5wdj+Djwk1bsRicGVSbWPYtA=="
+    "size": 6331,
+    "integrity": "sha256-McFADtqvE+ZCP2r2JJr0XgN3xyQKFNKfnc+tYdKEM/k= sha384-/Rafp8TiWaTs86an5QEwZBydHY3BRJelxp9JAsQZZeeSDSGgQSCd7Gvfhof9OZNR sha512-XDLOKDLG8wIjBIx9SAX1LRYHRZmMF40ZJwIA0uch1dNGDQ078L5xBaUxasPpEzuhVsq/AXDbJYI9sf7lhlFkew=="
   },
   {
     "href": "templates/diary/list.html",
-    "size": 8319,
-    "integrity": "sha256-Ia/uoiOuGxYzmqdnUUiV69aC4IEkeiwWPtAAzGgaW2I= sha384-X/r2nIdA+MwrWBCmpc1N3PPb61i/gvu2wAET+ZQFrCB2wZfCeUVdJxdB1zdopj5A sha512-hkdpEDlMLCUjaeZjsrsG/RGAd2THWCPApafZ6lqz1pgr0g7Uzc+/fH+RK/fi/a55tnk9MSjA/3q6hOUU4pIA6Q=="
+    "size": 7750,
+    "integrity": "sha256-yQFs16OrcxTUuMf3t+US23zfWsvEk5FlIa/0h2UHooM= sha384-gL79ZuhiKiD2Gqi4kgcwzPqdPyQ7iAoo1EPd1yIfn51r3WosyE/Fj75utO/9nsbp sha512-ybmNJWQ5+KRcR/h4aNv7mL6qTXrC8QtSbxK4u4PoMYxjqKBrKNZJQAjov9fYaflSmO4q3WshRdLH+f37HQw2xg=="
   },
   {
     "href": "templates/diary/mode-popover.html",
