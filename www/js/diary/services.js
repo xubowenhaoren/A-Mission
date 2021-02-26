@@ -1085,7 +1085,13 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
       };
 
       timeline.getTripWrapper = function(tripId) {
-        return timeline.data.tripWrapperMap[tripId];
+        let res = timeline.data.tripWrapperMap[tripId];
+        if (res.sections[0].properties.sensed_mode !== "MotionTypes.UNPROCESSED") {
+          res.sections.map(function(s) {
+            s.properties.userInput = {"MODE": {"text":"", "value":""}}
+          });
+        }
+        return res;
       };
 
       /*
