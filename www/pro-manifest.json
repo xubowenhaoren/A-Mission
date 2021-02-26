@@ -416,8 +416,8 @@
   },
   {
     "href": "js/diary/change-mode.js",
-    "size": 6671,
-    "integrity": "sha256-p238zArL7FlR7hgXb8aEhPX8ApiejZkLsYDkT2/8tlc= sha384-Ak2Tydj3IjreK6W4zaEcVNAdWny+/Y3jL+et8m8n85pF6l/gWDkE00A1cMxjIvW8 sha512-OLebPPVUMQ3kK6X1caQ3NKAWoq+dR178WDR0auuj3L2mlfaqCffrrfklXiQh27331az4Kgfuobj/XKa7IINPYQ=="
+    "size": 6576,
+    "integrity": "sha256-QA1hruGRMLBjeqCJfMqG6XJ1NRlNleAogwSE5Uvv+Io= sha384-ZmVFw0F34H4fQdET1bUpKDY6JbF1P07XumtZ/9+XHaXlMLqq0b567FO0nOd7kwzg sha512-nMi+l5ZpmYKKnQkGFoxsattMT/NzvDdRke/qUonSMZ26l0mnJjyYvgcUPCp8H9awBo6aA/SEDxyscubB6vBetQ=="
   },
   {
     "href": "js/diary/current.js",
