@@ -16,6 +16,7 @@ controller('ChangeModeCtrl',
 
     //$scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
 
+    $scope.userModes = DiaryHelper.userModes;
     $scope.$on('$ionicView.enter', function(ev) {
 
       // raw unformatted current date from timeline:
@@ -39,6 +40,10 @@ controller('ChangeModeCtrl',
     $scope.toDiary = function() {
       $state.go('root.main.diary');
     };
+
+    $scope.setMode = function(mode) {
+      console.log("User has selected: "+mode);
+    }
 
 
     $scope.popovers = {};
