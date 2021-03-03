@@ -180,6 +180,7 @@ angular.module('emission.main.diary.list',['ui-leaflet',
         tripgj.display_start_time = DiaryHelper.getLocalTimeString(tripgj.data.properties.start_local_dt);
         tripgj.display_end_time = DiaryHelper.getLocalTimeString(tripgj.data.properties.end_local_dt);
         tripgj.display_distance = $scope.getFormattedDistance(tripgj.data.properties.distance);
+        tripgj.display_distance_miles = $scope.getFormattedDistance(tripgj.data.properties.distance) * 0.62137;
         tripgj.display_time = $scope.getFormattedTimeRange(tripgj.data.properties.start_ts,
                                 tripgj.data.properties.end_ts);
         tripgj.isDraft = $scope.isDraft(tripgj);
