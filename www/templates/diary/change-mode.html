@@ -1,13 +1,9 @@
-<ion-view>
+<ion-view ng-class="tripgj.background" translate-namespace="diary">
   <ion-nav-title>
-    Your trip on {{formattedCurrDate}}
+    <div class="col" text-align="center">
+      Your trip on {{formattedCurrDate}}
+    </div>
   </ion-nav-title>
-  <ion-nav-bar class="bar-stable"></ion-nav-bar>
-  <!-- <ion-nav-buttons side="right">
-    <button id="accessmap-help"
-            class="button button-icon ion-help"
-            ng-click="startWalkthrough()"></button>
-  </ion-nav-buttons> -->
   <ion-content [fullscreen]="true">
     <ion-list>
       <h1 style="font-size: 1.4em; padding: 0.2em;">
@@ -63,14 +59,15 @@
         </button>
       </div>
     </ion-list>
-    <!--      <div class="row" style="margin-bottom: 15px; display: flex; justify-content: center;">-->
-    <!--          <button ng-click="toDetail(tripgj.data.id)"-->
-    <!--            style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 10px; margin-right: 1px;">-->
-    <!--            BACK TO TRIP REVIEW-->
-    <!--          </button>-->
-    <!--        <button style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 10px; margin-left: 1px;">-->
-    <!--            BACK TO TRIP DIARY-->
-    <!--        </button>-->
-    <!--      </div>-->
+    <div class="row" style="margin-bottom: 15px; display: flex; justify-content: center;">
+      <button ng-click="toDetail()"
+              style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 10px; margin-right: 1px;">
+        BACK TO TRIP REVIEW
+      </button>
+      <button ng-click="toDiary()"
+              style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 10px; margin-left: 1px;">
+        BACK TO TRIP DIARY
+      </button>
+    </div>
   </ion-content>
 </ion-view>

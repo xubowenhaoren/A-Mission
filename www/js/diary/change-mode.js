@@ -30,6 +30,16 @@ controller('ChangeModeCtrl',
       $scope.segment_index = $stateParams.sectionInfo.segment_index;
     });
 
+    $scope.toDetail = function() {
+      $state.go('root.main.diary-detail', {
+        tripId: $stateParams.tripId,
+      });
+    };
+
+    $scope.toDiary = function() {
+      $state.go('root.main.diary');
+    };
+
 
     $scope.popovers = {};
     ConfirmHelper.INPUTS.forEach(function(item, index) {
