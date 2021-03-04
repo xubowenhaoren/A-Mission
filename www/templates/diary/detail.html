@@ -5,7 +5,7 @@
       </div>
     </ion-nav-title>
     <ion-nav-buttons side="right">
-         <button class="button button-icon ion-help" ng-click="startWalkthrough()"></button>
+      <button class="button button-icon ion-help" ng-click="startWalkthrough()" aria-label="Help"></button>
     </ion-nav-buttons>
     <ion-content class="has-header" ng-class="tripgj.background" overflow-scroll="true" padding="true">
       <h1 id="tripDetailsHeader"
@@ -41,7 +41,9 @@
                   Total Distance
                 </span>
                 <br>
-                {{tripgj.display_distance}} km ({{tripgj.display_distance_miles}} mi)
+                {{tripgj.display_distance}} km
+                <br>
+                ({{tripgj.display_distance_miles}} mi)
               </p>
             </div>
             <div class="col" style="width: 30%; margin-top: 0; font-size: 1.1em;">
@@ -101,6 +103,7 @@
                <p style="padding-right: 5px;">
                  <span style="margin-right: 10px; font-weight: bold;">Distance: </span>
                  {{sectionFmt.fmt_distance}} km
+                 <br>
                  ({{sectionFmt.fmt_distance_miles}} mi)
                </p>
              </div>
@@ -114,7 +117,7 @@
              </div>
              <button
                style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 25px;
-               margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto;"
+               margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto; min-width: 50px; min-height: 50px;"
                ng-click="toChangeMode(sectionFmt)">
                MODIFY MODE OF TRANSPORTATION
              </button>
