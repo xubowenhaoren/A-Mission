@@ -85,7 +85,7 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
       };
     });
   } else {
-    $scope.formattedSectionProperties = [];
+    $scope.formattedSectionProperties = new Array($scope.tripgj.sections.length);
     $scope.tripgj.sections.map(function(s, index) {
       let start_point = {"lat": s.geometry.coordinates[0][1], "long": s.geometry.coordinates[0][0]};
       let end_point = {"lat": s.geometry.coordinates[s.geometry.coordinates.length - 1][1],
@@ -104,7 +104,7 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
           "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)},
           "segment_index": index
         };
-        $scope.formattedSectionProperties.push(res);
+        $scope.formattedSectionProperties[index] = res;
       });
     });
   }
