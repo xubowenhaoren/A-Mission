@@ -2,15 +2,18 @@
     <ion-nav-bar class="bar-stable">
     </ion-nav-bar>
     <ion-nav-buttons side="right">
-        <button class="button button-icon ion-help" ng-click="startWalkthrough()"></button>
+        <button class="button button-icon ion-help" ng-click="startWalkthrough()"
+        aria-label="Help"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="left">
         <button id="map-fix-button" class="button refresh-tiles" ng-click="refreshTiles()" translate>{{'map-fixmap'}}</button>
         <div class="buttons dark-color" style="text-align:center; background-color: transparent !important;" id="toget">
-            <button class="button button-icon icon ion-arrow-left-b date-picker-arrow" ng-click="prevDay()">
+            <button class="button button-icon icon ion-arrow-left-b date-picker-arrow" ng-click="prevDay()"
+            aria-label="Previous day">
             </button>
             <button id="date-picker-button" class="button date-picker-button" ng-click="pickDay()"> {{currDay}} <i class="ion-ios-calendar-outline" style="font-size: 16px !important;"></i></button>
-            <button class="button button-icon icon ion-arrow-right-b ion-arrow-left-b date-picker-arrow" ng-click="nextDay()">
+            <button class="button button-icon icon ion-arrow-right-b ion-arrow-left-b date-picker-arrow" ng-click="nextDay()"
+            aria-label="Next day">
             </button>
         </div>
     </ion-nav-buttons>
@@ -18,7 +21,8 @@
 	<ion-content class="diary-entry">
         <ion-refresher
         pulling-text="{{'pull-to-refresh' | translate}}"
-        on-refresh="refresh()">
+        on-refresh="refresh()"
+        aria-hidden="true">
         </ion-refresher>
         <!--
         <div  ng-if="inTrip()" class="control-list-item">
@@ -42,7 +46,7 @@
 		<div collection-repeat="tripgj in data.currDayTripWrappers">
 <!--      <div class="start-time-tag">{{tripgj.display_start_time}}</div>-->
 
-      <ion-item id="diary-item" style="background-color: transparent;" class="list-item">
+      <ion-item id="diary-item" style="background-color: transparent; margin-left: 5%;" class="list-item">
         <div ng-class="listExpandClass" ng-if="tripgj.common.different" id="hidden-{{tripgj.data.id}}">
           {{tripgj.common.displayEarlierOrLater}}
         </div>
@@ -110,7 +114,9 @@
                 <span style="font-weight: bold">
                   Total Distance:
                 </span>
-                {{tripgj.display_distance}} km ({{tripgj.display_distance_miles}} mi)
+                {{tripgj.display_distance}} km
+                <br>
+                ({{tripgj.display_distance_miles}} mi)
               </ion-item>
               <ion-item>
                 <span style="font-weight: bold">
@@ -122,7 +128,8 @@
             <!---<div class="diary-arrow-container">--->
             <div style="display: flex; justify-content: center; margin-top: 1em;">
               <button ng-click="toDetail(tripgj.data.id)" class="review-trip-details-button"
-                      style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 1em;">
+                      style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 1em;
+                      min-width: 50px; min-height: 50px;">
                 REVIEW TRIP DETAILS
                 <i class="ion-ios-arrow-right"></i>
               </button>
