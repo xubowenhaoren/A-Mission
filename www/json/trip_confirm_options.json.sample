@@ -1,10 +1,11 @@
 {
   "MODE" : [
-       {"text":"Walk", "value":"walk"},
-       {"text":"Wheelchair", "value":"wheelchair"},
-       {"text":"Automobile","value":"automobile"},
-       {"text":"Bike","value":"bike"},
-       {"text":"Train","value":"train"}],
+       {"text":"WALKING", "value":"walk"},
+       {"text":"RUNNING", "value":"run"},
+       {"text":"WHEELCHAIR", "value":"wheelchair"},
+       {"text":"CAR","value":"automobile"},
+       {"text":"BIKE","value":"bike"},
+       {"text":"TRAIN","value":"train"}],
     "PURPOSE" : [
        {"text":"Home", "value":"home"},
        {"text":"Work","value":"work"},
