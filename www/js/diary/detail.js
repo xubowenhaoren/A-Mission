@@ -8,7 +8,7 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
 .controller("DiaryDetailCtrl", function($state, $scope, $rootScope, $window, $stateParams, $ionicActionSheet,
                                         leafletData, leafletMapEvents, nzTour, KVStore,
                                         Logger, Timeline, DiaryHelper, Config, ConfirmHelper,
-                                        CommHelper, PostTripManualMarker, $translate, $ionicPopover) {
+                                        CommHelper, PostTripManualMarker, $translate, CommonGraph, $ionicPopover) {
   console.log("controller DiaryDetailCtrl called with params = "+
     JSON.stringify($stateParams));
 
@@ -68,61 +68,87 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
   $scope.getTripDetails = DiaryHelper.getTripDetails;
   $scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
 
-  $scope.formattedSectionProperties = $scope.tripgj.sections.map(function(s, index) {
-    return {"fmt_time": DiaryHelper.getLocalTimeString(s.properties.start_local_dt),
-            "fmt_end_time": DiaryHelper.getLocalTimeString(s.properties.end_local_dt),
-            "fmt_start_place": s.properties.start_point_name.name,
-            "fmt_end_place": s.properties.end_point_name.name,
-            "fmt_time_range": DiaryHelper.getFormattedTimeRange(s.properties.end_ts, s.properties.start_ts),
-            "fmt_distance": DiaryHelper.getFormattedDistance(s.properties.distance),
-            "fmt_distance_miles": DiaryHelper.getFormattedDistance(s.properties.distance) * 0.62137,
-            "sensed_mode": s.properties.sensed_mode,
-            "icon": DiaryHelper.getIcon(s.properties.sensed_mode),
-            "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)},
-            "segment_index": index
-          };
-  });
-
-  console.log("trip.start_place = " + JSON.stringify($scope.trip.start_place));
-
-  var data  = [];
-  var start_ts = $scope.trip.properties.start_ts;
-  var totalTime = 0;
-  for (var s in $scope.tripgj.sections) {
-    // ti = time index
-    for (var ti in $scope.tripgj.sections[s].properties.times) {
-      totalTime = ($scope.tripgj.sections[s].properties.times[ti] - start_ts);
-      data.push({x: totalTime, y: $scope.tripgj.sections[s].properties.speeds[ti] });
-    }
+  if ($scope.tripgj.sections[0].properties.sensed_mode === "MotionTypes.UNPROCESSED") {
+    $scope.formattedSectionProperties = $scope.tripgj.sections.map(function(s, index) {
+      return {"fmt_time": DiaryHelper.getLocalTimeString(s.properties.start_local_dt),
+        "fmt_end_time": DiaryHelper.getLocalTimeString(s.properties.end_local_dt),
+        "fmt_start_place": s.properties.start_point_name.name,
+        "fmt_end_place": s.properties.end_point_name.name,
+        "fmt_time_range": DiaryHelper.getFormattedTimeRange(s.properties.end_ts, s.properties.start_ts),
+        "fmt_distance": DiaryHelper.getFormattedDistance(s.properties.distance),
+        "fmt_distance_miles":
+          Math.round(DiaryHelper.getFormattedDistance(s.properties.distance) * 0.62137 * 10) / 10,
+        "sensed_mode": s.properties.sensed_mode.split(".")[1],
+        "icon": DiaryHelper.getIcon(s.properties.sensed_mode),
+        "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)},
+        "segment_index": index
+      };
+    });
+  } else {
+    $scope.formattedSectionProperties = new Array($scope.tripgj.sections.length);
+    $scope.tripgj.sections.map(function(s, index) {
+      let start_point = {"lat": s.geometry.coordinates[0][1], "long": s.geometry.coordinates[0][0]};
+      let end_point = {"lat": s.geometry.coordinates[s.geometry.coordinates.length - 1][1],
+        "long": s.geometry.coordinates[s.geometry.coordinates.length - 1][0]};
+      CommonGraph.getSectionDisplayNameCallback(start_point, end_point, function(start_res, end_res) {
+        let res = {"fmt_time": DiaryHelper.getLocalTimeString(s.properties.start_local_dt),
+          "fmt_end_time": DiaryHelper.getLocalTimeString(s.properties.end_local_dt),
+          "fmt_start_place": start_res,
+          "fmt_end_place": end_res,
+          "fmt_time_range": DiaryHelper.getFormattedTimeRange(s.properties.end_ts, s.properties.start_ts),
+          "fmt_distance": DiaryHelper.getFormattedDistance(s.properties.distance),
+          "fmt_distance_miles":
+            Math.round(DiaryHelper.getFormattedDistance(s.properties.distance) * 0.62137 * 10) / 10,
+          "sensed_mode": s.properties.sensed_mode.split(".")[1],
+          "icon": DiaryHelper.getIcon(s.properties.sensed_mode),
+          "colorStyle": {color: DiaryHelper.getColor(s.properties.sensed_mode)},
+          "segment_index": index
+        };
+        $scope.formattedSectionProperties[index] = res;
+      });
+    });
   }
-  var dataset = {
-      values: data,
-      key: $translate.instant('details.speed'),
-      color: '#7777ff',
-    }
-  var chart = nv.models.lineChart()
-                .margin({left: 65, right: 10})  //Adjust chart margins to give the x-axis some breathing room.
-                .useInteractiveGuideline(false)  //We want nice looking tooltips and a guideline!
-                .x(function(t) {return t.x / 60})
-                .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
-                .showYAxis(true)        //Show the y-axis
-                .showXAxis(true);        //Show the x-axis
-  chart.xAxis
-    .tickFormat(d3.format(".1f"))
-    .axisLabel($translate.instant('details.time') + ' (mins)');
 
-  chart.yAxis     //Chart y-axis settings
-      .axisLabel($translate.instant('details.speed') + ' (m/s)')
-      .tickFormat(d3.format('.1f'));
-
-  d3.select('#chart svg')    //Select the <svg> element you want to render the chart in.
-      .datum([dataset,])         //Populate the <svg> element with chart data...
-      .call(chart);          //Finally, render the chart!
-
-
-  //Update the chart when window resizes.
-  nv.utils.windowResize(chart.update);
-  nv.addGraph(chart);
+  // console.log("trip.start_place = " + JSON.stringify($scope.trip.start_place));
+  //
+  // var data  = [];
+  // var start_ts = $scope.trip.properties.start_ts;
+  // var totalTime = 0;
+  // for (var s in $scope.tripgj.sections) {
+  //   // ti = time index
+  //   for (var ti in $scope.tripgj.sections[s].properties.times) {
+  //     totalTime = ($scope.tripgj.sections[s].properties.times[ti] - start_ts);
+  //     data.push({x: totalTime, y: $scope.tripgj.sections[s].properties.speeds[ti] });
+  //   }
+  // }
+  // var dataset = {
+  //     values: data,
+  //     key: $translate.instant('details.speed'),
+  //     color: '#7777ff',
+  //   }
+  // var chart = nv.models.lineChart()
+  //               .margin({left: 65, right: 10})  //Adjust chart margins to give the x-axis some breathing room.
+  //               .useInteractiveGuideline(false)  //We want nice looking tooltips and a guideline!
+  //               .x(function(t) {return t.x / 60})
+  //               .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+  //               .showYAxis(true)        //Show the y-axis
+  //               .showXAxis(true);        //Show the x-axis
+  // chart.xAxis
+  //   .tickFormat(d3.format(".1f"))
+  //   .axisLabel($translate.instant('details.time') + ' (mins)');
+  //
+  // chart.yAxis     //Chart y-axis settings
+  //     .axisLabel($translate.instant('details.speed') + ' (m/s)')
+  //     .tickFormat(d3.format('.1f'));
+  //
+  // d3.select('#chart svg')    //Select the <svg> element you want to render the chart in.
+  //     .datum([dataset,])         //Populate the <svg> element with chart data...
+  //     .call(chart);          //Finally, render the chart!
+  //
+  //
+  // //Update the chart when window resizes.
+  // nv.utils.windowResize(chart.update);
+  // nv.addGraph(chart);
 
   /* START: ng-walkthrough code */
   // Tour steps
@@ -186,9 +212,6 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
     checkDetailTutorialDone();
 
   });
-
-
-
 
   /* END: ng-walkthrough code */
 })

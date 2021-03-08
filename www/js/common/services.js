@@ -144,14 +144,22 @@ angular.module('emission.main.common.services', ['emission.plugin.logger'])
         var maxEntry = getKeyWithMaxVal(retMap);
         return maxEntry[0];
     };
+  commonGraph.getSectionDisplayNameCallback = function(start_point, end_point, callback) {
+    commonGraph.getSectionDisplayName(start_point.lat, start_point.long, {}, function(start_res) {
+      commonGraph.getSectionDisplayName(end_point.lat, end_point.long,{}, function (end_res) {
+        callback(start_res, end_res);
+      });
+    });
+  }
 
-    commonGraph.getSectionDisplayName = function(lat, long, obj) {
+    commonGraph.getSectionDisplayName = function(lat, long, obj, callback) {
       var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat
         + "&lon=" + long;
       $http.get(url).then(function(response) {
         console.log("while reading data from nominatim, status = "+response.status
           +" data = "+JSON.stringify(response.data));
-        return responseListener(response.data, obj);
+        let tempRes = responseListener(response.data, obj);
+        callback(tempRes);
       }, function(error) {
         console.log("while reading data from nominatim, error = "+error);
       });

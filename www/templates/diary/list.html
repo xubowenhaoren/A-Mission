@@ -2,18 +2,18 @@
     <ion-nav-bar class="bar-stable">
     </ion-nav-bar>
     <ion-nav-buttons side="right">
-        <button class="button button-icon ion-help" ng-click="startWalkthrough()"
-        aria-label="Help"></button>
+      <button class="button button-icon ion-help" ng-click="startWalkthrough()"
+              aria-label="Help"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="left">
         <button id="map-fix-button" class="button refresh-tiles" ng-click="refreshTiles()" translate>{{'map-fixmap'}}</button>
         <div class="buttons dark-color" style="text-align:center; background-color: transparent !important;" id="toget">
-            <button class="button button-icon icon ion-arrow-left-b date-picker-arrow" ng-click="prevDay()"
-            aria-label="Previous day">
+          <button class="button button-icon icon ion-arrow-left-b date-picker-arrow" ng-click="prevDay()"
+                  aria-label="Previous day">
             </button>
             <button id="date-picker-button" class="button date-picker-button" ng-click="pickDay()"> {{currDay}} <i class="ion-ios-calendar-outline" style="font-size: 16px !important;"></i></button>
-            <button class="button button-icon icon ion-arrow-right-b ion-arrow-left-b date-picker-arrow" ng-click="nextDay()"
-            aria-label="Next day">
+          <button class="button button-icon icon ion-arrow-right-b ion-arrow-left-b date-picker-arrow" ng-click="nextDay()"
+                  aria-label="Next day">
             </button>
         </div>
     </ion-nav-buttons>
@@ -74,10 +74,10 @@
             </div>
           </div>-->
 
-          <div style="display: flex; justify-content: center; margin-top: 1em;">
+          <div style="display: flex; justify-content: center; margin-top: 1em; " >
             <leaflet geojson="tripgj" id="$index" defaults="defaults" aria-hidden="true"></leaflet>
           </div>
-          <div style="padding: 0.5em;">
+          <div >
             <div class="start-end-addresses-container">
               <!--<div ng-class="listLocationClass" id="no-border" href="#" style="background-color: transparent; font-size: 0.8em; padding-top: 5px; padding-bottom: 5px; padding-left: 30px; margin-top: 0; margin-bottom: 0;">
                 <i class="icon ion-ios-location" style="font-size: 16px; left: 0; color: #33e0bb;"></i>
@@ -126,7 +126,7 @@
               </ion-item>
             </div>
             <!---<div class="diary-arrow-container">--->
-            <div style="display: flex; justify-content: center; margin-top: 1em;">
+            <div style="display: flex; justify-content: center;">
               <button ng-click="toDetail(tripgj.data.id)" class="review-trip-details-button"
                       style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 1em;
                       min-width: 50px; min-height: 50px;">

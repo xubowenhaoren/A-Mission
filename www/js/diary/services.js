@@ -399,6 +399,24 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
     return moment(ts_in_secs * 1000).tz(tz).format();
   }
 
+  var printSegmentUserInput = function(segment_properties) {
+    return segment_properties.start_fmt_time + "(" + segment_properties.start_ts+ ") -> "
+      + segment_properties.end_fmt_time + "(" + segment_properties.end_ts+ ")"
+      + "existing user input: " + JSON.stringify(segment_properties.userInput);
+  }
+
+  // a method to return the user input for a segment
+  dh.getUserInputForSegment = function(segment, callback) {
+    console.log("Segment input = " + printSegmentUserInput(segment.properties));
+    // if (!angular.isDefined(segment.properties.userInput.MODE)) {
+    let segmentKey = segment.properties.start_ts + "_" + segment.properties.end_ts;
+    console.log("looking up userCache for segment motion mode user input with key " + segmentKey);
+    $window.cordova.plugins.BEMUserCache.getLastMessages(segmentKey, 1, true).then(function(tempRes) {
+      console.log("looking up result: " + JSON.stringify(tempRes));
+      callback(tempRes);
+    });
+  }
+
   var printUserInput = function(ui) {
     return fmtTs(ui.data.start_ts, ui.metadata.time_zone) + "("+ui.data.start_ts + ") -> "+
            fmtTs(ui.data.end_ts, ui.metadata.time_zone) + "("+ui.data.end_ts + ")"+
@@ -754,8 +772,10 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
 
       var start_place_name_res = {name: "dummy start place"};
       var end_place_name_res = {name: "dummy end place"};
-      CommonGraph.getSectionDisplayName(startPoint.data.latitude, startPoint.data.longitude, start_place_name_res);
-      CommonGraph.getSectionDisplayName(endPoint.data.latitude, endPoint.data.longitude, end_place_name_res);
+      CommonGraph.getSectionDisplayName(startPoint.data.latitude, startPoint.data.longitude,
+        start_place_name_res, function(){});
+      CommonGraph.getSectionDisplayName(endPoint.data.latitude, endPoint.data.longitude,
+        end_place_name_res, function(){});
 
       var section_gj = {
         "id": tripAndSectionId,
@@ -1083,7 +1103,13 @@ angular.module('emission.main.diary.services', ['emission.plugin.logger',
       };
 
       timeline.getTripWrapper = function(tripId) {
-        return timeline.data.tripWrapperMap[tripId];
+        let res = timeline.data.tripWrapperMap[tripId];
+        if (res.sections[0].properties.sensed_mode !== "MotionTypes.UNPROCESSED") {
+          res.sections.map(function(s) {
+            s.properties.userInput = {"MODE": {"text":"", "value":""}}
+          });
+        }
+        return res;
       };
 
       /*

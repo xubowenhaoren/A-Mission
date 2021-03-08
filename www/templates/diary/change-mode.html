@@ -1,13 +1,9 @@
-<ion-view>
+<ion-view ng-class="tripgj.background" translate-namespace="diary">
   <ion-nav-title>
-    Your trip on {{formattedCurrDate}}
+    <div class="col" text-align="center">
+      Your trip on {{formattedCurrDate}}
+    </div>
   </ion-nav-title>
-  <ion-nav-bar class="bar-stable"></ion-nav-bar>
-  <!-- <ion-nav-buttons side="right">
-    <button id="accessmap-help"
-            class="button button-icon ion-help"
-            ng-click="startWalkthrough()"></button>
-  </ion-nav-buttons> -->
   <ion-content [fullscreen]="true">
     <ion-list>
       <h1 style="font-size: 1.4em; padding: 0.2em;">
@@ -15,7 +11,7 @@
       </h1>
       <ion-item>
         <span style="font-weight: bold">
-          Departed from:
+          Segment Start:
         </span>
         {{startPlace}}
         <br>
@@ -26,7 +22,7 @@
       </ion-item>
       <ion-item>
         <span style="font-weight: bold">
-          Arrived at:
+          Segment End:
         </span>
         {{endPlace}}
         <br>
@@ -44,13 +40,13 @@
     </ion-list>
 
     <ion-list>
-      <ion-radio-group [(ngModel)]="mode">
+      <ion-radio-group [(ngModel)]="selectedMode">
         <h1 style="font-size: 1.4em; padding: 0.2em;">
           How did you travel between the start and end point?
         </h1>
-<!--        <ion-radio slot="start" value="walk">Walk</ion-radio>-->
-<!--        <ion-radio slot="start" value="bus">Bus</ion-radio>-->
-<!--        <ion-radio slot="start" value="other">Other</ion-radio>-->
+        <span ng-repeat="mode in inputParamsSegment.MODE.options">
+          <ion-radio ng-click="chooseSegment('MODE')" ng-model="selectedSegment.MODE.value" ng-value="mode.value">{{mode.text}}</ion-radio>
+        </span>
       </ion-radio-group>
       <div ng-if="tripgj.sections[segment_index].properties.userInput.MODE" class="mode-confirm-container">
         <button ng-click ="openPopoverSegment($event, segment_index, 'MODE')" class="button btn-mode-confirm btn-mode-confirm-green">
@@ -63,14 +59,15 @@
         </button>
       </div>
     </ion-list>
-    <!--      <div class="row" style="margin-bottom: 15px; display: flex; justify-content: center;">-->
-    <!--          <button ng-click="toDetail(tripgj.data.id)"-->
-    <!--            style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 10px; margin-right: 1px;">-->
-    <!--            BACK TO TRIP REVIEW-->
-    <!--          </button>-->
-    <!--        <button style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 10px; margin-left: 1px;">-->
-    <!--            BACK TO TRIP DIARY-->
-    <!--        </button>-->
-    <!--      </div>-->
+    <div class="row" style="margin-bottom: 15px; display: flex; justify-content: center;">
+      <button ng-click="toDetail()"
+              style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 10px; margin-right: 1px;">
+        BACK TO TRIP REVIEW
+      </button>
+      <button ng-click="toDiary()"
+              style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 10px; margin-left: 1px;">
+        BACK TO TRIP DIARY
+      </button>
+    </div>
   </ion-content>
 </ion-view>

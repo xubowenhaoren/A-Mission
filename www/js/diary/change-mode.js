@@ -16,6 +16,7 @@ controller('ChangeModeCtrl',
 
     //$scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
 
+    $scope.userModes = DiaryHelper.userModes;
     $scope.$on('$ionicView.enter', function(ev) {
 
       // raw unformatted current date from timeline:
@@ -28,14 +29,22 @@ controller('ChangeModeCtrl',
       $scope.sensed_mode = $stateParams.sectionInfo.sensed_mode;
       $scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
       $scope.segment_index = $stateParams.sectionInfo.segment_index;
-
     });
 
-    // $scope.toDetail = function (param) {
-    //   $state.go('root.main.diary-detail', {
-    //     tripId: param
-    //   });
-    // };
+    $scope.toDetail = function() {
+      $state.go('root.main.diary-detail', {
+        tripId: $stateParams.tripId,
+      });
+    };
+
+    $scope.toDiary = function() {
+      $state.go('root.main.diary');
+    };
+
+    $scope.setMode = function(mode) {
+      console.log("User has selected: "+mode);
+    }
+
 
     $scope.popovers = {};
     ConfirmHelper.INPUTS.forEach(function(item, index) {
@@ -94,8 +103,8 @@ controller('ChangeModeCtrl',
             + ", for segment " + JSON.stringify(segment.id));
         }
       });
+      $scope.editingSegment = angular.undefined;
     }
-    $scope.editingSegment = angular.undefined;
 
     var closePopover = function (inputType) {
       $scope.selectedSegment[inputType] = {
@@ -149,4 +158,5 @@ controller('ChangeModeCtrl',
         });
       });
     }
+
   });
