@@ -1,18 +1,21 @@
 <ion-view ng-class="tripgj.background" translate-namespace="diary">
-    <ion-nav-title>
+    <!--<ion-nav-title>
       <div class="col" text-align="center">
         Your trip on {{formattedTripDate}}
       </div>
-    </ion-nav-title>
+    </ion-nav-title>-->
     <ion-nav-buttons side="right">
       <button class="button button-icon ion-help" ng-click="startWalkthrough()" aria-label="Help"></button>
     </ion-nav-buttons>
     <ion-content class="has-header" ng-class="tripgj.background" overflow-scroll="true" padding="true">
-      <h1 id="tripDetailsHeader"
+      <h1 style="text-align: center; font-size: 1.7em;">
+        Your trip on {{formattedTripDate}}
+      </h1>
+      <h2 id="tripDetailsHeader"
           style="font-size: 1.5em; color: #000000; font-weight: bold; padding: 5px; background-color: #E8E8E8">
         Trip Details
-      </h1>
-        <div class="col" style="background-color: #ffffff; padding: 5px !important; font-size: 1.1em">
+      </h2>
+        <div class="col" style="background-color: #ffffff; padding: 5px !important; font-size: 1.1rem">
 
           <div class="row" id="trip-start-info" style="margin-bottom: 10px;">
             <i class="icon ion-ios-location" style="padding: 10px; font-size: 20px; color: #33e0bb;" aria-hidden="true"></i>
@@ -34,9 +37,9 @@
             </p>
           </div>
 
-          <div class="row" style="">
-            <div class="col" style="width: 30%; margin-top: 0; font-size: 1.1em;">
-              <p style="font-size: 1.1em; margin-bottom: 0;">
+          <div class="row" style="display: flex; justify-content: center;">
+            <div class="col" style="width: 30%; margin-top: 0; margin-right: 0.2rem;">
+              <p style="font-size: 1.1rem; margin-bottom: 0;">
                 <span style="font-weight: bold;">
                   Total Distance
                 </span>
@@ -46,8 +49,8 @@
                 ({{tripgj.display_distance_miles}} mi)
               </p>
             </div>
-            <div class="col" style="width: 30%; margin-top: 0; font-size: 1.1em;">
-              <p style="font-size: 1.1em; margin-bottom: 0;">
+            <div class="col" style="width: 30%; margin-top: 0; margin-left: 0.2rem;">
+              <p style="font-size: 1.1rem; margin-bottom: 0;">
                 <span style="font-weight: bold;">
                   Total Time
                 </span>
@@ -61,16 +64,16 @@
 <!--              <a ng-repeat="sectionPct in tripgj.percentages" style="font-size: 10px; margin-left: 10px; margin-right: 10px;">{{sectionPct.pct}}%</a>-->
 <!--            </div>-->
           </div>
-
         </div>
 
         <div style="height: 10px;"></div>
 
+        <div aria-label="Map" tabindex="0" style="height: 50%; width: 100%;">
+          <leaflet geojson="tripgj" id="detail" defaults="mapCtrl.defaults"
+                   data-tap-disabled="true" aria-hidden="true" tabindex="0" style="height: 100%; width: 100%;">
+          </leaflet>
+        </div>
 
-        <leaflet geojson="tripgj" id="detail" defaults="mapCtrl.defaults"
-                 height="50%" width="100%" data-tap-disabled="true" aria-hidden="true">
-        </leaflet>
-        <div style="height: 20px;"></div>
         <!-- This is the section for the list of trip segments. -->
         <h2 id="tripSegmentHeader"
             style="font-size: 1.5em; color: #000000; font-weight: bold; padding: 5px; background-color: #E8E8E8">
@@ -137,7 +140,7 @@
 <!--        </div>-->
         <div style="" class="button-bar">
             <button class="button button-stable button-block icon ion-refresh" style="min-width: 50px; min-height: 50px;"
-                ng-click="refreshMap()" translate>{{'map-refresh'}}</button>
+                    ng-click="refreshMap()" translate>{{'map-refresh'}}</button>
             <button class="button button-stable button-block" style="min-width: 50px; min-height: 50px;"
                 ng-click="refreshTiles()" translate>{{'map-fixmap'}}</button>
             <!--

@@ -1,14 +1,17 @@
 <ion-view ng-class="tripgj.background" translate-namespace="diary">
-  <ion-nav-title>
+  <!--<ion-nav-title>
     <div class="col" text-align="center">
       Your trip on {{formattedCurrDate}}
     </div>
-  </ion-nav-title>
+  </ion-nav-title>-->
   <ion-content [fullscreen]="true">
+    <h1 style="text-align: center; font-size: 1.7em;">
+      Modify this segment's mode of transportation
+    </h1>
     <ion-list>
-      <h1 style="font-size: 1.4em; padding: 0.2em;">
+      <h2 style="font-size: 1.4em; padding: 0.2em;">
         Segment Details
-      </h1>
+      </h2>
       <ion-item>
         <span style="font-weight: bold">
           Segment Start:
@@ -41,9 +44,9 @@
 
     <ion-list>
       <ion-radio-group [(ngModel)]="selectedMode">
-        <h1 style="font-size: 1.4em; padding: 0.2em;">
+        <h2 style="font-size: 1.4em; padding: 0.2em;">
           How did you travel between the start and end point?
-        </h1>
+        </h2>
         <span ng-repeat="mode in inputParamsSegment.MODE.options">
           <ion-radio ng-click="chooseSegment('MODE')" ng-model="selectedSegment.MODE.value" ng-value="mode.value">{{mode.text}}</ion-radio>
         </span>
