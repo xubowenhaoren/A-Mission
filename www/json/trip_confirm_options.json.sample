@@ -4,7 +4,7 @@
        {"text":"RUNNING", "value":"run"},
        {"text":"WHEELCHAIR", "value":"wheelchair"},
        {"text":"CAR","value":"automobile"},
-       {"text":"BIKE","value":"bike"},
+       {"text":"BICYCLING","value":"bike"},
        {"text":"TRAIN","value":"train"}],
     "PURPOSE" : [
        {"text":"Home", "value":"home"},
