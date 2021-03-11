@@ -31,34 +31,48 @@
         </span>
         {{endTime}}
       </ion-item>
-      <ion-item>
+      <ion-item ng-if="!selectedMode">
         <span style="font-weight: bold">
           Detected mode:
         </span>
          {{sensed_mode}}
       </ion-item>
+      <ion-item ng-if="selectedMode">
+        <span style="font-weight: bold">
+          Detected mode:
+        </span>
+        {{selectedMode.text}}
+      </ion-item>
     </ion-list>
 
-    <ion-list>
-      <ion-radio-group [(ngModel)]="selectedMode">
-        <h1 style="font-size: 1.4em; padding: 0.2em;">
-          How did you travel between the start and end point?
-        </h1>
-        <span ng-repeat="mode in inputParamsSegment.MODE.options">
-          <ion-radio ng-click="chooseSegment('MODE')" ng-model="selectedSegment.MODE.value" ng-value="mode.value">{{mode.text}}</ion-radio>
-        </span>
-      </ion-radio-group>
-      <div ng-if="tripgj.sections[segment_index].properties.userInput.MODE" class="mode-confirm-container">
-        <button ng-click ="openPopoverSegment($event, segment_index, 'MODE')" class="button btn-mode-confirm btn-mode-confirm-green">
-          {{tripgj.sections[segment_index].properties.userInput.MODE.text}}
-        </button>
-      </div>
-      <div  ng-if="!tripgj.sections[segment_index].properties.userInput.MODE" class="mode-confirm-container">
-        <button ng-click ="openPopoverSegment($event, segment_index, 'MODE')" class="button btn-mode-confirm btn-mode-confirm-white" translate>
-          {{'.choose-mode'}}
-        </button>
-      </div>
-    </ion-list>
+<!--    <ion-list>-->
+<!--      <div ng-if="tripgj.sections[segment_index].properties.userInput.MODE" class="mode-confirm-container">-->
+<!--        <button ng-click ="openPopoverSegment($event, segment_index, 'MODE')" class="button btn-mode-confirm btn-mode-confirm-green">-->
+<!--          {{tripgj.sections[segment_index].properties.userInput.MODE.text}}-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div  ng-if="!tripgj.sections[segment_index].properties.userInput.MODE" class="mode-confirm-container">-->
+<!--        <button ng-click ="openPopoverSegment($event, segment_index, 'MODE')" class="button btn-mode-confirm btn-mode-confirm-white" translate>-->
+<!--          {{'.choose-mode'}}-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </ion-list>-->
+
+    <br class="option-spacing" />
+    <form>
+        <label ng-repeat="mode in inputParamsSegment.MODE.options">
+          <input class="button btn-mode-confirm btn-mode-confirm-white" type="radio" name="modeType"
+                 ng-model="$parent.selectedMode"
+                 ng-change="$parent.onModeChange(mode)"
+                 ng-value="mode">
+<!--          // TODO: replace with setter function-->
+          {{mode.text}}
+          </input>
+          <br />
+          <br class="option-spacing" />
+        </label>
+    </form>
+
     <div class="row" style="margin-bottom: 15px; display: flex; justify-content: center;">
       <button ng-click="toDetail()"
               style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 10px 10px; margin-right: 1px;">

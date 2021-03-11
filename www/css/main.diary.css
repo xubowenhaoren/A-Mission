@@ -135,7 +135,7 @@ a.item-content {
   min-height: 30px;
   font-size: 0.8em !important;
   width: 115px;
-  padding: 0;
+  padding: 0px;
 }
 .mode-confirm-container,
 .purpose-confirm-container {
@@ -145,6 +145,11 @@ a.item-content {
 .popover {
   height: 297px;
   width: 230px;
+}
+
+.option-spacing {
+  display: block;
+  margin: 10px 0;
 }
 
 #diary-item {

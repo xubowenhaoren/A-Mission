@@ -41,9 +41,48 @@ controller('ChangeModeCtrl',
       $state.go('root.main.diary');
     };
 
-    $scope.setMode = function(mode) {
-      console.log("User has selected: "+mode);
-    }
+    $scope.selectedMode = '';
+
+    $scope.onModeChange = function(obj) {
+      delete obj.$$hashKey;
+      console.log("in onModeChange, value selected: " + JSON.stringify(obj));
+
+      // Set up variables
+      $scope.draftInputSegment = {
+        "start_ts": $scope.tripgj.sections[$scope.segment_index].properties.start_ts,
+        "end_ts": $scope.tripgj.sections[$scope.segment_index].properties.end_ts,
+        "segment": true
+      };
+      $scope.editingSegment = $scope.tripgj.sections[$scope.segment_index];
+
+      var inputType = 'MODE';
+      var input = obj;
+      $scope.draftInputSegment.label = input.value;
+
+      // Modify mode for trip section with key
+      Logger.log("in onModeChange, after setting input.value = " + input.value + ", draftInputSegment = " + JSON.stringify($scope.draftInputSegment));
+      var tripToUpdate = $scope.editingSegment.properties;
+      let segmentKey = $scope.draftInputSegment.start_ts + "_" + $scope.draftInputSegment.end_ts;
+      console.log("in onModeChange, about to store with key " + segmentKey);
+      $window.cordova.plugins.BEMUserCache.putMessage(segmentKey, $scope.draftInputSegment);
+
+      $window.cordova.plugins.BEMUserCache.putMessage(ConfirmHelper.inputDetails[inputType].key, $scope.draftInputSegment).then(function () {
+        $scope.$apply(function() {
+          tripToUpdate.userInput[inputType] = $scope.inputParamsSegment[inputType].value2entry[input.value];
+        });
+      });
+
+      // Checking variables
+      // $scope.tripgj.sections[$scope.segment_index].properties.userInput["MODE"] = obj;
+      console.log("in onModeChange, userInput: " + JSON.stringify($scope.tripgj.sections[$scope.segment_index].properties.userInput));
+      // console.log("in onModeChange, editingSegment: " + JSON.stringify($scope.editingSegment));
+      // console.log("in onModeChange, draftInputSegment: " + JSON.stringify($scope.draftInputSegment));
+      $stateParams.sectionInfo.sensed_mode = input.text;
+      console.log("in onModeChange, stateParams: "+ JSON.stringify($stateParams));
+
+      // Modify trip data
+      // $scope.storeSegment('MODE', obj, false);
+    };
 
 
     $scope.popovers = {};
@@ -118,7 +157,7 @@ controller('ChangeModeCtrl',
      * $scope.selected is for display only
      * the value is displayed on popover selected option
      */
-    $scope.selectedSegment = {}
+    $scope.selectedSegment = {};
     ConfirmHelper.INPUTS.forEach(function(item, index) {
       $scope.selectedSegment[item] = {value: ''};
     });
@@ -132,7 +171,7 @@ controller('ChangeModeCtrl',
     };
 
     $scope.$on('$ionicView.afterEnter', function() {
-      $scope.inputParamsSegment = {}
+      $scope.inputParamsSegment = {};
       ConfirmHelper.INPUTS.forEach(function(item) {
         ConfirmHelper.getOptionsAndMaps(item).then(function(omObj) {
           $scope.inputParamsSegment[item] = omObj;
