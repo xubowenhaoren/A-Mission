@@ -73,12 +73,12 @@
               <button ng-if="tripgj.isDraft" class="button bg-unprocessed button-outline button-dark button-small icon-right ion-loop" ng-click="explainDraft($event)" style="font-size: 0.6em; margin-right: 0.4em" translate> {{'.draft'}} </button>
             </div>
           </div>-->
-
-          <div style="display: flex; justify-content: center; margin-top: 1em;" aria-label="Map" tabindex="0">
-            <leaflet geojson="tripgj" id="$index" defaults="defaults" aria-hidden="true" tabindex="0"></leaflet>
+          <div style="display: flex; justify-content: center; margin: 1rem 0; width: 100%; height: 10rem;" aria-label="Map" tabindex="0">
+            <leaflet geojson="tripgj" id="$index" defaults="defaults" aria-hidden="true" tabindex="0"
+            style="width: calc(100% - 1rem); height: 100%;"></leaflet>
           </div>
-          <div >
-            <div class="start-end-addresses-container">
+          <div style="width: 100%;">
+            <div style="position: relative; width: calc(100% - 1rem); left: 0.5rem; !important;">
               <!--<div ng-class="listLocationClass" id="no-border" href="#" style="background-color: transparent; font-size: 0.8em; padding-top: 5px; padding-bottom: 5px; padding-left: 30px; margin-top: 0; margin-bottom: 0;">
                 <i class="icon ion-ios-location" style="font-size: 16px; left: 0; color: #33e0bb;"></i>
                 {{tripgj.start_place.properties.display_name.split(',')[0]}}
@@ -126,7 +126,7 @@
               </ion-item>
             </div>
             <!---<div class="diary-arrow-container">--->
-            <div style="display: flex; justify-content: center;">
+            <div style="display: flex; justify-content: center; margin: 1rem 0;">
               <button ng-click="toDetail(tripgj.data.id)" class="review-trip-details-button"
                       style="background-color: #565656; color: #FFFFFF; text-align: center; border: none; padding: 1em;
                       min-width: 50px; min-height: 50px;">
