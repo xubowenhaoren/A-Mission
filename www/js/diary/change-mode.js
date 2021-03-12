@@ -29,6 +29,8 @@ controller('ChangeModeCtrl',
       $scope.sensed_mode = $stateParams.sectionInfo.sensed_mode;
       $scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
       $scope.segment_index = $stateParams.sectionInfo.segment_index;
+      // TODO: make prechecking on options list work
+      $scope.selectedMode = {"text":$scope.sensed_mode,"value":""};
     });
 
     $scope.toDetail = function() {
@@ -40,8 +42,6 @@ controller('ChangeModeCtrl',
     $scope.toDiary = function() {
       $state.go('root.main.diary');
     };
-
-    $scope.selectedMode = '';
 
     $scope.onModeChange = function(obj) {
       delete obj.$$hashKey;
@@ -73,7 +73,7 @@ controller('ChangeModeCtrl',
       });
 
       // Checking variables
-      // $scope.tripgj.sections[$scope.segment_index].properties.userInput["MODE"] = obj;
+      $scope.tripgj.sections[$scope.segment_index].properties.userInput["MODE"] = obj;
       console.log("in onModeChange, userInput: " + JSON.stringify($scope.tripgj.sections[$scope.segment_index].properties.userInput));
       // console.log("in onModeChange, editingSegment: " + JSON.stringify($scope.editingSegment));
       // console.log("in onModeChange, draftInputSegment: " + JSON.stringify($scope.draftInputSegment));
@@ -180,6 +180,9 @@ controller('ChangeModeCtrl',
           }
         });
       });
+      // if (angular.element(document.querySelector( 'motion-mode-selector')).value === 'walk') {
+      //   angular.element( document.querySelector( 'motion-mode-selector' ) ).checked = 'true';
+      // }
     });
 
     $scope.storeSegment = function (inputType, input, isOther) {

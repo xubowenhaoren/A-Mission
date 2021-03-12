@@ -34,13 +34,13 @@
         </span>
         {{endTime}}
       </ion-item>
-      <ion-item ng-if="!selectedMode">
+      <ion-item ng-if="!selectedMode.value">
         <span style="font-weight: bold">
           Detected mode:
         </span>
          {{sensed_mode}}
       </ion-item>
-      <ion-item ng-if="selectedMode">
+      <ion-item ng-if="selectedMode.value">
         <span style="font-weight: bold">
           Detected mode:
         </span>
@@ -67,7 +67,7 @@
     </h2>
     <form>
         <label ng-repeat="mode in inputParamsSegment.MODE.options">
-          <input class="button btn-mode-confirm btn-mode-confirm-white" type="radio" name="modeType"
+          <input class="button btn-mode-confirm btn-mode-confirm-white" id="motion-mode-selector" type="radio" name="modeType"
                  ng-model="$parent.selectedMode"
                  ng-change="$parent.onModeChange(mode)"
                  ng-value="mode">
