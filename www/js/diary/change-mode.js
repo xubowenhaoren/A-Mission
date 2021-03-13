@@ -29,7 +29,6 @@ controller('ChangeModeCtrl',
       $scope.sensed_mode = $stateParams.sectionInfo.sensed_mode;
       $scope.tripgj = Timeline.getTripWrapper($stateParams.tripId);
       $scope.segment_index = $stateParams.sectionInfo.segment_index;
-      // TODO: make prechecking on options list work
       $scope.selectedMode = {"text":$scope.sensed_mode,"value":""};
     });
 
@@ -113,38 +112,6 @@ controller('ChangeModeCtrl',
       $scope.popovers[inputType].show($event);
     };
 
-    /**
-     * Embed 'inputType' to the segment
-     */
-    $scope.populateSegmentInputFromTimeline = function (inputType) {
-      console.log("populateSegmentInputFromTimeline called");
-      let segment = $scope.tripgj.sections[$scope.segment_index];
-      console.log("populateSegmentInputFromTimeline: currently checking section " + JSON.stringify(segment.id));
-      DiaryHelper.getUserInputForSegment(segment, function (tempRes) {
-        console.log("populateSegmentInputFromTimeline: get back", JSON.stringify(tempRes));
-        if (angular.isDefined(tempRes) && tempRes.length > 0) {
-          let userInput = tempRes[0];
-          // userInput is an object with data + metadata
-          // the label is the "value" from the options
-          var userInputEntry = $scope.inputParamsSegment[inputType].value2entry[userInput.data.label];
-          if (!angular.isDefined(userInputEntry)) {
-            userInputEntry = ConfirmHelper.getFakeEntry(userInput.data.label);
-            $scope.inputParamsSegment[inputType].options.push(userInputEntry);
-            $scope.inputParamsSegment[inputType].value2entry[userInput.data.label] = userInputEntry;
-          }
-          console.log("Mapped label " + userInput.data.label + " to entry " + JSON.stringify(userInputEntry));
-          segment.properties.userInput[inputType] = userInputEntry;
-          Logger.log("populateSegmentInputFromTimeline: Set "
-            + inputType + " " + JSON.stringify(userInputEntry) + " for trip id " + JSON.stringify($scope.tripgj.data.id)
-            + ", for segment " + JSON.stringify(segment.id));
-        } else {
-          Logger.log("populateSegmentInputFromTimeline: Skipped for trip id " + JSON.stringify($scope.tripgj.data.id)
-            + ", for segment " + JSON.stringify(segment.id));
-        }
-      });
-      $scope.editingSegment = angular.undefined;
-    }
-
     var closePopover = function (inputType) {
       $scope.selectedSegment[inputType] = {
         value: ''
@@ -175,14 +142,8 @@ controller('ChangeModeCtrl',
       ConfirmHelper.INPUTS.forEach(function(item) {
         ConfirmHelper.getOptionsAndMaps(item).then(function(omObj) {
           $scope.inputParamsSegment[item] = omObj;
-          if (item === "MODE") {
-            $scope.populateSegmentInputFromTimeline(item);
-          }
         });
       });
-      // if (angular.element(document.querySelector( 'motion-mode-selector')).value === 'walk') {
-      //   angular.element( document.querySelector( 'motion-mode-selector' ) ).checked = 'true';
-      // }
     });
 
     $scope.storeSegment = function (inputType, input, isOther) {

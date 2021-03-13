@@ -213,5 +213,49 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
 
   });
 
+  $scope.$on('$ionicView.afterEnter', function() {
+    $scope.inputParamsSegment = {}
+    ConfirmHelper.INPUTS.forEach(function(item) {
+      ConfirmHelper.getOptionsAndMaps(item).then(function(omObj) {
+        $scope.inputParamsSegment[item] = omObj;
+        if (item === "MODE") {
+          $scope.populateSegmentInputFromTimeline(item);
+        }
+      });
+    });
+  });
+
+  $scope.populateSegmentInputFromTimeline = function (inputType) {
+    console.log("populateSegmentInputFromTimeline called");
+    for (let s_index in $scope.tripgj.sections) {
+      let segment = $scope.tripgj.sections[s_index];
+      console.log("populateSegmentInputFromTimeline: currently checking section " + JSON.stringify(segment.id));
+      DiaryHelper.getUserInputForSegment(segment, function (tempRes) {
+        console.log("populateSegmentInputFromTimeline: get back", JSON.stringify(tempRes));
+        if (angular.isDefined(tempRes) && tempRes.length > 0) {
+          let userInput = tempRes[0];
+          // userInput is an object with data + metadata
+          // the label is the "value" from the options
+          var userInputEntry = $scope.inputParamsSegment[inputType].value2entry[userInput.data.label];
+          if (!angular.isDefined(userInputEntry)) {
+            userInputEntry = ConfirmHelper.getFakeEntry(userInput.data.label);
+            $scope.inputParamsSegment[inputType].options.push(userInputEntry);
+            $scope.inputParamsSegment[inputType].value2entry[userInput.data.label] = userInputEntry;
+          }
+          console.log("Mapped label " + userInput.data.label + " to entry " + JSON.stringify(userInputEntry));
+          segment.properties.userInput[inputType] = userInputEntry;
+          Logger.log("populateSegmentInputFromTimeline: Set "
+            + inputType + " " + JSON.stringify(userInputEntry) + " for trip id " + JSON.stringify($scope.tripgj.data.id)
+            + ", for segment " + JSON.stringify(segment.id));
+          segment.properties.sensed_mode = "MotionTypes." + userInputEntry.text;
+        } else {
+          Logger.log("populateSegmentInputFromTimeline: Skipped for trip id " + JSON.stringify($scope.tripgj.data.id)
+            + ", for segment " + JSON.stringify(segment.id));
+        }
+      });
+    }
+    $scope.editingSegment = angular.undefined;
+  }
+
   /* END: ng-walkthrough code */
 })
