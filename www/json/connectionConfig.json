@@ -1,5 +1,5 @@
 {
-    "connectUrl": "http://45.33.108.175:80",
+    "connectUrl": "http://emission1.westus.cloudapp.azure.com:2015",
     "android": {
         "auth": {
             "method": "prompted-auth",
