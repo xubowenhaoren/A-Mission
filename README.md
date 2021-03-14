@@ -39,6 +39,10 @@ We hope that our improved E-mission app could be used by people with disabilitie
 
 ### Constraints and Limitations
 
+#### UI Accessibility
+
+#### Data Analysis and Motion Prediction Model Improvement
+
 ### Preliminary, Anecdotal Experimental results
 
 **Users can now change the predicted mode of transportation if it’s not accurate.**
@@ -53,11 +57,13 @@ We hope that our improved E-mission app could be used by people with disabilitie
  **Our app accommodates diverse use**.
 
 - Our improved E-mission app will likely be the most useful for people with motion-related disabilities, but it’s now usable by people with visual impairments as well. 
-- Users with visual and auditory impairments, like our needs expert, can interact with the improved E-mission app by using a braille reader too
+- Users with visual and auditory impairments, like our needs expert, can interact with the improved E-mission app by using a braille reader too.
 
 ### Conclusion and Future Directions
 
 ### User Manual
+
+A demo video demonstrating the overall UI interaction and the features on various pages is at `documentation/demo_video.mp4`.
 
 ### Developer Documentation
 
