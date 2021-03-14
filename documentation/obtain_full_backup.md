@@ -2,6 +2,8 @@
 
 Bowen Xu
 
+This is extremely helpful when the developing team uses multiple phones and the data collection phone is different from the phone used for app development purposes.
+
 #### Backing up
 
 1. Connect your phone to your desktop PC/Mac. Make sure USB debugging is enabled. Then open Android Studio Terminal. Unlock your phone.
