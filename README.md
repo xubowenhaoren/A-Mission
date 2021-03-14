@@ -61,8 +61,6 @@ We hope that our improved E-mission app could be used by people with disabilitie
 
 ### Developer Documentation
 
-### Teamwork Contribution
-
 ### Special Recognitions
 
 - Special thanks to Prof. Anat Caspi and Motoya Ohnishi for project mentorship!
