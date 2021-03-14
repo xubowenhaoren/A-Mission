@@ -66,17 +66,21 @@ We hope that our improved E-mission app could be used by people with disabilitie
 ### User Manual
 
 - Installing the App
-  - Find the pre-built APK in `documentation/apk_release/app-debug.apk`. Download link
+  - Find the pre-built APK in `documentation/apk_release/app-debug.apk`. [Download link](https://github.com/CSE482Winter2021/NameN0tF0und/raw/main/documentation/apk_release/app-debug.apk)
   - If Android warns you about “installation from unknown source”, ignore that.
   - If you use the emulator, you can open the Files app, drag & drop the APK to install. 
   - If you use the phone, follow this guide to copy the APK to your phone: https://www.lifewire.com/install-apk-on-android-4177185 
 
-- Registering the App
+- Registering the App: see `documentation/user_manual/register_app.md`
 
 - Logging Trips
+  - Be sure you turn on your Wi-Fi or a mobile data plan. Also, make sure that your GPS is on. Do not force-kill the app. It will stay in the background but won’t consume much battery. 
+  - You now have two choices to record a trip. The recommended way is to go out and take a walk in your neighborhood. The app will automatically start recording the trip. 
+  - Another way is to manually trigger it and log a mocked trip.  See `documentation/mocking_trips.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/mocking_trips.md))
 
 - Viewing Trips and Trip Segments
   - A video demonstrating the overall UI interaction with only the screenreader and the features on viewing trips/trip segments is at `documentation/demo_video.mp4`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/raw/main/documentation/demo_video.mp4)) Please start watching at 01:36 for our new A-Mission UI. 
+  - Processed vs unprocessed trips: Both the original E-mission app and our A-mission requires the server-side analysis pipelines to process each trip. The trip processing speed depends on the phone-server connection and the server status. This is beyond the scope and control of our project. Before a trip is processed, the whole trip will appear as one segment and have the "unprocessed" motion mode. 
 
 ### Developer Documentation
 
