@@ -37,6 +37,8 @@ We hope that our improved E-mission app could be used by people with disabilitie
 
 ### Project Development
 
+#### Integrated Motion Unit (IMU) plugin modernization and integration
+
 ### Constraints and Limitations
 
 #### UI Accessibility
@@ -63,9 +65,21 @@ We hope that our improved E-mission app could be used by people with disabilitie
 
 ### User Manual
 
-A demo video demonstrating the overall UI interaction and the features on various pages is at `documentation/demo_video.mp4`.
+#### Installing the App
+
+#### Registering the App
+
+#### Logging Trips
+
+#### Viewing Trips
+
+- A demo video demonstrating the overall UI interaction and the features on viewing trips is at `documentation/demo_video.mp4`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/raw/main/documentation/demo_video.mp4)) Please start watching at 01:36 for our new A-Mission UI. 
 
 ### Developer Documentation
+
+- For building and running the A-mission app from source code, with or without a physical Android phone, see `documentation/building_and_running_a_mission_app.md`. 
+- For mocking trips to test the UI trips without physically doing trips, see `documentation/mocking_trips.md`.
+- For obtaining a full backup of the A-mission app from one phone and restoring the backup to a different phone, see `documentation/obtain_full_backup.md`. This is extremely helpful when the developing team uses multiple phones and the data collection phone is different from the phone used for app development purposes. 
 
 ### Special Recognitions
 
