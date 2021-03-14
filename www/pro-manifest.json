@@ -241,8 +241,8 @@
   },
   {
     "href": "json/connectionConfig.json",
-    "size": 420,
-    "integrity": "sha256-+mgFx5y9F2vkEJCEPmH8nwESceoqZIPOqh11J8umU5U= sha384-p3NOYUPpBbKTCpnjXrf/DjfQWlW9X4hpIRxYsLan3nro/rPiVl31wo1drVgfyZwr sha512-7TU/K28OxToEhMo5IFYtWK5di+XbAPaqe36o7qPB+7XZoMtOv6orLfKQB2hnUgXh3fBjCJKIYTftIDCBJLbNaQ=="
+    "size": 396,
+    "integrity": "sha256-Puy1eO6kjyvKr9WyNvkKqgQTkj7Vg6AmMKcoIuTEqlY= sha384-ZatpFPygUyc28QLS97xMqMJ8kupkRTc5Ze8mgqEksGkhowcJS3Z78Hfzsk5W6DwS sha512-IvGGJM0RwhVvohqJOL17NjgnzLBo7cQr6qHxlbj6fV84OgOecbeLL/Ws1tyb8L5aWAVFS06twAoOwuIZGDbZrA=="
   },
   {
     "href": "json/connectionConfig.openid.json.sample",
@@ -1606,8 +1606,8 @@
   },
   {
     "href": "templates/diary/detail.html",
-    "size": 7539,
-    "integrity": "sha256-mv+PYXX1hIWawgFQedPLmfrXbClaELtcp5ImRGrmtVk= sha384-VPgxc36rd1KeLGOKxFX1IZnGlAYSEqn2kjrV3kEuZGHLfiyNjzFdaYaXG+A1pVdC sha512-dEPdiqD5UkST77t9lKLEgiW5igBbhx4hi0w1/wDOJIgYhUsHNqmX1aEaCYPxVxB8NtjK3EYuSur9r5smf5KemA=="
+    "size": 7540,
+    "integrity": "sha256-QYyH1UkUBeSBF3vhX8eiVAR7RNr6C3HXckRCyVTqT6g= sha384-/9F22IK1/K4YL/J/Oma07s/eZev1vAey8E1Ovr5VjivOsMYfLaAYM6N96/Tn7maA sha512-l19uMSfmKLSEIAbzVVQtKuXyaQWS9pnu3k4izeDA0MiZk6x1oZ4VlZbRqDGgBOuwTQaMc3bPaTEPg1LvJaa+ZQ=="
   },
   {
     "href": "templates/diary/list.html",
