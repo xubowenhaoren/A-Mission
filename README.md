@@ -39,6 +39,8 @@ We hope that our improved E-mission app could be used by people with disabilitie
 
 #### Integrated Motion Unit (IMU) plugin modernization and integration
 
+- The original IMU plugin was developed 3 years ago. When we first attempted to add the plugin to our project, Cordova no longer recognizes the plugin. Upon further research, we learned that all recent plugins require a `package.json` as the plugin describer. We consulted existing E-mission plugin repos and added the `package.json` to modernize the IMU plugin. 
+
 ### Constraints and Limitations
 
 #### UI Accessibility
