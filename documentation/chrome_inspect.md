@@ -15,7 +15,7 @@ This documentation is for setting up breakpoints and debugging in the JavaScript
 
    ![image-20210313210206001](image-20210313210206001.png)
 
-5. Set your breakpoint to any Javscript file. The example sets one at `js/diary/detail.js:71`.
+5. Set your breakpoint to any Javascript file. The example sets one at `js/diary/detail.js:71`.
 
 6. When the breakpoint is caught, you can find the variables updated on the right. You can also use the Step in/out/over features like other IDE debuggers.
    ![image-20210313210413593](image-20210313210413593.png)

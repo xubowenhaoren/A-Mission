@@ -78,7 +78,7 @@ We hope that our improved E-mission app could be used by people with disabilitie
   - You now have two choices to record a trip. The recommended way is to go out and take a walk in your neighborhood. The app will automatically start recording the trip. 
   - Another way is to manually trigger it and log a mocked trip.  See `documentation/mocking_trips.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/mocking_trips.md))
 
-- Viewing trips, trip segments, and editing the segmentation motion mode: See `documentation/user_manual/viewing_trips.md` 
+- Viewing trips, trip segments, and editing the segmentation motion mode: See `documentation/user_manual/viewing_trips.md` ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/user_manual/viewing_trips.md))
 
 ### Developer Documentation
 
@@ -86,7 +86,7 @@ We hope that our improved E-mission app could be used by people with disabilitie
 - For mocking trips to test the trip diary UI without physically doing trips, see `documentation/mocking_trips.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/mocking_trips.md))
 - For obtaining a full backup of the A-mission app from one phone and restoring the backup to a different phone, see `documentation/obtain_full_backup.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/obtain_full_backup.md)) This is extremely helpful when the developing team uses multiple phones and the data collection phone is different from the phone used for app development purposes. 
 - For setting up breakpoints and debugging in the JavaScript UI, see `documentation/chrome_inspect.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/chrome_inspect.md))
-- To match and merge the E-mission data and IMU data on a segment level, see  `documentation/data_analysis.md`.
+- To match and merge the E-mission data and IMU data on a segment level, see  `documentation/data_analysis.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/data_analysis.md))
 
 ### Special Recognitions
 
