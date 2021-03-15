@@ -1,45 +1,65 @@
 ## A-Mission: Accessible Trip Diary App
 
 ### Project Participants
-
-- Bruce Visser: Needs Expert, Adventurous traveller
 - Bowen Xu: University of Washington Computer Science
 - Maryam Saleh: University of Washington Computer Science
-
 - Asila Maksumova: University of Washington Computer Science
 - Josh Curtis: University of Washington Computer Science
+- Bruce Visser: Needs Expert, Adventurous traveller
 
 ### Project Abstract
 
-We are working on improving E-mission, which is an existing open-source mobile app that provides a trip diary so users can see which trips they’ve taken and which modes of transportation those trips involve.
+This quarter, our team worked on improving E-mission, which is an existing open-source mobile app that provides a trip diary so users can see which trips they’ve taken and which modes of transportation those trips involve. Our team identified E-mission as a useful app for people with disabilities, especially those who might typically have to spend longer planning and carrying out their daily travel due to inaccessible routes and lack of accomodation. The only problem is that the original E-mission app was not designed with accessibility in mind, rendering it essentially useless for users with visual impairments who rely on screen readers or braille readers. One such user is our Needs Expert, Bruce Visser, who uses a braille reader to navigate his phone. One of the main goals of this project was to improve the app's accessibility in order allow people like Bruce to utilize _all_ of the functionality that E-mission's trip diary has to offer. We hope that our improved E-mission app could be used by people with disabilities to keep track of the trips they take and identify any inaccessible parts so they can have an easier time planning for their future trips. 
 
-“Trip segmentation” refers to the way that E-mission splits up each trip into segments, where each segment involves one single mode of transportation, like walking or riding a bus. A new segment begins when the user switches to a different mode of transportation.
-
-- A motion prediction model is used to detect when the mode switches and which mode the person has switched to. 
-
-We hope that our improved E-mission app could be used by people with disabilities in order to identify inaccessible parts of the trips they take so they can have an easier time planning for their future trips. 
+_A note about terminology:_ In the context of this project, “trip segmentation” refers to the way that E-mission splits up each trip into segments. Each segment involves one single mode of transportation, like walking or riding a bus. A new segment begins when the user switches to a different mode of transportation.
 
 ### Project Goals
 
 #### Improve E-Mission accessibility
+The original E-mission app was not particularly accessible. In fact, a lot of the trip diary's functionality depended on the user being able to look at a map for each trip. Since map widgets are notoriously difficult to navigate via screen reader, this dependency caused visually impaired users to be excluded.
 
-- The original E-mission app was not particularly accessible. A lot of the functionality relied on being able to look at the map, which excluded visually impaired users.
-- We wanted to make the trip diary totally accessible to anybody and everybody.
-- Much of our work on this goal involved streamlining the screen reader’s navigation of the trip diary screens. 
-- To meet this goal, we ended up eliminating the need for a user to interact with the map in order to have access to the full functionality of the trip diary. 
+It's important to our team that E-mission's trip diary is totally accessible to anybody and everybody, so we made it our main goal to improve the trip diary's overall accessibility and bring it up to par with the most recent Web Content Accessibility Guidelines. Much of our work on this goal involved updating the app's design in order to streamline the screen reader’s navigation of the trip diary screens. There were a lot of "basic" accessibility improvements for us to make as well, including adding alt text for buttons, hiding decorative content from the screen reader, and increasing button size and text color contrast to meet current accessibility standards.
+
+Below is an example of how the Trip Diary page looks before and after our accessibility improvements.
+
+_Before (the original E-mission Trip Diary):_
+
+<img src="https://user-images.githubusercontent.com/77460900/111097929-bb5ea100-84ff-11eb-9de5-11fb9a41cd0a.png" width="300">
+
+_After (our improved E-mission Trip Diary):_
+
+<img src="https://user-images.githubusercontent.com/77460900/111097941-c0235500-84ff-11eb-94e5-7a34b0053e20.png" width="300">
+
 
 #### Improve the motion prediction model and update it to be inclusive of people who use wheelchairs
 
-- The original E-mission app uses a pre-trained motion classification model with little or no wheelchair data. 
-- To evaluate the accuracy of the current E-mission model, we designed pre-defined trips that cover various modes of transportation, such as walk, car, train, etc. We also designed pre-defined trips that mix different transportation modes and have various time durations.
-- During the data collection, we also collected additional data using an Integrated Motion Unit or IMU plugin. These additional data are directly collected from the phone accelerometer and gyroscope. These data should help correct inaccuracies in the current E-mission models.
-- We wrote data analysis script that fetches E-mission data and matches with the IMU data for any trip segments. If the user used our UI to update the actual motion mode, this data will be matched as well. Due to the time limitations, we couldn’t train a new motion inference model. However, our data analysis script is a firm step toward the full integration of IMU data so that future researchers can build upon our work. 
+The original E-mission app uses a pre-trained motion classification model in order to segment trips and determine which mode of transportation was used for each segment. Unfortunately, the model was given little or no wheelchair data, causing E-mission's trip diary to exclude users whose trips involve travel via wheelchair. The less accurate the model is, the less useful E-mission becomes, so we made it a goal to improve the motion prediction model and update it to be inclusive of people who use wheelchairs.
+
+Part of this goal involved evaluating the accuracy of the original E-mission model. To do this, we designed pre-defined trips that cover various modes of transportation, such as walk, car, train, etc. To cover as many cases as possible, we also designed pre-defined trips that mix different transportation modes and have various time durations. Our team carried out these trips and recorded the data to be analyzed later. During our data collection process, we also collected additional data using an Integrated Motion Unit (IMU) plugin. These additional data points are directly collected from the phone's accelerometer and gyroscope. This data should help correct inaccuracies in the current E-mission models.
+
+At the beginning of the project, we had hoped that part of this goal would involve training a new, more accurate motion prediction model. We ended up writing a data analysis script instead that fetches E-mission data and matches it with the IMU data for each trip segment. If the user uses our UI to update the mode of transportation for a trip segment, this data will be matched as well. Due to time limitations, we weren’t able to train a new motion inference model. However, our data analysis script is a firm step toward the full integration of IMU data so that future projects can build upon our work. 
 
 ### Project Development
+#### Accessibility improvements and other front-end work
+When we started planning out our accessibility improvements at the beginning of the quarter, we quickly realized that we would need a new UI design that allows for better screen reader navigation than the original E-mission app. We used Figma to sketch out some preliminary designs and worked together to come up with a final cohesive design after a few iterations. During this process, we focused on three screens in particular: the main "Trip Diary" page, the trip review page that allows users to review the details of a particular trip, and the "Edit Mode of Transportation" page. Our main goal here was to end up with a design that had a straightforward layout, large, easy-to-read text and buttons, and no extraneous information. The most important requirement was that we needed our users to be able to review the details of any trip (and update them if necessary) quickly, easily, and with no reliance on the map widget. Below is a screenshot of our final design that we made in Figma.
+
+<img width="743" alt="Four phone screens showing our final design layout" src="https://user-images.githubusercontent.com/77460900/111218545-1c37b900-8594-11eb-8de4-b8fd957bde65.png">
+
+Although our improved E-mission app mostly reflects the designs above, we did have to make some changes after we started developing. The most obvious example of this is the dropdown "Trip Segments" list that we included on the trip review page. After talking with Bruce and getting feedback from the course staff, we quickly realized that putting the segments in a dropdown list (as opposed to a regular list that is always present on the screen) would require unnecessary input from the user and may even result in focusing issues with the screen reader. To fix this, we scrapped the dropdown list idea and put the trip segments in a list that is visible to the user at all times.
+
+All of our accessibility improvements were accomplished by using HTML, CSS, and the JavaScript-based Angular framework. For our front-end work, we edited the existing E-mission codebase using WebStorm. To debug and test our application, we used the debug feature in Android Studio and ran the app on either a physical Android phone or an emulator (both of which allow use of a screen reader). For accessibility testing in particular, one tool we found useful was Android's Accessibility Scanner app. The Accessibility Scanner does not find _every_ accessibility issue, but it does a good job of finding things like low color contrast, touch targets that are too small, and elements without alt text. Below is a screenshot showing all the issues (highlighted in orange) that the Accessibility Scanner identified on just one portion of the trip review screen before we started our accessibility improvements.
+
+<img width="300" src="https://user-images.githubusercontent.com/77460900/111223689-b7cc2800-859a-11eb-8170-13a4e62d936e.png">
+
+#### Pre-defined trips
+In order to evaluate the accuracy of E-mission's motion prediction model, we defined some trips involving various modes of transportation that we then carried out as if we were regular E-mission users. We consider the data collected from these trips to be "ground truth," since we already know what the modes and segmentation of these trips _should_ be. The purpose of using pre-defined trips instead of actual user data was to avoid potential user privacy concerns. Given the sensitive nature of location tracking, we did not want to put users in an uncomfortable position by asking them to share their trip data.
+
+The image below shows the Google Doc where we defined five different trips. You can see that we broke down each trip into the segments that the motion prediction model should, ideally, identify.
+
+<img width="589" alt="List of pre-defined trips" src="https://user-images.githubusercontent.com/77460900/111225535-24e0bd00-859d-11eb-823e-be1eeae5f86a.png">
 
 #### Integrated Motion Unit (IMU) plugin modernization and integration
-
-- The original IMU plugin was developed 3 years ago. When we first attempted to add the plugin to our project, Cordova no longer recognizes the plugin. Upon further research, we learned that all recent plugins require a `package.json` as the plugin describer. We consulted existing E-mission plugin repos and added the `package.json` to modernize the IMU plugin. 
+The original IMU plugin was developed 3 years ago. When we first attempted to add the plugin to our project, we found that Cordova no longer recognizes the plugin. Upon further research, we learned that all recent plugins require a ```package.json``` as the plugin describer. We consulted existing E-mission plugin repos and added the ```package.json``` to modernize the IMU plugin.
 
 ### Constraints and Limitations
 
