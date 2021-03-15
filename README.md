@@ -49,21 +49,47 @@ We hope that our improved E-mission app could be used by people with disabilitie
 
 ### Preliminary, Anecdotal Experimental results
 
-**Users can now change the predicted mode of transportation if it’s not accurate.**
+#### Positive Notes
 
-- This can be done by clicking a button on the segment that you want to change, which will bring you to a new page where you can select from a list of modes
-- Our needs expert recommended we either use a popup for this functionality or a totally new page altogether, so we opted for a new page because it works more smoothly with TalkBack
+1. Users can now change the predicted mode of transportation if it’s not accurate.
+   - This can be done by clicking a button on the segment that you want to change, which will bring you to a new page where you can select from a list of modes.
+   - Our needs expert recommended we either use a popup for this functionality or a totally new page altogether, so we opted for a new page because it works more smoothly with TalkBack.
 
-**Users can now learn about his/her daily trips with more details.** 
+2. Users can now learn about his/her daily trips with more details. 
+   - Users can now review their past trips and learn about the details of these trips and their individual segments by using a screen reader or a braille reader exclusively. 
 
-- Users can now review their past trips and learn about the details of these trips and their individual segments by using a screen reader or a braille reader exclusively. 
+3. Our app accommodates diverse use.
+   - Our improved E-mission app will likely be the most useful for people with motion-related disabilities, but it’s now usable by people with visual impairments as well. 
+   - Users with visual and auditory impairments, like our needs expert, can interact with the improved E-mission app by using a braille reader too.
 
- **Our app accommodates diverse use**.
+#### Constructive Feedback
 
-- Our improved E-mission app will likely be the most useful for people with motion-related disabilities, but it’s now usable by people with visual impairments as well. 
-- Users with visual and auditory impairments, like our needs expert, can interact with the improved E-mission app by using a braille reader too.
+1. The date picker button and calendar are not accessible.
+2. The navigation tabs (at the bottom of the app screen) are not accessible.
+3. Some of the default buttons like “refresh” and “fix map” buttons are confusing. 
+4. Navigating between trip cards is laborious. There is not an easy way to jump from one to the next without navigating through all of the information displayed on the trip card. 
 
 ### Conclusion and Future Directions
+
+#### Conclusion
+
+Through the complete UI redesign, the A-mission project has enabled high accessibility for the E-mission trip diary UI and high usability for people with screen readers. Moreover, we believe that through reviewing the trip summaries and the segmentation details, our A-mission app can help people with both vision and motion disabilities to travel with more confidence. They can how easily know which part of their trip takes the most time and make informed decisions about future travel. 
+
+Through the integration of the Integrated Motion Unit (IMU) plugin and the introduction of the accessible segmentation motion mode editing UI, we enabled the collection of "ground truth" user input. The "ground truth" refers to the actual motion mode compared to the E-mission predictions. 
+
+Through the development of the data analysis script, we can match and merge the E-mission data and IMU data on a segment level.  This data analysis script sets a firm foundation toward the full integration of IMU data into an improved E-mission motion inference model. 
+
+#### Future Directions
+
+On the A-mission UI, one next step is to make the E-mission app fully accessible, including the user registration and other tabs in E-mission. Another area of improvement is advanced on-device data analysis. 
+
+- This future A-mission app will analyze each user trip over time and decide what trips belong to this user's routine. 
+  - This can be done by grouping trips by the same start/end locations. 
+- After that, the A-mission app can compare a routine trip to previous routine trips and automatically deduce whether this trip took shorter or longer than usual. For instance, an example notification of this future A-mission app can be "This daily commute took 26% longer than usual." This helps the user evaluate the transportation accessibility more easily. 
+
+On the data analysis, one next step is to train a new machine learning (ML) model that reads both E-mission and IMU data and provide better motion inference predictions. 
+
+- E-mission's MobilityNet project introduced a method to qualitatively evaluate the current E-mission motion inference model. See my notes on the project [here](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/data_analysis.md#partial-notes-on-running-a-new-mobilitynet-data-collection-project). 
 
 ### User Manual
 
