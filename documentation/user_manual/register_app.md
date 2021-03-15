@@ -32,4 +32,4 @@ Our priority focus is to make the E-mission trip dairy UI accessible. Thus we di
     ![image-20210313221853832](image-20210313221853832.png)
 
   - You should now be able to see the dairy tab. It’s fine to see an empty page (because you didn’t make any trips after installing the app). 
-    ![image-20210313221909719](image-20210313221909719.png)
+    ![image-20210315102027143](image-20210315102027143.png)
