@@ -1,20 +1,24 @@
 <ion-view ng-class="ion-view-background" translate-namespace="diary">
-    <ion-nav-bar class="bar-stable">
+    <ion-nav-bar>
     </ion-nav-bar>
     <ion-nav-buttons side="right">
-      <button class="button button-icon ion-help" ng-click="startWalkthrough()"
-              aria-label="Help"></button>
+<!--      <button class="button button-icon ion-help" ng-click="startWalkthrough()"-->
+<!--              aria-label="Help"></button>-->
+      <div class="buttons dark-color" style="text-align:center; background-color: transparent !important;" id="toget">
+        <button class="button button-icon icon ion-arrow-left-b date-picker-arrow" ng-click="prevDay()"
+                aria-label="Previous day">
+        </button>
+        <button id="date-picker-button" class="button date-picker-button" ng-click="pickDay()"> {{currDay}} <i class="ion-ios-calendar-outline" style="font-size: 16px !important;" ></i></button>
+        <button class="button button-icon icon ion-arrow-right-b ion-arrow-left-b date-picker-arrow" ng-click="nextDay()"
+                aria-label="Next day">
+        </button>
+
+      </div>
     </ion-nav-buttons>
     <ion-nav-buttons side="left">
-        <button id="map-fix-button" class="button refresh-tiles" ng-click="refreshTiles()" translate>{{'map-fixmap'}}</button>
-        <div class="buttons dark-color" style="text-align:center; background-color: transparent !important;" id="toget">
-          <button class="button button-icon icon ion-arrow-left-b date-picker-arrow" ng-click="prevDay()"
-                  aria-label="Previous day">
-            </button>
-            <button id="date-picker-button" class="button date-picker-button" ng-click="pickDay()"> {{currDay}} <i class="ion-ios-calendar-outline" style="font-size: 16px !important;"></i></button>
-          <button class="button button-icon icon ion-arrow-right-b ion-arrow-left-b date-picker-arrow" ng-click="nextDay()"
-                  aria-label="Next day">
-            </button>
+<!--        <button id="map-fix-button" class="button refresh-tiles" ng-click="refreshTiles()" translate>{{'map-fixmap'}}</button>-->
+        <div aria-hidden="true">
+          <p style="font-size: 16px !important;">A-mission</p>
         </div>
     </ion-nav-buttons>
 <!--    <div style="background-color: transparent; border-left-style: solid; border-left-width: 0.5px; border-left-color: #212121; margin-left: 10%; position: absolute; float: left; height: 100%;"></div>-->

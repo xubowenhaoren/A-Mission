@@ -257,5 +257,9 @@ angular.module('emission.main.diary.detail',['ui-leaflet', 'ng-walkthrough',
     $scope.editingSegment = angular.undefined;
   }
 
+  $scope.toDiary = function() {
+    $state.go('root.main.diary');
+  };
+
   /* END: ng-walkthrough code */
 })
