@@ -20,3 +20,7 @@ This is extremely helpful when the developing team uses multiple phones and the 
 #### Restoring the backup
 
 `adb restore ~/Downloads/backup_emission.ab`
+
+Note that no password is required for the on-screen prompt.
+
+Example data can be found at: 
