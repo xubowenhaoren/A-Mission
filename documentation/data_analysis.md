@@ -14,7 +14,7 @@ This section provides all necessary information for using the A-mission data ana
 
 #### Exporting the phone UserCache to obtain IMU data
 
-Note: if you are just interested in viewing the IMU data and/or running the data analysis script, you can find an example userCache in `documentation/userCacheDB_with_IMU_data_and_user_input`. You can view the data contents with [SQLite Browser](https://sqlitebrowser.org/). 
+Note: if you are just interested in viewing the IMU data and/or running the data analysis script, you can find an example userCache in `documentation/userCacheDB_with_IMU_data_and_user_input`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/userCacheDB_with_IMU_data_and_user_input)). You can view the data contents with [SQLite Browser](https://sqlitebrowser.org/). 
 
 The IMU data is stored locally in the phone UserCache. 
 

@@ -62,12 +62,16 @@ We hope that our improved E-mission app could be used by people with disabilitie
    - Our improved E-mission app will likely be the most useful for people with motion-related disabilities, but it’s now usable by people with visual impairments as well. 
    - Users with visual and auditory impairments, like our needs expert, can interact with the improved E-mission app by using a braille reader too.
 
-#### Constructive Feedback
+#### Things to improve
 
-1. The date picker button and calendar are not accessible.
-2. The navigation tabs (at the bottom of the app screen) are not accessible.
+1. The date picker button and calendar are not accessible. Two participants noted the lack of a descriptive label for the date picker button.
+   - Feedback: we've since then introduced alt text labels for the previous/next day buttons, and for the date picker button. However, the E-mission date picker popup is a third party plugin. This makes updating the screenreader focus very difficult. Therefore, future developers should consider looking for accessible date picker replacements. 
+2. The navigation bar (at the bottom of the app screen) is not very accessible. When using the screen reader, we noticed that icons do not have alt texts. For each tab, the icon and the tab name was also focused twice by the screenreader. 
+   - Feedback: we noticed that the cause of the screenreader double-focus is the lack of alt texts. While we were able to pinpoint the source code for  the navigation bar, we also noticed that it's written in Ionic, a hybrid UI framework, instead of standard HTML. As a result, we weren't about to directly fix the layout to address the double-focus issue. However, during the development of A-mission, we found that the other tabs do not have any functionality that relates to the trip diary feature. In other words, the trip diary UI represents the core functionality of E-mission (A-mission). Thus we removed the icons and hid other irrelevant tabs. 
+     - As a result, the user can quickly use the screenreader to focus on the actual trip/segment information. See an example in the demo video: `documentation/demo_video.mp4` ([link](https://github.com/CSE482Winter2021/NameN0tF0und/raw/main/documentation/demo_video.mp4))
 3. Some of the default buttons like “refresh” and “fix map” buttons are confusing. 
 4. Navigating between trip cards is laborious. There is not an easy way to jump from one to the next without navigating through all of the information displayed on the trip card. 
+   - Feedback: Theoretical fixes that make the trip cards skippable exist. One example is the use of `h3` tags to the header elements of every trip card. While we've made attempts to achieve this fix, we couldn't generate a stable feature for this due to the time constraints. 
 
 ### Conclusion and Future Directions
 
