@@ -26,9 +26,9 @@ _Before (the original E-mission Trip Diary):_
 
 <img src="https://user-images.githubusercontent.com/77460900/111097929-bb5ea100-84ff-11eb-9de5-11fb9a41cd0a.png" width="300">
 
-_After (our improved E-mission Trip Diary):_
+_After (our improved A-mission Trip Diary):_
 
-<img src="https://user-images.githubusercontent.com/77460900/111097941-c0235500-84ff-11eb-94e5-7a34b0053e20.png" width="300">
+![image-20210315150245157](documentation/image-20210315150245157.png)
 
 
 #### Improve the motion prediction model and update it to be inclusive of people who use wheelchairs
