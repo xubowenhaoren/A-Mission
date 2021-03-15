@@ -1,4 +1,4 @@
-### Obtaining a full backup of A-mission app
+### Obtaining and restoring a full backup of A-mission app
 
 Bowen Xu
 
@@ -23,4 +23,4 @@ This is extremely helpful when the developing team uses multiple phones and the 
 
 Note that no password is required for the on-screen prompt.
 
-Example data can be found at: 
+Example data can be found at: https://github.com/CSE482Winter2021/NameN0tF0und/raw/main/documentation/backup_emission.ab

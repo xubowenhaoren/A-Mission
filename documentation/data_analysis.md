@@ -11,7 +11,6 @@ This section provides all necessary information for using the A-mission data ana
 - See the "Logging Trips" section of the user manual to log trips and collect the E-mission and IMU data. ([link](https://github.com/CSE482Winter2021/NameN0tF0und#user-manual)).
 - Wait for the server-side analysis pipelines to process each trip. Before a trip is processed, the whole trip will appear as one segment and have the "unprocessed" motion mode. You wouldn't be able to view that trip in the data analysis script either. The trip processing speed depends on the phone-server connection and the server status. Both factors are beyond the scope and control of our project. 
   - You may change between days on the A-mission trip dairy UI to refresh.
-  - If you are interested in running the data analysis script on our example E-mission data, you can refer to `documentation/obtain_full_backup.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/obtain_full_backup.md))
 
 #### Exporting the phone UserCache to obtain IMU data
 
