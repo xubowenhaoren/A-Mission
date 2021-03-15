@@ -45,3 +45,7 @@ The MobilityNet is a special branch of E-mission with a focus on model accuracy 
 
 Find the original paper and presentation PDF here: https://www.climatechange.ai/papers/iclr2020/15
 
+- See the full discussion on the necessary steps for running MobilityNet analysis scripts: https://github.com/e-mission/e-mission-docs/issues/624
+- See the full discussion on writing the evaluation spec: https://github.com/e-mission/e-mission-docs/issues/626
+  - To use the Google Maps to quickly generate the evaluation spec, see this helper data analysis script: https://github.com/xubowenhaoren/mobilitynet-analysis-scripts/blob/master/spec_creation/generate_digital_pre_defined_trips.ipynb
+
