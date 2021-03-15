@@ -155,6 +155,33 @@ angular.module('emission.main.diary.list',['ui-leaflet',
       ionicDatePicker.openDatePicker($scope.datepickerObject);
     }
 
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        // console.log("MutationObserver: " + mutation.type);
+        if(mutation.addedNodes) {
+          mutation.addedNodes.forEach(function (n) {
+            // TODO: figure out why blur() and focus() don't work
+            if (n.className === "popup-container ng-animate ionic_datepicker_popup-add") {
+              console.log("MutationObserver: popup-container found");
+              // document.activeElement.setAttribute('tabindex', '-1');
+              n.childNodes[0].setAttribute('tabindex', '-1');
+              document.body.blur();
+              n.childNodes[0].focus();
+            }
+          });
+        }
+      });
+    });
+
+    var observerConfig = {
+      attributes: true,
+      childList: true,
+      characterData: true
+    };
+
+    var targetNode = document.body;
+    observer.observe(targetNode, observerConfig);
+
     /**
      * Embed 'inputType' to the trip
      */
