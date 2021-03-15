@@ -45,7 +45,13 @@ We hope that our improved E-mission app could be used by people with disabilitie
 
 #### UI Accessibility
 
+As an open-source project since 2015, E-mission is a complex platform with a hybrid mobile application architecture. It has too many UI tabs and features for our small team to redesign and meet the accessibility standards. Therefore, in the beginning of the project, we've identified that the trip diary UI offers the essential functionalities of E-mission. We then dedicated our focus to improve the UI accessibility of the trip dairy UI as much as possible. With this said, there are still design compromises caused by the architecture, such as the navigation bar and the date picker. (Please see the "Things to improve" section for the in-depth discussion.) 
+
 #### Data Analysis and Motion Prediction Model Improvement
+
+Data collection: Initially we planned to use the E-mission server hosted on Prof. Caspi's research lab. However, after several unsuccessful trials to upload the data and run the server-side analysis pipelines, we had to build our own instance of E-mission server from scratch. 
+
+Data analysis: Before we collected the trip data, we built our E-mission server with the best motion inference model option. However, we realized later that to perform a quantitative analysis on the E-mission prediction, we need to set up the E-mission server with another special branch (MobilityNet). The data we collected is unfortunately incompatible with the MobilityNet data analysis scripts. Nevertheless, earlier in the project we collectively decided that we will prioritize the work on improving the accessibility of the E-mission UI, especially the trip diary UI. Thus we had limited time and resources on the data analysis subproject. Our team has then immediately opened up a discussion, constructed an alternative plan, and actively communicated with Prof. Caspi. Under Prof. Caspi's guidance, we successfully developed a data analysis script that can match and merge the E-mission data and IMU data on a segment level. Any future analysis pipeline can directly use our data analysis script, benefit from its data merging features, and kick-start the ML development work. 
 
 ### Preliminary, Anecdotal Experimental results
 
@@ -70,6 +76,7 @@ We hope that our improved E-mission app could be used by people with disabilitie
    - Feedback: we noticed that the cause of the screenreader double-focus is the lack of alt texts. While we were able to pinpoint the source code for  the navigation bar, we also noticed that it's written in Ionic, a hybrid UI framework, instead of standard HTML. As a result, we weren't about to directly fix the layout to address the double-focus issue. However, during the development of A-mission, we found that the other tabs do not have any functionality that relates to the trip diary feature. In other words, the trip diary UI represents the core functionality of E-mission (A-mission). Thus we removed the icons and hid other irrelevant tabs. 
      - As a result, the user can quickly use the screenreader to focus on the actual trip/segment information. See an example in the demo video: `documentation/demo_video.mp4` ([link](https://github.com/CSE482Winter2021/NameN0tF0und/raw/main/documentation/demo_video.mp4))
 3. Some of the default buttons like “refresh” and “fix map” buttons are confusing. 
+   - Feedback: We've removed these unnecessary buttons in the final version of A-mission.
 4. Navigating between trip cards is laborious. There is not an easy way to jump from one to the next without navigating through all of the information displayed on the trip card. 
    - Feedback: Theoretical fixes that make the trip cards skippable exist. One example is the use of `h3` tags to the header elements of every trip card. While we've made attempts to achieve this fix, we couldn't generate a stable feature for this due to the time constraints. 
 
