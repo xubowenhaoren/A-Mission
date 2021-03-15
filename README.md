@@ -59,7 +59,22 @@ The image below shows the Google Doc where we defined five different trips. You 
 <img width="589" alt="List of pre-defined trips" src="https://user-images.githubusercontent.com/77460900/111225535-24e0bd00-859d-11eb-823e-be1eeae5f86a.png">
 
 #### Integrated Motion Unit (IMU) plugin modernization and integration
-The original IMU plugin was developed 3 years ago. When we first attempted to add the plugin to our project, we found that Cordova no longer recognizes the plugin. Upon further research, we learned that all recent plugins require a ```package.json``` as the plugin describer. We consulted existing E-mission plugin repos and added the ```package.json``` to modernize the IMU plugin.
+The original [IMU plugin](https://github.com/xubowenhaoren/e-mission-integrity-detect) was developed 3 years ago. When we first attempted to add the plugin to our project, we found that Cordova no longer recognizes the plugin. Upon further research, we learned that all recent plugins require a ```package.json``` as the plugin describer. We consulted existing E-mission plugin repos and added the ```package.json``` to modernize the IMU plugin.
+
+#### Data Analysis and Motion Prediction Model Improvement
+
+In the A-mission project, we collected one complete round of the data. We ran the E-mission analysis pipelines with the most accurate model (`gis-based-mode-detection`). We then performed a comparison of the E-mission motion inference with actual pre-defined trips. We determined that it still generates inaccurate trip segmentation and motion mode sensing for even common motion modes. 
+
+- See our full comparison here: `documentation/data_comparison.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/data_comparison.md))
+
+Under Prof. Caspi's guidance, we successfully developed a data analysis script that can match and merge the E-mission data and IMU data on a segment level. Its highlight features include: 
+
+- Connects to an instance of the e-mission server
+- Accepts a user UUID (e.g. email) and use it to fetch all processed trip data
+- For each trip segment, fetch all corresponding IMU data from the SQLite phone UserCache local database
+- Also for each trip segment, check and fetch user input ground truth from the UserCache.
+
+Any future analysis pipeline can directly use our data analysis script, benefit from its data merging features, and kick-start the ML development work. 
 
 ### Constraints and Limitations
 
@@ -71,7 +86,7 @@ As an open-source project since 2015, E-mission is a complex platform with a hyb
 
 Data collection: Initially we planned to use the E-mission server hosted on Prof. Caspi's research lab. However, after several unsuccessful trials to upload the data and run the server-side analysis pipelines, we had to build our own instance of E-mission server from scratch. 
 
-Data analysis: Before we collected the trip data, we built our E-mission server with the best motion inference model option. However, we realized later that to perform a quantitative analysis on the E-mission prediction, we need to set up the E-mission server with another special branch (MobilityNet). The data we collected is unfortunately incompatible with the MobilityNet data analysis scripts. Nevertheless, earlier in the project we collectively decided that we will prioritize the work on improving the accessibility of the E-mission UI, especially the trip diary UI. Thus we had limited time and resources on the data analysis subproject. Our team has then immediately opened up a discussion, constructed an alternative plan, and actively communicated with Prof. Caspi. Under Prof. Caspi's guidance, we successfully developed a data analysis script that can match and merge the E-mission data and IMU data on a segment level. Any future analysis pipeline can directly use our data analysis script, benefit from its data merging features, and kick-start the ML development work. 
+Data analysis: Before we collected the trip data, we built our E-mission server with the best motion inference model option. However, we realized later that to perform a quantitative analysis on the E-mission prediction, we need to set up the E-mission server with another special branch (MobilityNet). The data we collected is unfortunately incompatible with the MobilityNet data analysis scripts. Nevertheless, earlier in the project we collectively decided that we will prioritize the work on improving the accessibility of the E-mission UI, especially the trip diary UI. Thus we had limited time and resources on the data analysis subproject. Our team has then immediately opened up a discussion, actively communicated with Prof. Caspi, and constructed alternative plans.
 
 ### Preliminary, Anecdotal Experimental results
 
