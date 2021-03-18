@@ -14,33 +14,33 @@
         Your trip on {{formattedTripDate}}
       </h1>
       <h2 id="tripDetailsHeader"
-          style="font-size: 1.5em; color: #000000; font-weight: bold; padding: 5px; background-color: #E8E8E8">
+          style="font-size: 1.5rem; color: #000000; font-weight: bold; padding: 0.4rem; background-color: #E8E8E8">
         Trip Details
       </h2>
-        <div class="col" style="background-color: #ffffff; padding: 5px !important; font-size: 1.1rem">
+        <div class="col" style="background-color: #ffffff; padding: 0.3rem !important; font-size: 1.1rem">
 
-          <div class="row" id="trip-start-info" style="margin-bottom: 10px;">
-            <i class="icon ion-ios-location" style="padding: 10px; font-size: 20px; color: #33e0bb;" aria-hidden="true"></i>
-            <p style="padding-right: 5px;">
-              <span style="margin-right: 2px; font-weight: bold;">Trip Start:</span>
+          <div class="row" id="trip-start-info" style="margin-bottom: 0.5rem;">
+            <i class="icon ion-ios-location" style="padding: 0.5rem; font-size: 1.5rem; color: #33e0bb;" aria-hidden="true"></i>
+            <p style="padding-right: 0.2rem;">
+              <span style="margin: 0 0.1rem; font-weight: bold;">Trip Start:</span>
               {{tripgj.start_place.properties.display_name.split(',')[0]}}
-              <span style="margin: 0 2px; font-weight: bold;">at</span>
+              <span style="margin: 0 0.1rem; font-weight: bold;">at</span>
               {{tripgj.display_start_time}}
             </p>
           </div>
 
-          <div class="row" id="trip-end-info">
-            <i class="icon ion-ios-location" style="padding: 10px; font-size: 20px; color: #ff5251; margin-bottom: 10px;" aria-hidden="true"></i>
-            <p style="padding-right: 5px;">
-              <span style="margin-right: 2px; font-weight: bold;">Trip End:</span>
+          <div class="row" id="trip-end-info" style="margin-bottom: 0.5rem;">
+            <i class="icon ion-ios-location" style="padding: 0.5rem; font-size: 1.5rem; color: #ff5251;" aria-hidden="true"></i>
+            <p style="padding-right: 0.2rem;">
+              <span style="margin: 0 0.1rem; font-weight: bold;">Trip End:</span>
               {{tripgj.end_place.properties.display_name.split(',')[0]}}
-              <span style="margin: 0 2px; font-weight: bold;">at</span>
+              <span style="margin: 0 0.1rem; font-weight: bold;">at</span>
               {{tripgj.display_end_time}}
             </p>
           </div>
 
           <div class="row" style="display: flex; justify-content: center;">
-            <div class="col" style="width: 30%; margin-top: 0; margin-right: 0.2rem;">
+            <div class="col" style="width: 30%; margin: 0 0.2rem;">
               <p style="font-size: 1.1rem; margin-bottom: 0;">
                 <span style="font-weight: bold;">
                   Total Distance
@@ -51,7 +51,7 @@
                 ({{tripgj.display_distance_miles}} mi)
               </p>
             </div>
-            <div class="col" style="width: 30%; margin-top: 0; margin-left: 0.2rem;">
+            <div class="col" style="width: 30%; margin: 0 0.2rem;">
               <p style="font-size: 1.1rem; margin-bottom: 0;">
                 <span style="font-weight: bold;">
                   Total Time
@@ -78,43 +78,43 @@
 
         <!-- This is the section for the list of trip segments. -->
         <h2 id="tripSegmentHeader"
-            style="font-size: 1.5em; color: #000000; font-weight: bold; padding: 5px; background-color: #E8E8E8">
+            style="font-size: 1.5rem; color: #000000; font-weight: bold; padding: 0.4rem; background-color: #E8E8E8">
           Trip Segments
         </h2>
          <div id="sectionList" class="col" aria-labelledby="tripSegmentHeader">
 
 
            <div class="col" ng-repeat="sectionFmt in formattedSectionProperties"
-                style="padding: 5px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;
+                style="padding: 0.3rem; border-bottom-width: 0.5px; border-bottom-style: solid; border-bottom-color: #000000;
                 background-color: #eeeeee;">
-             <div class="row" style="font-size: 15px; margin-left:10px; margin-bottom: 10px;">
-               <p style="padding-right: 5px;">
-                 <span style="margin-right: 5px; font-weight: bold;">Segment start: </span>
+             <div class="row" style="font-size: 1rem; margin-left: 0.5rem; margin-bottom: 0.5rem;">
+               <p style="padding-right: 0.5rem;">
+                 <span style="margin-right: 0.1rem; font-weight: bold;">Segment start: </span>
                  {{sectionFmt.fmt_start_place}}
-                 <span style="margin-left: 2px; margin-right: 2px; font-weight: bold;"> at </span>
+                 <span style="margin-left: 0.1rem; margin-right: 0.1rem; font-weight: bold;"> at </span>
                  {{sectionFmt.fmt_time}}
                </p>
              </div>
-             <div class="row" style="font-size: 15px; margin-left:10px; margin-bottom: 10px;">
-               <p style="padding-right: 5px;">
-                 <span style="margin-right: 5px; font-weight: bold;">Segment end: </span>
+             <div class="row" style="font-size: 1rem; margin-left: 0.5rem; margin-bottom: 0.5rem;">
+               <p style="padding-right: 0.5rem;">
+                 <span style="margin-right: 0.1rem; font-weight: bold;">Segment end: </span>
                  {{sectionFmt.fmt_end_place}}
-                 <span style="margin-left: 2px; margin-right: 2px; font-weight: bold;"> at </span>
+                 <span style="margin-left: 0.1rem; margin-right: 0.1rem; font-weight: bold;"> at </span>
                  {{sectionFmt.fmt_end_time}}
                </p>
              </div>
 
-             <div class="row" style="font-size: 15px; margin-left:10px; margin-bottom: 10px;">
-               <p style="padding-right: 5px;">
-                 <span style="margin-right: 10px; font-weight: bold;">Distance: </span>
+             <div class="row" style="font-size: 1rem; margin-left: 0.5rem; margin-bottom: 0.5rem;">
+               <p style="padding-right: 0.5rem;">
+                 <span style="margin-right: 0.1rem; font-weight: bold;">Distance: </span>
                  {{sectionFmt.fmt_distance}} km
                  <br>
                  ({{sectionFmt.fmt_distance_miles}} mi)
                </p>
              </div>
-             <div class="row" style="font-size: 15px; margin-left:10px; margin-bottom: 10px;">
-               <p style="padding-right: 5px;">
-                 <span style="margin-right: 10px; font-weight: bold;">Mode of transportation: </span>
+             <div class="row" style="font-size: 1rem; margin-left: 0.5rem; margin-bottom: 0.5rem;">
+               <p style="padding-right: 0.5rem;">
+                 <span style="margin-right: 0.1rem; font-weight: bold;">Mode of transportation: </span>
                   {{sectionFmt.sensed_mode}}
                </p>
 <!--               <i class="{{sectionFmt.icon}}" , style="font-size: 25px; margin-left: 10px;"-->
