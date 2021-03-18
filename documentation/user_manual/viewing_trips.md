@@ -12,18 +12,13 @@ A video demonstrating the overall UI interaction with only the screenreader is a
   ![image-20210313230843466](image-20210313230843466.png)
 
 - Upon opening the app, the trip diary UI loads all trips on the current day.  
-
 - Each trip is represented by a trip card.
-
   - Each trip card contains the summary information about each trip, including trip start, trip end, total distance, and total time.
   - The trip total distance contains both kilometers and miles. 
-
 - You may use the accesssible previous day/next day buttons to navigate between recent dates. 
   ![image-20210315101712987](image-20210315101712987.png)
-
-- You can use the date picker popup window to view trip cards on any date. E-mission is a hybrid app with Javascript, HTML, Ionic, and Angular as the frontend UI. It's rather difficult to refocus the screenreader to the date picker popup. We've consulted the Ionic's accessibility docs and the Angular's `FocusMonitor`, but we weren't able to make the date picker popup fully accessible. 
-
-  ![image-20210315101834320](image-20210315101834320.png)
+- You can use the calendar button to open the date picker popup window and select to trip cards on any date. However, E-mission is a hybrid app with Javascript, HTML, Ionic, and Angular as the frontend UI. It's rather difficult to refocus the screenreader to the date picker popup. We've consulted the Ionic's accessibility docs and the Angular's `FocusMonitor`. We've also adjusted the individual date buttons to increase the accessibility. But we weren't able to make the date picker popup fully accessible. 
+  ![image-20210317202647380](image-20210317202647380.png)
 
 #### Trip Detail UI
 
