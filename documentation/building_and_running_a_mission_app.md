@@ -9,7 +9,7 @@ This documentation assumes that you are using macOS. With that said, the majorit
 3. Run `sdk install java 8.282.08.1-amzn` to download Java 8. Note this is for the sdkman virtual environment. It doesn’t break any of your existing java setup.  (Skip this step if your Java environment is already Java 8)
 
 4. Run the following commands. Note that after you run the first command (`source setup/setup_android_native.sh`), you should see “All plugins installed successfully!” If not, the setup script has probably failed mid-way. You can simply run the same command again.
-   - If you wish to use a new E-mission server and need to change the server url, update `connectUrl` in `www/json/connectionConfig.json` before running the script below. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/www/json/connectionConfig.json#L2)). 
+   - If you wish to use a new E-mission server and need to change the server url, update `connectUrl` in `www/json/connectionConfig.json` before running the script below. ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/www/json/connectionConfig.json#L2)). 
      - Also note that the [official guide](https://github.com/e-mission/e-mission-docker#quick-start-installation-instructions) to installing the E-mission server is not exactly clear. See this [related issue](https://github.com/e-mission/e-mission-docs/issues/619#issuecomment-783986767) for more details. 
 
 ```bash

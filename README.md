@@ -65,7 +65,7 @@ The original [IMU plugin](https://github.com/xubowenhaoren/e-mission-integrity-d
 
 In the A-mission project, we collected one complete round of the data. We ran the E-mission analysis pipelines with the most accurate model (`gis-based-mode-detection`). We then performed a comparison of the E-mission motion inference with actual pre-defined trips. We determined that it still generates inaccurate trip segmentation and motion mode sensing for even common motion modes. 
 
-- See our full comparison here: `documentation/data_comparison.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/data_comparison.md))
+- See our full comparison here: `documentation/data_comparison.md`. ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/data_comparison.md))
 
 Under Prof. Caspi's guidance, we successfully developed a data analysis script that can match and merge the E-mission data and IMU data on a segment level. Its highlight features include: 
 
@@ -109,7 +109,7 @@ Data analysis: Before we collected the trip data, we built our E-mission server 
    - Feedback: we've since then introduced alt text labels for the previous/next day buttons, and for the date picker button. However, the E-mission date picker popup is a third party plugin. While we've made efforts to increase the individual date buttons to increase the visual accessibility. This makes updating the screenreader focus very difficult. Therefore, future developers should consider looking for accessible date picker replacements. 
 2. The navigation bar (at the bottom of the app screen) is not very accessible. When using the screen reader, we noticed that icons do not have alt texts. For each tab, the icon and the tab name was also focused twice by the screenreader. 
    - Feedback: we noticed that the cause of the screenreader double-focus is the lack of alt texts. While we were able to pinpoint the source code for  the navigation bar, we also noticed that it's written in Ionic, a hybrid UI framework, instead of standard HTML. As a result, we weren't about to directly fix the layout to address the double-focus issue. However, during the development of A-mission, we found that the other tabs do not have any functionality that relates to the trip diary feature. In other words, the trip diary UI represents the core functionality of E-mission (A-mission). Thus we removed the icons and hid other irrelevant tabs. 
-     - As a result, the user can quickly use the screenreader to focus on the actual trip/segment information. See an example in the demo video: `documentation/demo_video.mp4` ([link](https://github.com/CSE482Winter2021/NameN0tF0und/raw/main/documentation/demo_video.mp4))
+     - As a result, the user can quickly use the screenreader to focus on the actual trip/segment information. See an example in the demo video: `documentation/demo_video.mp4` ([link](https://github.com/xubowenhaoren/A-Mission/raw/main/documentation/demo_video.mp4))
 3. Some of the default buttons like “refresh” and “fix map” buttons are confusing. 
    - Feedback: We've removed these unnecessary buttons in the final version of A-mission.
 4. Navigating between trip cards is laborious. There is not an easy way to jump from one to the next without navigating through all of the information displayed on the trip card. 
@@ -135,32 +135,32 @@ On the A-mission UI, one next step is to make the E-mission app fully accessible
 
 On the data analysis, one next step is to train a new machine learning (ML) model that reads both E-mission and IMU data and provide better motion inference predictions. 
 
-- E-mission's MobilityNet project introduced a method to qualitatively evaluate the current E-mission motion inference model. See my notes on the project [here](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/data_analysis.md#partial-notes-on-running-a-new-mobilitynet-data-collection-project). 
+- E-mission's MobilityNet project introduced a method to qualitatively evaluate the current E-mission motion inference model. See my notes on the project [here](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/data_analysis.md#partial-notes-on-running-a-new-mobilitynet-data-collection-project). 
 
 ### User Manual
 
 - Installing the App
-  - Find the pre-built APK in `documentation/apk_release/app-debug.apk`. [Download link](https://github.com/CSE482Winter2021/NameN0tF0und/raw/main/documentation/apk_release/app-debug.apk)
+  - Find the pre-built APK in `documentation/apk_release/app-debug.apk`. [Download link](https://github.com/xubowenhaoren/A-Mission/raw/main/documentation/apk_release/app-debug.apk)
   - If Android warns you about “installation from unknown source”, ignore that.
   - If you use the emulator, you can open the Files app, drag & drop the APK to install. 
   - If you use the phone, follow this guide to copy the APK to your phone: https://www.lifewire.com/install-apk-on-android-4177185 
 
-- Registering the App: See `documentation/user_manual/register_app.md`  ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/user_manual/register_app.md))
+- Registering the App: See `documentation/user_manual/register_app.md`  ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/user_manual/register_app.md))
 
 - Logging Trips
   - Be sure you turn on your Wi-Fi or a mobile data plan. Also, make sure that your GPS is on. Do not force-kill the app. It will stay in the background but won’t consume much battery. 
   - You now have two choices to record a trip. The recommended way is to go out and take a walk in your neighborhood. The app will automatically start recording the trip. 
-  - Another way is to manually trigger it and log a mocked trip.  See `documentation/mocking_trips.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/mocking_trips.md))
+  - Another way is to manually trigger it and log a mocked trip.  See `documentation/mocking_trips.md`. ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/mocking_trips.md))
 
-- Viewing trips, trip segments, and editing the segmentation motion mode: See `documentation/user_manual/viewing_trips.md` ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/user_manual/viewing_trips.md))
+- Viewing trips, trip segments, and editing the segmentation motion mode: See `documentation/user_manual/viewing_trips.md` ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/user_manual/viewing_trips.md))
 
 ### Developer Documentation
 
-- For building and running the A-mission app from source code, with or without a physical Android phone, see `documentation/building_and_running_a_mission_app.md` ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/building_and_running_a_mission_app.md)). 
-- For mocking trips to test the trip diary UI without physically doing trips, see `documentation/mocking_trips.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/mocking_trips.md))
-- For obtaining a full backup of the A-mission app from one phone and restoring the backup to a different phone, see `documentation/obtain_full_backup.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/obtain_full_backup.md)) This is extremely helpful when the developing team uses multiple phones and the data collection phone is different from the phone used for app development purposes. 
-- For setting up breakpoints and debugging in the JavaScript UI, see `documentation/chrome_inspect.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/chrome_inspect.md))
-- Data analysis: To match and merge the E-mission data and IMU data on a segment level, see  `documentation/data_analysis.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/data_analysis.md))
+- For building and running the A-mission app from source code, with or without a physical Android phone, see `documentation/building_and_running_a_mission_app.md` ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/building_and_running_a_mission_app.md)). 
+- For mocking trips to test the trip diary UI without physically doing trips, see `documentation/mocking_trips.md`. ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/mocking_trips.md))
+- For obtaining a full backup of the A-mission app from one phone and restoring the backup to a different phone, see `documentation/obtain_full_backup.md`. ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/obtain_full_backup.md)) This is extremely helpful when the developing team uses multiple phones and the data collection phone is different from the phone used for app development purposes. 
+- For setting up breakpoints and debugging in the JavaScript UI, see `documentation/chrome_inspect.md`. ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/chrome_inspect.md))
+- Data analysis: To match and merge the E-mission data and IMU data on a segment level, see  `documentation/data_analysis.md`. ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/data_analysis.md))
 
 ### Special Recognitions
 

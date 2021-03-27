@@ -6,15 +6,15 @@ This section provides all necessary information for using the A-mission data ana
 
 #### Prerequisites
 
-- Build the A-mission app. See `documentation/building_and_running_a_mission_app.md` ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/building_and_running_a_mission_app.md)). 
+- Build the A-mission app. See `documentation/building_and_running_a_mission_app.md` ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/building_and_running_a_mission_app.md)). 
   - The above documentation already includes the integration of the IMU plugin. If you are interested in changing the IMU plugin, the repo is at https://github.com/xubowenhaoren/e-mission-integrity-detect/.
-- See the "Logging Trips" section of the user manual to log trips and collect the E-mission and IMU data. ([link](https://github.com/CSE482Winter2021/NameN0tF0und#user-manual)).
+- See the "Logging Trips" section of the user manual to log trips and collect the E-mission and IMU data. ([link](https://github.com/xubowenhaoren/A-Mission#user-manual)).
 - Wait for the server-side analysis pipelines to process each trip. Before a trip is processed, the whole trip will appear as one segment and have the "unprocessed" motion mode. You wouldn't be able to view that trip in the data analysis script either. The trip processing speed depends on the phone-server connection and the server status. Both factors are beyond the scope and control of our project. 
   - You may change between days on the A-mission trip dairy UI to refresh.
 
 #### Exporting the phone UserCache to obtain IMU data
 
-Note: if you are just interested in viewing the IMU data and/or running the data analysis script, you can find an example userCache in `documentation/userCacheDB_with_IMU_data_and_user_input`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/userCacheDB_with_IMU_data_and_user_input)). You can view the data contents with [SQLite Browser](https://sqlitebrowser.org/). 
+Note: if you are just interested in viewing the IMU data and/or running the data analysis script, you can find an example userCache in `documentation/userCacheDB_with_IMU_data_and_user_input`. ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/userCacheDB_with_IMU_data_and_user_input)). You can view the data contents with [SQLite Browser](https://sqlitebrowser.org/). 
 
 The IMU data is stored locally in the phone UserCache. 
 

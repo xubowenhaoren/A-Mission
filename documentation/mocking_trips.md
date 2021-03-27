@@ -4,7 +4,7 @@ Bowen Xu
 
 This doc is for mocking trips to test the UI trips without physically doing trips.
 
-1. Build your copy of the E-mission app here, either on a phone or on an emulator: `documentation/building_and_running_a_mission_app.md` ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/building_and_running_a_mission_app.md)). 
+1. Build your copy of the E-mission app here, either on a phone or on an emulator: `documentation/building_and_running_a_mission_app.md` ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/building_and_running_a_mission_app.md)). 
 
 2. Install the Lockito location simulator app on your phone/emulator: https://play.google.com/store/apps/details?id=fr.dvilleneuve.lockito&hl=en_US&gl=US 
 3. Open the Lockito app, agree to all the terms and conditions, and land on the main UI.

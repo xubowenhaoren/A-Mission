@@ -2,7 +2,7 @@
 
 Bowen Xu
 
-A video demonstrating the overall UI interaction with only the screenreader is at `documentation/demo_video.mp4`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/raw/main/documentation/demo_video.mp4)) Please start watching at 01:36 for our new A-Mission UI. 
+A video demonstrating the overall UI interaction with only the screenreader is at `documentation/demo_video.mp4`. ([link](https://github.com/xubowenhaoren/A-Mission/raw/main/documentation/demo_video.mp4)) Please start watching at 01:36 for our new A-Mission UI. 
 
 - Note that the app build in the demo still shows "departed from" and "arrived at" for the segmentation start/end places. This has been fixed to "segment start" and "segment end" so we have a consistent language for both trips and segments.
 
@@ -31,7 +31,7 @@ A video demonstrating the overall UI interaction with only the screenreader is a
 - For each segment, the A-mission UI provides the segment start, segment end, segment distance, and the mode of transportation. 
 - When the E-mission analysis pipeline believes that there's only one segment in the trip, then this only segment will have the same start/end places, the same start/end times, and the distance statistics as the trip. 
   ![image-20210314155252951](image-20210314155252951.png)
-- Processed vs unprocessed trips: Both the original E-mission app and our A-mission requires the server-side analysis pipelines to process each trip. The trip processing speed depends on the phone-server connection and the server status. Both factors are beyond the scope and control of our project. Before a trip is processed, the whole trip will appear as one segment and have the "unprocessed" motion mode. Note: If you are interested in seeing our example E-mission data on your device, we provide a full backup of that. You can refer to `documentation/obtain_full_backup.md`. ([link](https://github.com/CSE482Winter2021/NameN0tF0und/blob/main/documentation/obtain_full_backup.md))
+- Processed vs unprocessed trips: Both the original E-mission app and our A-mission requires the server-side analysis pipelines to process each trip. The trip processing speed depends on the phone-server connection and the server status. Both factors are beyond the scope and control of our project. Before a trip is processed, the whole trip will appear as one segment and have the "unprocessed" motion mode. Note: If you are interested in seeing our example E-mission data on your device, we provide a full backup of that. You can refer to `documentation/obtain_full_backup.md`. ([link](https://github.com/xubowenhaoren/A-Mission/blob/main/documentation/obtain_full_backup.md))
   <img src="image-20210314160739076.png" alt="image-20210314160739076" style="zoom:30%;" />
 
 #### Segment motion mode editing UI
